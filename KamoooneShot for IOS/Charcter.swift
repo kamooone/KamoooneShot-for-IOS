@@ -6,8 +6,8 @@
 //
 
 import Foundation
+import SpriteKit
 
 protocol Charcter {
-    
     
 }

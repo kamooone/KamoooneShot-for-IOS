@@ -22,8 +22,8 @@ class GameViewController: UIViewController {
         skView.showsNodeCount = false //ノード数の表示
         
         //シーンの追加(サイズは背景のテクスチャサイズに合わせる)
-        let scene = TitleScene(size: CGSize(width: 360, height: 640))
-        scene.scaleMode = SKSceneScaleMode.aspectFill
-        skView.presentScene(scene)
+        GameManager.scene = TitleScene(size: GameManager.backGroundSize)
+        GameManager.scene!.scaleMode = SKSceneScaleMode.aspectFill
+        skView.presentScene(GameManager.scene)
     }
 }
