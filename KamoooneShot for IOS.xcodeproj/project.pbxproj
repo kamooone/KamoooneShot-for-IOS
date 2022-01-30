@@ -15,6 +15,10 @@
 		E22F2531279D4E0E006F49B7 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F2530279D4E0E006F49B7 /* Enemy.swift */; };
 		E22F2533279D804F006F49B7 /* GameUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F2532279D804F006F49B7 /* GameUI.swift */; };
 		E22F2535279D835F006F49B7 /* BackGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F2534279D835F006F49B7 /* BackGround.swift */; };
+		E22F2537279D8516006F49B7 /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F2536279D8516006F49B7 /* Bullet.swift */; };
+		E2481C9727A650F800583CDD /* Explosion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2481C9627A650F800583CDD /* Explosion.swift */; };
+		E2481C9C27A6A36100583CDD /* bgm1.wav in Resources */ = {isa = PBXBuildFile; fileRef = E2481C9B27A6A36100583CDD /* bgm1.wav */; };
+		E2481C9E27A6A36B00583CDD /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = E2481C9D27A6A36B00583CDD /* hit.wav */; };
 		E2BF4C562793D19400BB72E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF4C552793D19400BB72E5 /* AppDelegate.swift */; };
 		E2BF4C582793D19400BB72E5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2BF4C572793D19400BB72E5 /* GameScene.sks */; };
 		E2BF4C5A2793D19400BB72E5 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2BF4C592793D19400BB72E5 /* Actions.sks */; };
@@ -35,6 +39,10 @@
 		E22F2530279D4E0E006F49B7 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		E22F2532279D804F006F49B7 /* GameUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUI.swift; sourceTree = "<group>"; };
 		E22F2534279D835F006F49B7 /* BackGround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGround.swift; sourceTree = "<group>"; };
+		E22F2536279D8516006F49B7 /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
+		E2481C9627A650F800583CDD /* Explosion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Explosion.swift; sourceTree = "<group>"; };
+		E2481C9B27A6A36100583CDD /* bgm1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bgm1.wav; sourceTree = "<group>"; };
+		E2481C9D27A6A36B00583CDD /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
 		E2BF4C522793D19400BB72E5 /* KamoooneShot for IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KamoooneShot for IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2BF4C552793D19400BB72E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2BF4C572793D19400BB72E5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -58,6 +66,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E22F253C279D8A50006F49B7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E22F253D279D8A8F006F49B7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E22F253E279D8A9B006F49B7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E2481C9A27A6A34900583CDD /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				E2481CA027A6A38700583CDD /* SE */,
+				E2481C9F27A6A37B00583CDD /* BGM */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
+		E2481C9F27A6A37B00583CDD /* BGM */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BGM;
+			sourceTree = "<group>";
+		};
+		E2481CA027A6A38700583CDD /* SE */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SE;
+			sourceTree = "<group>";
+		};
 		E2BF4C492793D19400BB72E5 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +129,9 @@
 		E2BF4C542793D19400BB72E5 /* KamoooneShot for IOS */ = {
 			isa = PBXGroup;
 			children = (
+				E22F253E279D8A9B006F49B7 /* Controller */,
+				E22F253D279D8A8F006F49B7 /* View */,
+				E22F253C279D8A50006F49B7 /* Model */,
 				E2BF4C552793D19400BB72E5 /* AppDelegate.swift */,
 				E2BF4C572793D19400BB72E5 /* GameScene.sks */,
 				E2BF4C592793D19400BB72E5 /* Actions.sks */,
@@ -94,6 +149,11 @@
 				E22F2530279D4E0E006F49B7 /* Enemy.swift */,
 				E22F2532279D804F006F49B7 /* GameUI.swift */,
 				E22F2534279D835F006F49B7 /* BackGround.swift */,
+				E22F2536279D8516006F49B7 /* Bullet.swift */,
+				E2481C9627A650F800583CDD /* Explosion.swift */,
+				E2481C9B27A6A36100583CDD /* bgm1.wav */,
+				E2481C9D27A6A36B00583CDD /* hit.wav */,
+				E2481C9A27A6A34900583CDD /* Sound */,
 			);
 			path = "KamoooneShot for IOS";
 			sourceTree = "<group>";
@@ -159,7 +219,9 @@
 				E2BF4C612793D19400BB72E5 /* Main.storyboard in Resources */,
 				E2BF4C582793D19400BB72E5 /* GameScene.sks in Resources */,
 				E2BF4C632793D19400BB72E5 /* Assets.xcassets in Resources */,
+				E2481C9C27A6A36100583CDD /* bgm1.wav in Resources */,
 				E2BF4C662793D19400BB72E5 /* LaunchScreen.storyboard in Resources */,
+				E2481C9E27A6A36B00583CDD /* hit.wav in Resources */,
 				E2BF4C5A2793D19400BB72E5 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,7 +234,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2BF4C5C2793D19400BB72E5 /* GameScene.swift in Sources */,
+				E2481C9727A650F800583CDD /* Explosion.swift in Sources */,
 				E22F252F279D3F83006F49B7 /* GameManager.swift in Sources */,
+				E22F2537279D8516006F49B7 /* Bullet.swift in Sources */,
 				E2BF4C6D2794403600BB72E5 /* TitleScene.swift in Sources */,
 				E22F2535279D835F006F49B7 /* BackGround.swift in Sources */,
 				E2BF4C5E2793D19400BB72E5 /* GameViewController.swift in Sources */,
