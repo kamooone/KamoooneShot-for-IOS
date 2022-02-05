@@ -10,6 +10,8 @@ import UIKit
 
 class Collision {
     public static var collisionJudge: Bool = false
+
+    
     //=================================================================================
     // 概要   ： 当たり判定入口
     // 仮引数 ： なし
@@ -34,7 +36,11 @@ class Collision {
                     let doubleWidth = Float((bulletPos[0].size.width / 3) + (enemyPos[0].size.width / 3))
                     
                     // 中心座標の2点間の距離より半径の和の方が大きければ接触
-                    if distance <= doubleWidth {
+                    if distance <= doubleWidth && !GameManager.isSeHit {
+                        GameManager.isSeHit = true
+                        GameScene.GetExplosionObject().isExplosion[k] = true
+                        GameScene.GetSoundObject().PlaySE()
+                        GameScene.GetExplosionObject().StartExplosion(x: enemyPos[k].position.x,y: enemyPos[k].position.y, cnt: k)
                         bulletPos[i].removeFromParent()
                         enemyPos[k].removeFromParent()
                         enemyPos[k].position.x = 1000
@@ -42,6 +48,7 @@ class Collision {
                     }
                 }
             }
+            GameManager.isSeHit = false
         }
     }
 }

@@ -13,5 +13,7 @@ final public class GameManager {
     public static var backGroundSize: CGSize = CGSize(width: 360, height: 640)
     public static var touchPos: CGPoint?
     
+    public static var isSeHit: Bool = false
+    
     private init() {}
 }

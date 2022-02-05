@@ -87,16 +87,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B4B5C097-6CA1-4071-A3D0-448EAE732C6A"
-            shouldBeEnabled = "Yes"
+            uuid = "39AB4EC2-1FA1-44BB-87C5-3D30B765FE0F"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KamoooneShot for IOS/GameScene.swift"
+            filePath = "KamoooneShot for IOS/Collision.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "CollisionJudge()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8AB70FBA-1826-4D70-8578-74AA620F3A22"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KamoooneShot for IOS/Explosion.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
             endingLineNumber = "44"
-            landmarkName = "didMove(to:)"
+            landmarkName = "Update()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
