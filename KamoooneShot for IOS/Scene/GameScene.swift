@@ -13,12 +13,12 @@ import AVFoundation
 class GameScene: SKScene {
     
     // オブジェクトインスタンス生成
-    private var backGround = BackGround()
-    private var player = Player()
-    private var enemy = Enemy()
-    private var gameUI = GameUI()
+    private var backGround = BackGroundView()
+    private var player = PlayerView()
+    private var enemy = EnemyView()
+    private var gameUI = GameUIView()
     private static var sound = Sound()
-    private static var explosion = Explosion()
+    private static var explosion = ExplosionView()
     
     // 画面描画する際の初期化時に呼ばれる
     override func didMove(to view: SKView) {
@@ -29,6 +29,7 @@ class GameScene: SKScene {
         gameUI.Init()
         GameScene.sound.Init()
         GameScene.explosion.Init()
+        Collision.Init()
     }
     
     //タッチ時に呼ばれる
@@ -80,7 +81,7 @@ class GameScene: SKScene {
     public static func GetSoundObject() -> Sound {
         return GameScene.sound
     }
-    public static func GetExplosionObject() -> Explosion {
+    public static func GetExplosionObject() -> ExplosionView {
         return GameScene.explosion
     }
  }

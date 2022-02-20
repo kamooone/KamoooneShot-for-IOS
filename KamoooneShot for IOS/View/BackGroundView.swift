@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-class BackGround {
+class BackGroundView {
     func Init(){
         //背景画像のノードを作成する。
         let bgNode = SKSpriteNode(imageNamed: "bg")

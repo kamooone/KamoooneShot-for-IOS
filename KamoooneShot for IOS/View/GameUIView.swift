@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-class GameUI {
+class GameUIView {
     private var _tapText: SKLabelNode?
     private var _title: SKSpriteNode?
     private var unHideAction : SKAction!
