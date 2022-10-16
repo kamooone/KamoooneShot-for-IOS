@@ -16,14 +16,14 @@ class PlayerView {
     func Init(){
         // 自機の生成
         PlayerView.ziki = SKSpriteNode(imageNamed: "ziki.png")
-        PlayerView.ziki!.position = CGPoint(x: GameManager.scene!.frame.midX, y: GameManager.scene!.frame.minY+150)
-        GameManager.scene!.addChild(PlayerView.ziki!)
+        PlayerView.ziki!.position = CGPoint(x: (GameManager.shared.scene?.frame.midX)!, y: (GameManager.shared.scene?.frame.minY)!+150)
+        GameManager.shared.scene?.addChild(PlayerView.ziki!)
         PlayerView.bullet.Init()
     }
     
     func Move(){
-        PlayerView.ziki?.run(SKAction.moveTo(x: GameManager.touchPos!.x, duration: 0.2))
-        PlayerView.ziki?.run(SKAction.moveTo(y: GameManager.touchPos!.y, duration: 0.2))
+        PlayerView.ziki?.run(SKAction.moveTo(x: GameManager.shared.touchPos!.x, duration: 0.2))
+        PlayerView.ziki?.run(SKAction.moveTo(y: GameManager.shared.touchPos!.y, duration: 0.2))
     }
     
     func Update(){

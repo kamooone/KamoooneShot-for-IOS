@@ -17,7 +17,7 @@ class GameScene: SKScene {
     private var player = PlayerView()
     private var enemy = EnemyView()
     private var gameUI = GameUIView()
-    private static var sound = Sound()
+
     private static var explosion = ExplosionView()
     
     // 画面描画する際の初期化時に呼ばれる
@@ -27,7 +27,7 @@ class GameScene: SKScene {
         player.Init()
         enemy.Init()
         gameUI.Init()
-        GameScene.sound.Init()
+
         GameScene.explosion.Init()
         Collision.Init()
     }
@@ -37,7 +37,7 @@ class GameScene: SKScene {
         super.touchesBegan(touches, with: event)
         // タップした位置の座標を取得
         let touch = touches.first!;
-        GameManager.touchPos = touch.location(in: GameManager.scene!)
+        GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
         // 移動
         player.Move()
         gameUI.Update()
@@ -52,7 +52,7 @@ class GameScene: SKScene {
         super.touchesMoved(touches, with: event)
         // タップした位置に自機を移動
         let touch = touches.first!;
-        GameManager.touchPos = touch.location(in: GameManager.scene!)
+        GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
         player.Move()
     }
     
@@ -60,7 +60,7 @@ class GameScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         // タップした位置に自機を移動
         let touch = touches.first!;
-        GameManager.touchPos = touch.location(in: GameManager.scene!)
+        GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
         player.Move()
     }
     
@@ -75,12 +75,6 @@ class GameScene: SKScene {
         GameScene.explosion.Update()
     }
     
-    //---------------------------------------------------------
-    // インスタンスを他のクラスに渡す
-    //---------------------------------------------------------
-    public static func GetSoundObject() -> Sound {
-        return GameScene.sound
-    }
     public static func GetExplosionObject() -> ExplosionView {
         return GameScene.explosion
     }

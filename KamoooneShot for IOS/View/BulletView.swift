@@ -35,7 +35,7 @@ class BulletView {
                 // ToDo 画面ごとのサイズ
                 zikiBullet[i].size = CGSize(width: 10, height: 10)
                 zikiBullet[i].position = CGPoint(x: x, y: y)
-                GameManager.scene!.addChild(zikiBullet[i])
+                GameManager.shared.scene?.addChild(zikiBullet[i])
                 bulletStartTime = 0
                 break
             }
@@ -48,7 +48,7 @@ class BulletView {
                 zikiBullet[i].position.y += 3
                 zikiBullet[i].run(SKAction.moveTo(y: zikiBullet[i].position.y, duration: 0))
                 
-                if zikiBullet[i].position.y >= GameManager.scene!.frame.maxY {
+                if zikiBullet[i].position.y >= (GameManager.shared.scene?.frame.maxY)! {
                     isBulletTrigger[i] = false
                     zikiBullet[i].removeFromParent()
                 }
@@ -69,7 +69,7 @@ class BulletView {
                 // ToDo 画面ごとのサイズ
                 enemyBullet[i].size = CGSize(width: 10, height: 10)
                 enemyBullet[i].position = CGPoint(x: x, y: y)
-                GameManager.scene!.addChild(enemyBullet[i])
+                GameManager.shared.scene?.addChild(enemyBullet[i])
                 bulletStartTimeForEnemy = 0
                 break
             }
@@ -82,7 +82,7 @@ class BulletView {
                 enemyBullet[i].position.y -= 2
                 enemyBullet[i].run(SKAction.moveTo(y: enemyBullet[i].position.y, duration: 0))
                 
-                if enemyBullet[i].position.y <= GameManager.scene!.frame.minY {
+                if enemyBullet[i].position.y <= (GameManager.shared.scene?.frame.minY)! {
                     isBulletTrigger[i] = false
                     enemyBullet[i].removeFromParent()
                 }

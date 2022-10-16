@@ -13,7 +13,7 @@ class BackGroundView {
         //背景画像のノードを作成する。
         let bgNode = SKSpriteNode(imageNamed: "bg")
         //背景画像の位置をシーンの中央にする。
-        bgNode.position = CGPoint(x: GameManager.scene!.frame.midX, y: GameManager.scene!.frame.midY)
-        GameManager.scene!.addChild(bgNode)
+        bgNode.position = CGPoint(x: (GameManager.shared.scene?.frame.midX)!, y: (GameManager.shared.scene?.frame.midY)!)
+        GameManager.shared.scene?.addChild(bgNode)
     }
 }

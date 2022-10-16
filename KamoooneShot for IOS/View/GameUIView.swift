@@ -21,8 +21,8 @@ class GameUIView {
         _tapText!.text = "タップしてスタート！"
         _tapText!.fontSize = 20
         // 表示位置を画面中央
-        _tapText!.position = CGPoint(x: GameManager.scene!.frame.midX, y: GameManager.scene!.frame.midY);
-        GameManager.scene!.addChild(_tapText!)
+        _tapText!.position = CGPoint(x: (GameManager.shared.scene?.frame.midX)!, y: (GameManager.shared.scene?.frame.midY)!);
+        GameManager.shared.scene?.addChild(_tapText!)
     }
     
     func Update(){

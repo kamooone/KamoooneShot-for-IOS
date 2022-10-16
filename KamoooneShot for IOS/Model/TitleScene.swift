@@ -35,9 +35,9 @@ class TitleScene: SKScene{
         super.touchesBegan(touches, with: event)
         if let _ = touches.first as UITouch? {
             //タッチを検出したときにStepSceneを呼び出す
-            GameManager.scene = GameScene(size: self.scene!.size)
-            GameManager.scene!.scaleMode = SKSceneScaleMode.aspectFill
-            self.view!.presentScene(GameManager.scene)
+            GameManager.shared.scene = GameScene(size: self.scene!.size)
+            GameManager.shared.scene?.scaleMode = SKSceneScaleMode.aspectFill
+            self.view!.presentScene(GameManager.shared.scene)
         }
     }
 }

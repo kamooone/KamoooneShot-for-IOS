@@ -23,9 +23,9 @@ class EnemyView {
         // エネミーの生成
         for i in 0..<EnemyView.ENEMYMAX {
             EnemyView.enemy.append(SKSpriteNode(imageNamed: "enemy.png"))
-            EnemyView.enemy[i].position = CGPoint(x: CGFloat.random(in: GameManager.scene!.frame.minX+25..<GameManager.scene!.frame.maxX-25), y: CGFloat.random(in: GameManager.scene!.frame.maxY+150..<GameManager.scene!.frame.maxY+600))
+            EnemyView.enemy[i].position = CGPoint(x: CGFloat.random(in: (GameManager.shared.scene?.frame.minX)! + 25..<(GameManager.shared.scene?.frame.maxX)! - 25), y: CGFloat.random(in: (GameManager.shared.scene?.frame.maxY)! + 150..<(GameManager.shared.scene?.frame.maxY)! + 600))
             EnemyView.enemy[i].zRotation = DegreeToRadian(Degree: 180)
-            GameManager.scene!.addChild(EnemyView.enemy[i])
+            GameManager.shared.scene?.addChild(EnemyView.enemy[i])
             EnemyView.bullet.append(BulletView())
             EnemyView.bullet[i].Init()
         }
@@ -44,7 +44,7 @@ class EnemyView {
         
         // エネミー弾
         for i in 0..<EnemyView.ENEMYMAX {
-            if EnemyView.enemy[i].position.y <= GameManager.scene!.frame.maxY-50 {
+            if EnemyView.enemy[i].position.y <= (GameManager.shared.scene?.frame.maxY)! - 50 {
                 EnemyView.bullet[i].UpdateForEnemy(x: EnemyView.enemy[i].position.x, y: EnemyView.enemy[i].position.y)
             }
         }

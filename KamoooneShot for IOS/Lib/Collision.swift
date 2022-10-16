@@ -48,11 +48,13 @@ class Collision {
                         let doubleWidth = Float((bullet[i].size.width / 3) + (enemyPos[0].size.width / 3))
                         
                         // 中心座標の2点間の距離より半径の和の方が大きければ接触
-                        if distance <= doubleWidth && !GameManager.isSeHit {
+                        if distance <= doubleWidth && !GameManager.shared.isSeHit {
                             isEnemyLive[k] = false
-                            GameManager.isSeHit = true
+                            GameManager.shared.isSeHit = true
                             GameScene.GetExplosionObject().isExplosion[k] = true
-                            GameScene.GetSoundObject().PlaySE()
+
+                            SoundManager.shared.PlaySE()
+
                             GameScene.GetExplosionObject().StartExplosion(x: enemyPos[k].position.x,y: enemyPos[k].position.y, cnt: k)
                             bullet[i].removeFromParent()
                             enemyPos[k].removeFromParent()
@@ -77,10 +79,12 @@ class Collision {
                             let doubleWidth = Float((bullet[i].size.width / 3) + (enemyBulletPos[0].enemyBullet[0].size.width / 3))
                             
                             // 中心座標の2点間の距離より半径の和の方が大きければ接触
-                            if distance <= doubleWidth && !GameManager.isSeHit {
+                            if distance <= doubleWidth && !GameManager.shared.isSeHit {
                                 //GameManager.isSeHit = true
                                 //GameScene.GetExplosionObject().isExplosion[k] = true
-                                GameScene.GetSoundObject().PlaySE()
+                                
+                                SoundManager.shared.PlaySE()
+                                
                                 //GameScene.GetExplosionObject().StartExplosion(x: enemyPos[k].position.x,y: enemyPos[k].position.y, cnt: k)
                                 enemyBulletPos[k].enemyBullet[cnt].removeFromParent()
                                 bullet[i].removeFromParent()
@@ -91,7 +95,7 @@ class Collision {
                     }
                 }
             }
-            GameManager.isSeHit = false
+            GameManager.shared.isSeHit = false
         }
         
         // 自機と敵の弾との当たり判定
@@ -110,10 +114,12 @@ class Collision {
                     let doubleWidth = Float((ziki.size.width / 3) + (enemyBulletPos[0].enemyBullet[0].size.width / 3))
                     
                     // 中心座標の2点間の距離より半径の和の方が大きければ接触
-                    if distance <= doubleWidth && !GameManager.isSeHit {
+                    if distance <= doubleWidth && !GameManager.shared.isSeHit {
                         //GameManager.isSeHit = true
                         //GameScene.GetExplosionObject().isExplosion[k] = true
-                        GameScene.GetSoundObject().PlaySE()
+                        
+                        SoundManager.shared.PlaySE()
+                        
                         //GameScene.GetExplosionObject().StartExplosion(x: enemyPos[k].position.x,y: enemyPos[k].position.y, cnt: k)
                         enemyBulletPos[k].enemyBullet[cnt].removeFromParent()
                         //ziki.removeFromParent()

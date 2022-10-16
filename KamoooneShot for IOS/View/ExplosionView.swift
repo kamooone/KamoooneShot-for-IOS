@@ -28,7 +28,7 @@ class ExplosionView {
     
     func StartExplosion(x:CGFloat, y:CGFloat, cnt:Int){
         sprite[cnt].position = CGPoint(x: x, y: y)
-        GameManager.scene!.addChild(sprite[cnt])
+        GameManager.shared.scene?.addChild(sprite[cnt])
         
         /** Creates an action that repeats another action a specified number of times
          @param action The action to execute
