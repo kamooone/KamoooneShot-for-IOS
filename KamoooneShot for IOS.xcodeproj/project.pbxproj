@@ -17,6 +17,11 @@
 		E22F2537279D8516006F49B7 /* BulletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F2536279D8516006F49B7 /* BulletView.swift */; };
 		E23A62BA28FC026100DE818C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A62B928FC026100DE818C /* BaseViewController.swift */; };
 		E23A62BC28FC108E00DE818C /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A62BB28FC108E00DE818C /* SoundManager.swift */; };
+		E23A62FA28FC20C400DE818C /* pink.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A62F828FC20C400DE818C /* pink.png */; };
+		E23A62FB28FC20C400DE818C /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A62F928FC20C400DE818C /* orange.png */; };
+		E23A62FE28FC20D100DE818C /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A62FC28FC20D100DE818C /* enemy.png */; };
+		E23A62FF28FC20D100DE818C /* ziki.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A62FD28FC20D100DE818C /* ziki.png */; };
+		E23A630128FC20DA00DE818C /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A630028FC20DA00DE818C /* bg.png */; };
 		E2481C9727A650F800583CDD /* ExplosionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2481C9627A650F800583CDD /* ExplosionView.swift */; };
 		E2481C9C27A6A36100583CDD /* bgm1.wav in Resources */ = {isa = PBXBuildFile; fileRef = E2481C9B27A6A36100583CDD /* bgm1.wav */; };
 		E2481C9E27A6A36B00583CDD /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = E2481C9D27A6A36B00583CDD /* hit.wav */; };
@@ -43,6 +48,11 @@
 		E22F2536279D8516006F49B7 /* BulletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletView.swift; sourceTree = "<group>"; };
 		E23A62B928FC026100DE818C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		E23A62BB28FC108E00DE818C /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		E23A62F828FC20C400DE818C /* pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pink.png; sourceTree = "<group>"; };
+		E23A62F928FC20C400DE818C /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
+		E23A62FC28FC20D100DE818C /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
+		E23A62FD28FC20D100DE818C /* ziki.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ziki.png; sourceTree = "<group>"; };
+		E23A630028FC20DA00DE818C /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		E2481C9627A650F800583CDD /* ExplosionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplosionView.swift; sourceTree = "<group>"; };
 		E2481C9B27A6A36100583CDD /* bgm1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bgm1.wav; sourceTree = "<group>"; };
 		E2481C9D27A6A36B00583CDD /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
@@ -136,6 +146,51 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		E23A62BD28FC1DCD00DE818C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E23A62BE28FC1DFD00DE818C /* Texture */,
+				E2481C9A27A6A34900583CDD /* Sound */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E23A62BE28FC1DFD00DE818C /* Texture */ = {
+			isa = PBXGroup;
+			children = (
+				E23A62D628FC207500DE818C /* Bullet */,
+				E23A62D528FC206800DE818C /* Character */,
+				E23A62D428FC205600DE818C /* BackGround */,
+			);
+			path = Texture;
+			sourceTree = "<group>";
+		};
+		E23A62D428FC205600DE818C /* BackGround */ = {
+			isa = PBXGroup;
+			children = (
+				E23A630028FC20DA00DE818C /* bg.png */,
+			);
+			path = BackGround;
+			sourceTree = "<group>";
+		};
+		E23A62D528FC206800DE818C /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				E23A62FC28FC20D100DE818C /* enemy.png */,
+				E23A62FD28FC20D100DE818C /* ziki.png */,
+			);
+			path = Character;
+			sourceTree = "<group>";
+		};
+		E23A62D628FC207500DE818C /* Bullet */ = {
+			isa = PBXGroup;
+			children = (
+				E23A62F928FC20C400DE818C /* orange.png */,
+				E23A62F828FC20C400DE818C /* pink.png */,
+			);
+			path = Bullet;
+			sourceTree = "<group>";
+		};
 		E2481C9A27A6A34900583CDD /* Sound */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +203,7 @@
 		E2481C9F27A6A37B00583CDD /* BGM */ = {
 			isa = PBXGroup;
 			children = (
+				E2481C9B27A6A36100583CDD /* bgm1.wav */,
 			);
 			path = BGM;
 			sourceTree = "<group>";
@@ -155,6 +211,7 @@
 		E2481CA027A6A38700583CDD /* SE */ = {
 			isa = PBXGroup;
 			children = (
+				E2481C9D27A6A36B00583CDD /* hit.wav */,
 			);
 			path = SE;
 			sourceTree = "<group>";
@@ -189,9 +246,7 @@
 				E2BF4C5F2793D19400BB72E5 /* Main.storyboard */,
 				E2BF4C622793D19400BB72E5 /* Assets.xcassets */,
 				E2BF4C642793D19400BB72E5 /* LaunchScreen.storyboard */,
-				E2481C9B27A6A36100583CDD /* bgm1.wav */,
-				E2481C9D27A6A36B00583CDD /* hit.wav */,
-				E2481C9A27A6A34900583CDD /* Sound */,
+				E23A62BD28FC1DCD00DE818C /* Resources */,
 			);
 			path = "KamoooneShot for IOS";
 			sourceTree = "<group>";
@@ -255,12 +310,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2BF4C612793D19400BB72E5 /* Main.storyboard in Resources */,
+				E23A62FF28FC20D100DE818C /* ziki.png in Resources */,
 				E2BF4C582793D19400BB72E5 /* GameScene.sks in Resources */,
+				E23A62FA28FC20C400DE818C /* pink.png in Resources */,
+				E23A62FB28FC20C400DE818C /* orange.png in Resources */,
 				E2BF4C632793D19400BB72E5 /* Assets.xcassets in Resources */,
 				E2481C9C27A6A36100583CDD /* bgm1.wav in Resources */,
+				E23A630128FC20DA00DE818C /* bg.png in Resources */,
 				E2BF4C662793D19400BB72E5 /* LaunchScreen.storyboard in Resources */,
 				E2481C9E27A6A36B00583CDD /* hit.wav in Resources */,
 				E2BF4C5A2793D19400BB72E5 /* Actions.sks in Resources */,
+				E23A62FE28FC20D100DE818C /* enemy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
