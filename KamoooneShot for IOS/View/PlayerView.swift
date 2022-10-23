@@ -11,6 +11,18 @@ import SpriteKit
 class PlayerView {
     var ziki: SKSpriteNode?
     let bullet = BulletView()
+    private static var isSingleton: Bool = false
+    
+    init(){
+        // このクラスのインスタンスを一つしか生成できないようにする
+        if !PlayerView.isSingleton {
+            Init()
+            PlayerView.isSingleton = true
+        } else {
+            // エラー処理に飛ばす
+            print("インスタンス重複エラー")
+        }
+    }
     
     func Init(){
         // 自機の生成

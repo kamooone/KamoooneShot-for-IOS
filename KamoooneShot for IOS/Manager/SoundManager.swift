@@ -17,7 +17,8 @@ class SoundManager {
     let bgm = Bundle.main.bundleURL.appendingPathComponent("bgm1.wav")
     let seHit = SKAction.playSoundFileNamed("hit", waitForCompletion: true)
     
-    init() {
+    // インスタンスを一つにするためにinitはptivateにする
+    private init() {
     }
 
     func PlayBGM() {

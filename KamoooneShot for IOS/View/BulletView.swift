@@ -16,8 +16,15 @@ class BulletView {
     var bulletDurationForEnemy: Int = 50
     var bulletStartTime: Int = 0
     var bulletStartTimeForEnemy: Int = 0
+    private static var isSingleton: Bool = false
     
-    
+    init(){
+        // このクラスのインスタンスは一つのみにする
+        if !BulletView.isSingleton {
+            Init()
+            BulletView.isSingleton = true
+        }
+    }
     func Init(){
         // 自機弾の生成
         for _ in 0..<ZIKIMAXBULLET {
@@ -57,5 +64,4 @@ class BulletView {
             bulletStartTime+=1
         }
     }
-    
 }

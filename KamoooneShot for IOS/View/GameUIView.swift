@@ -12,7 +12,15 @@ class GameUIView {
     private var _tapText: SKLabelNode?
     private var _title: SKSpriteNode?
     private var unHideAction : SKAction!
+    private static var isSingleton: Bool = false
     
+    init(){
+        // このクラスのインスタンスは一つのみにする
+        if !GameUIView.isSingleton {
+            Init()
+            GameUIView.isSingleton = true
+        }
+    }
     func Init(){
         // Nodeを非表示させるアクションを作る.
         unHideAction = SKAction.hide()

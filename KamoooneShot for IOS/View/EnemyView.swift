@@ -14,9 +14,8 @@ class EnemyView {
     var body: SKSpriteNode?
     let bullet = EnemyBulletView()
     var rotateAction :SKAction?
-    var explosion = ExplosionView()
     
-    func Init(){
+    init(){
         // 指定した回転値まで回転させるアクションを作る.
         //rotateAction = SKAction.rotate( toAngle: DegreeToRadian(Degree: 180.0) , duration: 1)
         
@@ -30,14 +29,12 @@ class EnemyView {
         GameManager.shared.scene?.addChild(body!)
         // 弾初期化
         bullet.Init()
-        // 爆発処理初期化
-        explosion.Init()
     }
     
     func Update(){
         body!.position.y -= 1
         bullet.Update(x: body!.position.x, y: body!.position.y)
-        explosion.Update()
+        ExplosionView.shared.Update()
     }
     
     func DegreeToRadian(Degree : Double!)-> CGFloat{

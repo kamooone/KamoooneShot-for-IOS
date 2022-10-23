@@ -9,6 +9,15 @@ import Foundation
 import SpriteKit
 
 class BackGroundView {
+    private static var isSingleton: Bool = false
+    
+    init(){
+        // このクラスのインスタンスは一つのみにする
+        if !BackGroundView.isSingleton {
+            Init()
+            BackGroundView.isSingleton = true
+        }
+    }
     func Init(){
         //背景画像のノードを作成する。
         let bgNode = SKSpriteNode(imageNamed: "bg")

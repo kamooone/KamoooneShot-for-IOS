@@ -9,12 +9,17 @@ import Foundation
 import UIKit
 
 class Collision {
-    // 他のクラスで使用できるようにstaticなインスタンスを生成しておく
-    static let shared = Collision()
-    
     private var collisionJudge: Bool = false
     private var isEnemyLive: [Bool] = []
+    private static var isSingleton: Bool = false
     
+    init(){
+        // このクラスのインスタンスは一つのみにする
+        if !Collision.isSingleton {
+            Init()
+            Collision.isSingleton = true
+        }
+    }
     func Init() {
         for _ in 0..<EnemyView.ENEMYMAX {
             isEnemyLive.append(true)

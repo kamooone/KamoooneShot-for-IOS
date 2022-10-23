@@ -20,8 +20,8 @@ class GameManager {
     let backGroundSize: CGSize = CGSize(width: 360, height: 640)
     var isSeHit: Bool = false
 
-    
-    init() {
+    // インスタンスを一つにするためにinitはptivateにする
+    private init() {
         scene = SKScene()
     }
 }
