@@ -8,7 +8,8 @@
 import Foundation
 import SpriteKit
 
-class BulletView {    
+class BulletView {
+    private static var isSingleton: Bool = false
     let ZIKIMAXBULLET: Int = 20
     var isBulletTrigger: [Bool] = []
     var zikiBullet: [SKSpriteNode] = []
@@ -16,13 +17,15 @@ class BulletView {
     var bulletDurationForEnemy: Int = 50
     var bulletStartTime: Int = 0
     var bulletStartTimeForEnemy: Int = 0
-    private static var isSingleton: Bool = false
     
     init(){
         // このクラスのインスタンスは一つのみにする
         if !BulletView.isSingleton {
             Init()
             BulletView.isSingleton = true
+        } else {
+            // エラー処理
+            print("エラー処理")
         }
     }
     func Init(){

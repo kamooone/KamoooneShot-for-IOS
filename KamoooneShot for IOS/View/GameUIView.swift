@@ -9,10 +9,10 @@ import Foundation
 import SpriteKit
 
 class GameUIView {
+    private static var isSingleton: Bool = false
     private var _tapText: SKLabelNode?
     private var _title: SKSpriteNode?
     private var unHideAction : SKAction!
-    private static var isSingleton: Bool = false
     
     init(){
         // このクラスのインスタンスは一つのみにする

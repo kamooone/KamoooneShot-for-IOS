@@ -94,13 +94,13 @@
 		E22F253D279D8A8F006F49B7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E22466E6279C4E0F00DED8D3 /* PlayerView.swift */,
-				E22F2530279D4E0E006F49B7 /* EnemyView.swift */,
-				E22F2536279D8516006F49B7 /* BulletView.swift */,
 				E22F2532279D804F006F49B7 /* GameUIView.swift */,
 				E22F2534279D835F006F49B7 /* BackGroundView.swift */,
-				E2481C9627A650F800583CDD /* ExplosionView.swift */,
+				E22466E6279C4E0F00DED8D3 /* PlayerView.swift */,
+				E22F2536279D8516006F49B7 /* BulletView.swift */,
+				E22F2530279D4E0E006F49B7 /* EnemyView.swift */,
 				E2A09147290444F5002D7201 /* EnemyBulettView.swift */,
+				E2481C9627A650F800583CDD /* ExplosionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

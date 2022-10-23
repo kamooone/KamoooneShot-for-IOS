@@ -11,15 +11,10 @@ import AVFoundation
 //ゲームシーン
 @available(iOS 10.0, *) // IOS10.0以降を要求
 class GameScene: SKScene {
-    
-    // オブジェクトインスタンス生成(ToDo インスタンスを一つのみに限定しなければいけないやつかつ、staticを使用する必要のないものはシングルトンを使用する)
     private var backGround: BackGroundView!
     private var gameUI: GameUIView!
     private var player: PlayerView!
     private var colision: Collision!
-    
-
-    // 表示するエネミーの数分のインスタンスを生成する
     private var enemys: [EnemyView] = []
     
     // 画面描画する際の初期化時に呼ばれる
@@ -89,7 +84,6 @@ class GameScene: SKScene {
         }
         
         colision.CollisionJudge(player: player, enemys: enemys)
-        ExplosionView.shared.Update()
     }
  }
 

@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 class Collision {
+    private static var isSingleton: Bool = false
     private var collisionJudge: Bool = false
     private var isEnemyLive: [Bool] = []
-    private static var isSingleton: Bool = false
     
     init(){
         // このクラスのインスタンスは一つのみにする
@@ -52,11 +52,11 @@ class Collision {
                         if distance <= doubleWidth && !GameManager.shared.isSeHit {
                             isEnemyLive[k] = false
                             GameManager.shared.isSeHit = true
-                            ExplosionView.shared.isExplosion[k] = true
+                            enemys[k].explotion.isExplosion[k] = true
 
                             SoundManager.shared.PlaySE()
 
-                            ExplosionView.shared.StartExplosion(x: enemys[k].body?.position.x ?? 0,y: enemys[k].body?.position.y ?? 0, cnt: k)
+                            enemys[k].explotion.StartExplosion(x: enemys[k].body?.position.x ?? 0,y: enemys[k].body?.position.y ?? 0, cnt: k)
                             player.bullet.zikiBullet[i].removeFromParent()
                             enemys[k].body?.removeFromParent()
                             enemys[k].body?.position.x = -1000

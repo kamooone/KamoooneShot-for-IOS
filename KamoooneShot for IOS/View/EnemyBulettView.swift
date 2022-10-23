@@ -16,7 +16,9 @@ class EnemyBulletView {
     var bulletStartTime: Int = 0
     var bulletStartTimeForEnemy: [Int] = []
     
-    
+    init() {
+        Init()
+    }
     func Init(){
         // 自機弾の生成
         for _ in 0..<EnemyView.ENEMYMAX {

@@ -9,9 +9,9 @@ import Foundation
 import SpriteKit
 
 class PlayerView {
+    private static var isSingleton: Bool = false
     var ziki: SKSpriteNode?
     let bullet = BulletView()
-    private static var isSingleton: Bool = false
     
     init(){
         // このクラスのインスタンスを一つしか生成できないようにする

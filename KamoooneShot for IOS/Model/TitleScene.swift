@@ -9,6 +9,7 @@ import Foundation
 import SpriteKit
 
 class TitleScene: SKScene{
+    
     // 画面を描画する際の初期化時に呼ばれる
     override func didMove(to view: SKView) {
         //背景画像のノードを作成する。

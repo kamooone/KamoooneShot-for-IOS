@@ -9,15 +9,15 @@ import Foundation
 import SpriteKit
 
 class ExplosionView {
-    // 他のクラスで使用できるようにstaticなインスタンスを生成しておく
-    static let shared = ExplosionView()
+    var explosion: [SKTexture] = []
+    var sprite: [SKSpriteNode] = []
+    var isExplosion: [Bool] = []
+
+    init() {
+        Init()
+    }
     
-    private var explosion: [SKTexture] = []
-    private var sprite: [SKSpriteNode] = []
-    public var isExplosion: [Bool] = []
-    
-    // インスタンスを一つにするためにinitはptivateにする
-    private init(){
+    func Init(){
         // テクスチャアトラスのフォルダ名を指定
         let atlas = SKTextureAtlas(named: "explosion")
         // 爆発のテクスチャのスプライト数分

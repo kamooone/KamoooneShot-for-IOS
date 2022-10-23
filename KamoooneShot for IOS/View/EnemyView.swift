@@ -13,6 +13,7 @@ class EnemyView {
     
     var body: SKSpriteNode?
     let bullet = EnemyBulletView()
+    let explotion = ExplosionView()
     var rotateAction :SKAction?
     
     init(){
@@ -34,7 +35,6 @@ class EnemyView {
     func Update(){
         body!.position.y -= 1
         bullet.Update(x: body!.position.x, y: body!.position.y)
-        ExplosionView.shared.Update()
     }
     
     func DegreeToRadian(Degree : Double!)-> CGFloat{
