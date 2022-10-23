@@ -14,22 +14,25 @@ class GameScene: SKScene {
     
     // オブジェクトインスタンス生成
     private var backGround = BackGroundView()
-    private var player = PlayerView()
-    private var enemy = EnemyView()
     private var gameUI = GameUIView()
+    private var enemys: [EnemyView] = []
 
-    private static var explosion = ExplosionView()
-    
     // 画面描画する際の初期化時に呼ばれる
     override func didMove(to view: SKView) {
         // 初期化
         backGround.Init()
-        player.Init()
-        enemy.Init()
+        PlayerView.shared.Init()
+        
+        // エネミーの数分インスタンスを生成する
+        for i in 0..<EnemyView.ENEMYMAX {
+            enemys.append(EnemyView())
+            enemys[i].Init()
+        }
+        
         gameUI.Init()
 
-        GameScene.explosion.Init()
-        Collision.Init()
+        ExplosionView.shared.Init()
+        Collision.shared.Init()
     }
     
     //タッチ時に呼ばれる
@@ -39,7 +42,7 @@ class GameScene: SKScene {
         let touch = touches.first!;
         GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
         // 移動
-        player.Move()
+        PlayerView.shared.Move()
         gameUI.Update()
         
         for touch in touches {
@@ -53,7 +56,7 @@ class GameScene: SKScene {
         // タップした位置に自機を移動
         let touch = touches.first!;
         GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
-        player.Move()
+        PlayerView.shared.Move()
     }
     
     // タッチを離した時に呼ばれる
@@ -61,7 +64,7 @@ class GameScene: SKScene {
         // タップした位置に自機を移動
         let touch = touches.first!;
         GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
-        player.Move()
+        PlayerView.shared.Move()
     }
     
     //ノードのアクションの処理後に呼ばれる
@@ -69,14 +72,15 @@ class GameScene: SKScene {
         // 回転処理
         //_enemy[i].run(rotateAction)
         
-        player.Update()
-        enemy.Update()
-        Collision.CollisionJudge()
-        GameScene.explosion.Update()
-    }
-    
-    public static func GetExplosionObject() -> ExplosionView {
-        return GameScene.explosion
+        PlayerView.shared.Update()
+        
+        // エネミーの数分回す
+        for i in 0..<EnemyView.ENEMYMAX {
+            enemys[i].Update()
+        }
+        
+        Collision.shared.CollisionJudge(enemys: enemys)
+        ExplosionView.shared.Update()
     }
  }
 

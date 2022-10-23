@@ -9,10 +9,13 @@ import Foundation
 import UIKit
 
 class Collision {
-    private static var collisionJudge: Bool = false
-    private static var isEnemyLive: [Bool] = []
+    // 他のクラスで使用できるようにstaticなインスタンスを生成しておく
+    static let shared = Collision()
     
-    static func Init() {
+    private var collisionJudge: Bool = false
+    private var isEnemyLive: [Bool] = []
+    
+    func Init() {
         for _ in 0..<EnemyView.ENEMYMAX {
             isEnemyLive.append(true)
         }
@@ -23,60 +26,53 @@ class Collision {
     // 仮引数 ： なし
     // 戻り値 ： なし
     //=================================================================================
-    static func CollisionJudge() {
-
-        let ziki = PlayerView.GetPlayerPos()
-        let bullet = PlayerView.GetBullet()
-        let bulletTrigger = PlayerView.GetBulletTrigger()
-        let enemyPos = EnemyView.GetEnemyPos()
-        let enemyBulletPos = EnemyView.GetEnemyBulletPos()
-        
-        for i in 0..<BulletView.ZIKIMAXBULLET {
-            if bulletTrigger[i] {
+    func CollisionJudge(enemys: [EnemyView]) {
+        for i in 0..<BulletView.shared.ZIKIMAXBULLET {
+            if BulletView.shared.isBulletTrigger[i] {
                 
                 // 自機の弾とエネミーとの当たり判定
                 for k in 0..<EnemyView.ENEMYMAX {
                     if isEnemyLive[k] {
                         //  ベクトル
-                        let posX = bullet[i].position.x - enemyPos[k].position.x
-                        let posY = bullet[i].position.y - enemyPos[k].position.y
+                        let posX = BulletView.shared.zikiBullet[i].position.x - (enemys[k].body?.position.x ?? 0)
+                        let posY = BulletView.shared.zikiBullet[i].position.y - (enemys[k].body?.position.y ?? 0)
                         
                         // 三平方定理を使用して距離取得
                         let distance = sqrtf(Float((posX * posX) + (posY * posY)))
                         
                         // 対象となる二つのオブジェクトの半径の和を求める
-                        let doubleWidth = Float((bullet[i].size.width / 3) + (enemyPos[0].size.width / 3))
+                        let doubleWidth = Float((BulletView.shared.zikiBullet[i].size.width / 3) + ((enemys[0].body?.size.width ?? 0) / 3))
                         
                         // 中心座標の2点間の距離より半径の和の方が大きければ接触
                         if distance <= doubleWidth && !GameManager.shared.isSeHit {
                             isEnemyLive[k] = false
                             GameManager.shared.isSeHit = true
-                            GameScene.GetExplosionObject().isExplosion[k] = true
+                            ExplosionView.shared.isExplosion[k] = true
 
                             SoundManager.shared.PlaySE()
 
-                            GameScene.GetExplosionObject().StartExplosion(x: enemyPos[k].position.x,y: enemyPos[k].position.y, cnt: k)
-                            bullet[i].removeFromParent()
-                            enemyPos[k].removeFromParent()
-                            enemyPos[k].position.x = -1000
-                            enemyPos[k].position.y = -1000
+                            ExplosionView.shared.StartExplosion(x: enemys[k].body?.position.x ?? 0,y: enemys[k].body?.position.y ?? 0, cnt: k)
+                            BulletView.shared.zikiBullet[i].removeFromParent()
+                            enemys[k].body?.removeFromParent()
+                            enemys[k].body?.position.x = -1000
+                            enemys[k].body?.position.y = -1000
                         }
                     }
                 }
                 
                 // 自機の弾とエネミーの弾との当たり判定
                 for k in 0..<EnemyView.ENEMYMAX {
-                    for cnt in 0..<BulletView.ZIKIMAXBULLET {
-                        if enemyBulletPos[k].isBulletTrigger[cnt] {
+                    for cnt in 0..<BulletView.shared.ZIKIMAXBULLET {
+                        if enemys[k].bullet.isBulletTrigger[cnt] {
                             //  ベクトル
-                            let posX = bullet[i].position.x - enemyBulletPos[k].enemyBullet[cnt].position.x
-                            let posY = bullet[i].position.y - enemyBulletPos[k].enemyBullet[cnt].position.y
+                            let posX = BulletView.shared.zikiBullet[i].position.x - (enemys[k].bullet.body[cnt].position.x )
+                            let posY = BulletView.shared.zikiBullet[i].position.y - (enemys[k].bullet.body[cnt].position.y )
                             
                             // 三平方定理を使用して距離取得
                             let distance = sqrtf(Float((posX * posX) + (posY * posY)))
                             
                             // 対象となる二つのオブジェクトの半径の和を求める
-                            let doubleWidth = Float((bullet[i].size.width / 3) + (enemyBulletPos[0].enemyBullet[0].size.width / 3))
+                            let doubleWidth = Float((BulletView.shared.zikiBullet[i].size.width / 3) + (enemys[k].bullet.body[0].size.width / 3))
                             
                             // 中心座標の2点間の距離より半径の和の方が大きければ接触
                             if distance <= doubleWidth && !GameManager.shared.isSeHit {
@@ -86,9 +82,9 @@ class Collision {
                                 SoundManager.shared.PlaySE()
                                 
                                 //GameScene.GetExplosionObject().StartExplosion(x: enemyPos[k].position.x,y: enemyPos[k].position.y, cnt: k)
-                                enemyBulletPos[k].enemyBullet[cnt].removeFromParent()
-                                bullet[i].removeFromParent()
-                                enemyBulletPos[k].isBulletTrigger[cnt] = false
+                                enemys[k].bullet.body[cnt].removeFromParent()
+                                BulletView.shared.zikiBullet[i].removeFromParent()
+                                enemys[k].bullet.isBulletTrigger[cnt] = false
                                 
                             }
                         }
@@ -100,18 +96,18 @@ class Collision {
         
         // 自機と敵の弾との当たり判定
         for k in 0..<EnemyView.ENEMYMAX {
-            for cnt in 0..<BulletView.ZIKIMAXBULLET {
-                if enemyBulletPos[k].isBulletTrigger[cnt] {
+            for cnt in 0..<BulletView.shared.ZIKIMAXBULLET {
+                if enemys[k].bullet.isBulletTrigger[cnt] {
                     
                     //  ベクトル
-                    let posX = ziki.position.x - enemyBulletPos[k].enemyBullet[cnt].position.x
-                    let posY = ziki.position.y - enemyBulletPos[k].enemyBullet[cnt].position.y
+                    let posX = PlayerView.shared.ziki?.position.x ?? 0 - enemys[k].bullet.body[cnt].position.x
+                    let posY = PlayerView.shared.ziki?.position.y ?? 0 - enemys[k].bullet.body[cnt].position.y
                     
                     // 三平方定理を使用して距離取得
                     let distance = sqrtf(Float((posX * posX) + (posY * posY)))
                     
                     // 対象となる二つのオブジェクトの半径の和を求める
-                    let doubleWidth = Float((ziki.size.width / 3) + (enemyBulletPos[0].enemyBullet[0].size.width / 3))
+                    let doubleWidth = Float(((PlayerView.shared.ziki?.size.width ?? 0) / 3) + (enemys[k].bullet.body[0].size.width / 3))
                     
                     // 中心座標の2点間の距離より半径の和の方が大きければ接触
                     if distance <= doubleWidth && !GameManager.shared.isSeHit {
@@ -121,9 +117,9 @@ class Collision {
                         SoundManager.shared.PlaySE()
                         
                         //GameScene.GetExplosionObject().StartExplosion(x: enemyPos[k].position.x,y: enemyPos[k].position.y, cnt: k)
-                        enemyBulletPos[k].enemyBullet[cnt].removeFromParent()
+                        enemys[k].bullet.body[cnt].removeFromParent()
                         //ziki.removeFromParent()
-                        enemyBulletPos[k].isBulletTrigger[cnt] = false
+                        enemys[k].bullet.isBulletTrigger[cnt] = false
                     }
                 }
             }

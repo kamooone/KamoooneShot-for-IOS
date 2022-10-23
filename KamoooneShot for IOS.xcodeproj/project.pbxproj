@@ -25,6 +25,7 @@
 		E2481C9727A650F800583CDD /* ExplosionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2481C9627A650F800583CDD /* ExplosionView.swift */; };
 		E2481C9C27A6A36100583CDD /* bgm1.wav in Resources */ = {isa = PBXBuildFile; fileRef = E2481C9B27A6A36100583CDD /* bgm1.wav */; };
 		E2481C9E27A6A36B00583CDD /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = E2481C9D27A6A36B00583CDD /* hit.wav */; };
+		E2A09148290444F5002D7201 /* EnemyBulettView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A09147290444F5002D7201 /* EnemyBulettView.swift */; };
 		E2ADDD2E27AFF16A0013A0BA /* BulletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ADDD2D27AFF16A0013A0BA /* BulletController.swift */; };
 		E2BF4C562793D19400BB72E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF4C552793D19400BB72E5 /* AppDelegate.swift */; };
 		E2BF4C582793D19400BB72E5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2BF4C572793D19400BB72E5 /* GameScene.sks */; };
@@ -56,6 +57,7 @@
 		E2481C9627A650F800583CDD /* ExplosionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplosionView.swift; sourceTree = "<group>"; };
 		E2481C9B27A6A36100583CDD /* bgm1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bgm1.wav; sourceTree = "<group>"; };
 		E2481C9D27A6A36B00583CDD /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
+		E2A09147290444F5002D7201 /* EnemyBulettView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyBulettView.swift; sourceTree = "<group>"; };
 		E2ADDD2D27AFF16A0013A0BA /* BulletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletController.swift; sourceTree = "<group>"; };
 		E2BF4C522793D19400BB72E5 /* KamoooneShot for IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KamoooneShot for IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2BF4C552793D19400BB72E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				E22F2532279D804F006F49B7 /* GameUIView.swift */,
 				E22F2534279D835F006F49B7 /* BackGroundView.swift */,
 				E2481C9627A650F800583CDD /* ExplosionView.swift */,
+				E2A09147290444F5002D7201 /* EnemyBulettView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2A09148290444F5002D7201 /* EnemyBulettView.swift in Sources */,
 				E2BF4C5C2793D19400BB72E5 /* GameScene.swift in Sources */,
 				E2481C9727A650F800583CDD /* ExplosionView.swift in Sources */,
 				E22F252F279D3F83006F49B7 /* GameManager.swift in Sources */,

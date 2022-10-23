@@ -9,10 +9,12 @@ import Foundation
 import SpriteKit
 
 class BulletView {
-    public static let ZIKIMAXBULLET: Int = 20
+    // 他のクラスで使用できるようにstaticなインスタンスを生成しておく
+    static let shared = BulletView()
+    
+    let ZIKIMAXBULLET: Int = 20
     var isBulletTrigger: [Bool] = []
     var zikiBullet: [SKSpriteNode] = []
-    var enemyBullet: [SKSpriteNode] = []
     var bulletDuration: Int = 10
     var bulletDurationForEnemy: Int = 50
     var bulletStartTime: Int = 0
@@ -21,15 +23,14 @@ class BulletView {
     
     func Init(){
         // 自機弾の生成
-        for _ in 0..<BulletView.ZIKIMAXBULLET {
+        for _ in 0..<ZIKIMAXBULLET {
             isBulletTrigger.append(false)
             zikiBullet.append(SKSpriteNode(imageNamed: "orange.png"))
-            enemyBullet.append(SKSpriteNode(imageNamed: "pink.png"))
         }
     }
     func Update(x: CGFloat, y: CGFloat){
         // 弾発射前処理
-        for i in 0..<BulletView.ZIKIMAXBULLET {
+        for i in 0..<ZIKIMAXBULLET {
             if !isBulletTrigger[i] && bulletStartTime > bulletDuration {
                 isBulletTrigger[i] = true
                 // ToDo 画面ごとのサイズ
@@ -42,7 +43,7 @@ class BulletView {
         }
         
         // 弾移動処理
-        for i in 0..<BulletView.ZIKIMAXBULLET {
+        for i in 0..<ZIKIMAXBULLET {
             if isBulletTrigger[i] {
                 // 弾発射処理
                 zikiBullet[i].position.y += 3
@@ -60,37 +61,4 @@ class BulletView {
         }
     }
     
-    
-    func UpdateForEnemy(x: CGFloat, y: CGFloat){
-        // 弾発射前処理
-        for i in 0..<BulletView.ZIKIMAXBULLET {
-            if !isBulletTrigger[i] && bulletStartTimeForEnemy > bulletDurationForEnemy {
-                isBulletTrigger[i] = true
-                // ToDo 画面ごとのサイズ
-                enemyBullet[i].size = CGSize(width: 10, height: 10)
-                enemyBullet[i].position = CGPoint(x: x, y: y)
-                GameManager.shared.scene?.addChild(enemyBullet[i])
-                bulletStartTimeForEnemy = 0
-                break
-            }
-        }
-        
-        // 弾移動処理
-        for i in 0..<BulletView.ZIKIMAXBULLET {
-            if isBulletTrigger[i] {
-                // 弾発射処理
-                enemyBullet[i].position.y -= 2
-                enemyBullet[i].run(SKAction.moveTo(y: enemyBullet[i].position.y, duration: 0))
-                
-                if enemyBullet[i].position.y <= (GameManager.shared.scene?.frame.minY)! {
-                    isBulletTrigger[i] = false
-                    enemyBullet[i].removeFromParent()
-                }
-            }
-        }
-        // 弾発射インタバル
-        if bulletStartTimeForEnemy <= bulletDurationForEnemy{
-            bulletStartTimeForEnemy+=1
-        }
-    }
 }

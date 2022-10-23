@@ -9,6 +9,9 @@ import Foundation
 import SpriteKit
 
 class ExplosionView {
+    // 他のクラスで使用できるようにstaticなインスタンスを生成しておく
+    static let shared = ExplosionView()
+    
     private var explosion: [SKTexture] = []
     private var sprite: [SKSpriteNode] = []
     public var isExplosion: [Bool] = []
