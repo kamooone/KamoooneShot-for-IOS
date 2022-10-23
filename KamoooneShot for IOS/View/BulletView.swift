@@ -8,10 +8,7 @@
 import Foundation
 import SpriteKit
 
-class BulletView {
-    // 他のクラスで使用できるようにstaticなインスタンスを生成しておく
-    static let shared = BulletView()
-    
+class BulletView {    
     let ZIKIMAXBULLET: Int = 20
     var isBulletTrigger: [Bool] = []
     var zikiBullet: [SKSpriteNode] = []

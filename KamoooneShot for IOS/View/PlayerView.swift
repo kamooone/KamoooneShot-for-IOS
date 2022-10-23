@@ -9,17 +9,15 @@ import Foundation
 import SpriteKit
 
 class PlayerView {
-    // 他のクラスで使用できるようにstaticなインスタンスを生成しておく
-    static let shared = PlayerView()
     var ziki: SKSpriteNode?
-    
+    let bullet = BulletView()
     
     func Init(){
         // 自機の生成
         ziki = SKSpriteNode(imageNamed: "ziki.png")
         ziki!.position = CGPoint(x: (GameManager.shared.scene?.frame.midX)!, y: (GameManager.shared.scene?.frame.minY)!+150)
         GameManager.shared.scene?.addChild(ziki!)
-        BulletView.shared.Init()
+        bullet.Init()
     }
     
     func Move(){
@@ -28,7 +26,7 @@ class PlayerView {
     }
     
     func Update(){
-        BulletView.shared.Update(x: ziki!.position.x, y: ziki!.position.y)
+        bullet.Update(x: ziki!.position.x, y: ziki!.position.y)
     }
 }
 

@@ -15,13 +15,14 @@ class GameScene: SKScene {
     // オブジェクトインスタンス生成
     private var backGround = BackGroundView()
     private var gameUI = GameUIView()
+    private var player = PlayerView()
     private var enemys: [EnemyView] = []
 
     // 画面描画する際の初期化時に呼ばれる
     override func didMove(to view: SKView) {
         // 初期化
         backGround.Init()
-        PlayerView.shared.Init()
+        player.Init()
         
         // エネミーの数分インスタンスを生成する
         for i in 0..<EnemyView.ENEMYMAX {
@@ -42,7 +43,7 @@ class GameScene: SKScene {
         let touch = touches.first!;
         GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
         // 移動
-        PlayerView.shared.Move()
+        player.Move()
         gameUI.Update()
         
         for touch in touches {
@@ -56,7 +57,7 @@ class GameScene: SKScene {
         // タップした位置に自機を移動
         let touch = touches.first!;
         GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
-        PlayerView.shared.Move()
+        player.Move()
     }
     
     // タッチを離した時に呼ばれる
@@ -64,7 +65,7 @@ class GameScene: SKScene {
         // タップした位置に自機を移動
         let touch = touches.first!;
         GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
-        PlayerView.shared.Move()
+        player.Move()
     }
     
     //ノードのアクションの処理後に呼ばれる
@@ -72,14 +73,14 @@ class GameScene: SKScene {
         // 回転処理
         //_enemy[i].run(rotateAction)
         
-        PlayerView.shared.Update()
+        player.Update()
         
         // エネミーの数分回す
         for i in 0..<EnemyView.ENEMYMAX {
             enemys[i].Update()
         }
         
-        Collision.shared.CollisionJudge(enemys: enemys)
+        Collision.shared.CollisionJudge(player: player, enemys: enemys)
         ExplosionView.shared.Update()
     }
  }
