@@ -45,7 +45,7 @@ class ExplosionView {
     func Update(){
         for i in 0...EnemyView.ENEMYMAX{
             // 表示する必要がなくなったスプライトを削除する処理
-            if sprite[i].hasActions() && isExplosion[i] {
+            if !(sprite[i].hasActions() && isExplosion[i] ) {
                 sprite[i].removeFromParent()
             }
         }
