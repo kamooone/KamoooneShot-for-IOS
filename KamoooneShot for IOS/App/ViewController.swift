@@ -10,7 +10,7 @@ import SpriteKit
 
 //ゲームビューコントローラ
 @available(iOS 10.0, *)
-class ViewController: BaseViewController {
+class ViewController: UIViewController {
     
     //ロード完了時に呼ばれる
     override func viewDidLoad() {
