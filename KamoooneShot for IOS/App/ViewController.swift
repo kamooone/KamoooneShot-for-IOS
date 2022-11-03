@@ -22,8 +22,7 @@ class ViewController: UIViewController {
         skView.showsFPS = false
         //ノード数の表示
         skView.showsNodeCount = false
-        // BGM再生
-        SoundManager.shared.PlayBGM()
+
         //シーンの追加(サイズは背景のテクスチャサイズに合わせる)
         GameManager.shared.scene = TitleScene(size: GameManager.shared.backGroundSize)
         GameManager.shared.scene?.scaleMode = SKSceneScaleMode.aspectFill
