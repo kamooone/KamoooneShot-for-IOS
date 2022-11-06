@@ -33,7 +33,7 @@ class EnemyView: BaseCharacterView {
     
     func Update(){
         body!.position.y -= 1
-        bullet.Update(x: body!.position.x, y: body!.position.y)
+        bullet.Update(_x: body!.position.x, _y: body!.position.y)
     }
     
     func DegreeToRadian(Degree : Double!)-> CGFloat{
