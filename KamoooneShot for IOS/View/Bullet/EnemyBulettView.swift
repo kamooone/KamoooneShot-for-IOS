@@ -3,7 +3,7 @@
 //  KamoooneShot for IOS
 //
 //  Created by Kazusa Kondo on 2022/10/23.
-//
+//　プルリクエストテスト
 
 import Foundation
 import SpriteKit
