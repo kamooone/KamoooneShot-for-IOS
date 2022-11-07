@@ -7,7 +7,6 @@
 
 import Foundation
 import SpriteKit
-// プルリクエストテスト
 
 class BulletView: BaseBulletView {
     private static var isSingleton: Bool = false
