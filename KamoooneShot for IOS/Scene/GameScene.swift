@@ -5,7 +5,7 @@
 //  Created by Kazusa Kondo on 2022/01/16.
 //
 import Foundation
-import SpriteKit
+import SpriteKit // SpriteKitは画面左下が0,0になる。UiKitは左上が0,0
 import AVFoundation
 
 //ゲームシーン

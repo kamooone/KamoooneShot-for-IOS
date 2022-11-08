@@ -16,12 +16,10 @@ class EnemyBulletView: BaseBulletView {
         Init()
     }
     func Init(){
-        // 自機弾の生成
-        for _ in 0..<EnemyView.ENEMYMAX {
-            for _ in 0..<ZIKIMAXBULLET {
-                isBulletTrigger.append(false)
-                body.append(SKSpriteNode(imageNamed: "pink.png"))
-            }
+        // エネミー弾の生成
+        for _ in 0..<ZIKIMAXBULLET {
+            isBulletTrigger.append(false)
+            body.append(SKSpriteNode(imageNamed: "pink.png"))
         }
     }
     
@@ -133,10 +131,10 @@ class EnemyBulletView: BaseBulletView {
                         body[i].position.y -= 2
                         body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
 
-//                        if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! {
-//                            isBulletTrigger[i] = false
-//                            body[i].removeFromParent()
-//                        }
+                        if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y <= (GameManager.shared.scene?.frame.minY)! {
+                            isBulletTrigger[i] = false
+                            body[i].removeFromParent()
+                        }
                         tripleBulletNo += 1
                         break
 
