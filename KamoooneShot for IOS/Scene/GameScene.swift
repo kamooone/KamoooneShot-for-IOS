@@ -16,7 +16,7 @@ class GameScene: SKScene {
     var player: PlayerView!
     var colision: Collision!
     var enemys: [EnemyView] = []
-    var isGameStart: Bool = false
+
     
     // 画面描画する際の初期化時に呼ばれる
     override func didMove(to view: SKView) {
@@ -45,11 +45,11 @@ class GameScene: SKScene {
         super.touchesBegan(touches, with: event)
         
         // 初回タップを行うとゲームスタート
-        if !isGameStart {
+        if !GameManager.shared.isGameStart {
             gameUI.Update()
             // BGM再生
             SoundManager.shared.PlayBGM()
-            isGameStart = true
+            GameManager.shared.isGameStart = true
         }
         
         // タップした位置の座標を取得
@@ -82,7 +82,7 @@ class GameScene: SKScene {
     
     //ノードのアクションの処理後に呼ばれる
     override func didEvaluateActions() {
-        if isGameStart {
+        if GameManager.shared.isGameStart {
             // 回転処理
             //_enemy[i].run(rotateAction)
             

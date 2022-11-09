@@ -13,9 +13,9 @@ class BaseBulletView {
     var isBulletTrigger: [Bool] = []
     var body: [SKSpriteNode] = []
     var bulletDuration: Int = 10
-    var bulletDurationForEnemy: Int = 50
     var bulletStartTime: Int = 0
-    var bulletStartTimeForEnemy: Int = 0
+    var bulletDurationForEnemy: [Int] = []
+    var bulletStartTimeForEnemy: [Int] = []
         
     init(){}
 }

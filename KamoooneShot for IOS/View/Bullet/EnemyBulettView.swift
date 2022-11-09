@@ -9,6 +9,19 @@ import Foundation
 import SpriteKit
 
 class EnemyBulletView: BaseBulletView {
+    let VECTOR_Y: Float = 50.0
+    let RIGHTVECTOR_X: Float = 10.0
+    let LEFTVECTOR_X: Float = 10.0
+    var tripleBulletNo: Int = 0
+    // ToDo directionは右左関係なく同じ配列にする。直進の弾にもdirectionを設定する。(要素番号を揃えるため)
+    var directionX: [Float] = []
+    var directionY: [Float] = []
+    enum threeShots: Int {
+        case straight = 0
+        case diagonalRightFront = 1
+        case diagonalLeftFront = 2
+    }
+    
     
     override init() {
         super.init()
@@ -19,6 +32,8 @@ class EnemyBulletView: BaseBulletView {
         // エネミー弾の生成
         for _ in 0..<ZIKIMAXBULLET {
             isBulletTrigger.append(false)
+            bulletDurationForEnemy.append(50)
+            bulletStartTimeForEnemy.append(0)
             body.append(SKSpriteNode(imageNamed: "pink.png"))
         }
     }
@@ -61,27 +76,14 @@ class EnemyBulletView: BaseBulletView {
         
         // 三点弾 ToDo enumを使う
         if 0 == 0 {
-            let VECTOR_Y: Float = 50.0
-            let RIGHTVECTOR_X: Float = 10.0
-            let LEFTVECTOR_X: Float = 10.0
-            var tripleBulletNo: Int = 0
-            // ToDo directionは右左関係なく同じ配列にする。直進の弾にもdirectionを設定する。(要素番号を揃えるため)
-            var directionX: [Float] = []
-            var directionY: [Float] = []
-            enum threeShots: Int {
-                case straight = 0
-                case diagonalRightFront = 1
-                case diagonalLeftFront = 2
-            }
-
             // 弾発射前処理
             for i in 0..<ZIKIMAXBULLET {
-                if !isBulletTrigger[i] && bulletStartTimeForEnemy > bulletDurationForEnemy {
+                if !isBulletTrigger[i] && bulletStartTimeForEnemy[i] > bulletDurationForEnemy[i] {
                     isBulletTrigger[i] = true
                     body[i].size = CGSize(width: 10, height: 10)
                     body[i].position = CGPoint(x: _x, y: _y)
                     GameManager.shared.scene?.addChild(body[i])
-                    bulletStartTimeForEnemy = 0
+                    bulletStartTimeForEnemy[i] = 0
 
                     switch tripleBulletNo {
                     case threeShots.straight.rawValue:
@@ -133,35 +135,42 @@ class EnemyBulletView: BaseBulletView {
                         body[i].position.y -= 2
                         body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
 
-                        if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y <= (GameManager.shared.scene?.frame.minY)! {
+                        if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
+                            body[i].position.x <= (GameManager.shared.scene?.frame.minX)! ||
+                            body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
+                            isBulletTrigger[i] = false
                             body[i].removeFromParent()
                         }
                         tripleBulletNo += 1
                         break
 
                     case threeShots.diagonalRightFront.rawValue:
-                        body[i].position.x -= CGFloat(directionX[i] * 2)
+                        body[i].position.x += CGFloat(directionX[i] * 0.2)
                         body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
-                        body[i].position.y -= CGFloat(directionY[i] * 2)
+                        body[i].position.y -= CGFloat(directionY[i] * 0.2)
                         body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
 
-//                        if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! {
-//                            isBulletTrigger[i] = false
-//                            body[i].removeFromParent()
-//                        }
+                        if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
+                            body[i].position.x <= (GameManager.shared.scene?.frame.minX)! ||
+                            body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
+                            isBulletTrigger[i] = false
+                            body[i].removeFromParent()
+                        }
                         tripleBulletNo += 1
                         break
 
                     case threeShots.diagonalLeftFront.rawValue:
-                        body[i].position.x -= CGFloat(directionX[i] * 2)
+                        body[i].position.x -= CGFloat(directionX[i] * 0.2)
                         body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
-                        body[i].position.y -= CGFloat(directionY[i] * 2)
+                        body[i].position.y -= CGFloat(directionY[i] * 0.2)
                         body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
 
-//                        if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! {
-//                            isBulletTrigger[i] = false
-//                            body[i].removeFromParent()
-//                        }
+                        if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
+                            body[i].position.x <= (GameManager.shared.scene?.frame.minX)! ||
+                            body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
+                            isBulletTrigger[i] = false
+                            body[i].removeFromParent()
+                        }
                         tripleBulletNo = 0
                         break
                     default:
@@ -170,8 +179,8 @@ class EnemyBulletView: BaseBulletView {
                     }
                 }
                 // 弾発射インタバル
-                else if bulletStartTimeForEnemy <= bulletDurationForEnemy{
-                    bulletStartTimeForEnemy += 1
+                else if bulletStartTimeForEnemy[i] <= bulletDurationForEnemy[i] {
+                    bulletStartTimeForEnemy[i] += 1
                 }
             }
         }

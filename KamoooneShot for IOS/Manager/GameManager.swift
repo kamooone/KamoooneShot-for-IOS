@@ -12,6 +12,7 @@ class GameManager {
     // 他のクラスで使用できるようにstaticなインスタンスを生成しておく
     static let shared = GameManager()
     
+    var isGameStart: Bool = false
     var touchPos: CGPoint?
     
     // タッチ座標を取得するために使用する
