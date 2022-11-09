@@ -65,14 +65,13 @@ class EnemyBulletView: BaseBulletView {
             let RIGHTVECTOR_X: Float = 10.0
             let LEFTVECTOR_X: Float = 10.0
             var tripleBulletNo: Int = 0
-            var directionRightX: [Float] = []
-            var directionRightY: [Float] = []
-            var directionLeftX: [Float] = []
-            var directionLeftY: [Float] = []
+            // ToDo directionは右左関係なく同じ配列にする。直進の弾にもdirectionを設定する。(要素番号を揃えるため)
+            var directionX: [Float] = []
+            var directionY: [Float] = []
             enum threeShots: Int {
-                case straight = 1
-                case diagonalRightFront = 2
-                case diagonalLeftFront = 3
+                case straight = 0
+                case diagonalRightFront = 1
+                case diagonalLeftFront = 2
             }
 
             // 弾発射前処理
@@ -86,6 +85,9 @@ class EnemyBulletView: BaseBulletView {
 
                     switch tripleBulletNo {
                     case threeShots.straight.rawValue:
+                        // 直進弾のベクトル
+                        directionX.append(0)
+                        directionY.append(0)
                         tripleBulletNo += 1
                         break
 
@@ -98,8 +100,8 @@ class EnemyBulletView: BaseBulletView {
                         let length:Float = sqrt(vecX + vecY)
 
                         // ベクトルを求めた長さで割り、正規化にする
-                        directionRightX.append(vecX / length)
-                        directionRightY.append(vecY / length)
+                        directionX.append(vecX / length)
+                        directionY.append(vecY / length)
                         tripleBulletNo += 1
                         break
 
@@ -112,8 +114,8 @@ class EnemyBulletView: BaseBulletView {
                         let length:Float = sqrt(vecX + vecY)
 
                         // ベクトルを求めた長さで割り、正規化にする
-                        directionLeftX.append(vecX / length)
-                        directionLeftY.append(vecY / length)
+                        directionX.append(vecX / length)
+                        directionY.append(vecY / length)
                         tripleBulletNo = 0
                         break
 
@@ -132,16 +134,15 @@ class EnemyBulletView: BaseBulletView {
                         body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
 
                         if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y <= (GameManager.shared.scene?.frame.minY)! {
-                            isBulletTrigger[i] = false
                             body[i].removeFromParent()
                         }
                         tripleBulletNo += 1
                         break
 
                     case threeShots.diagonalRightFront.rawValue:
-                        body[i].position.x -= CGFloat(directionRightX[i] * 2)
+                        body[i].position.x -= CGFloat(directionX[i] * 2)
                         body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
-                        body[i].position.y -= CGFloat(directionRightY[i] * 2)
+                        body[i].position.y -= CGFloat(directionY[i] * 2)
                         body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
 
 //                        if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! {
@@ -152,9 +153,9 @@ class EnemyBulletView: BaseBulletView {
                         break
 
                     case threeShots.diagonalLeftFront.rawValue:
-                        body[i].position.x -= CGFloat(directionLeftX[i] * 2)
+                        body[i].position.x -= CGFloat(directionX[i] * 2)
                         body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
-                        body[i].position.y -= CGFloat(directionLeftY[i] * 2)
+                        body[i].position.y -= CGFloat(directionY[i] * 2)
                         body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
 
 //                        if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! {
