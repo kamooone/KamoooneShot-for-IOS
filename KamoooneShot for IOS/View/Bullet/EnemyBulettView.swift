@@ -62,7 +62,6 @@ class EnemyBulletView: BaseBulletView {
                     isBulletTrigger[i] = false
                     body[i].removeFromParent()
                 }
-                
             }
             // 弾発射インタバル
             else if bulletStartTime <= bulletDuration {
@@ -72,6 +71,11 @@ class EnemyBulletView: BaseBulletView {
     }
     
     func TripleBullet(__x: CGFloat, __y: CGFloat) {
+        enum tripleBullet: Int {
+            case straight = 0
+            case diagonallyRight = 1
+            case diagonallyLeft = 2
+        }
         // 弾の種類によって弾の間隔時間を変更する
         bulletDuration = 50
         // 弾発射前処理
@@ -83,18 +87,14 @@ class EnemyBulletView: BaseBulletView {
                 GameManager.shared.scene?.addChild(body[i])
                 bulletStartTime = 0
                 
-                // ターゲット方向のベクトルを求める
                 let vecX = RIGHTVECTOR_X
                 let vecY = VECTOR_Y
-                
-                // 三平方の定理を使って長さを求める
                 let length:Float = sqrt(vecX + vecY)
-                
-                // ベクトルを求めた長さで割り、正規化にする
-                if tripleBulletNo != 1 {
-                    directionX.append(vecX / length)
-                } else {
+            
+                if tripleBulletNo == tripleBullet.diagonallyRight.rawValue {
                     directionX.append((vecX / length) * -1)
+                } else {
+                    directionX.append(vecX / length)
                 }
                 directionY.append(vecY / length)
                 tripleBulletNo += 1
