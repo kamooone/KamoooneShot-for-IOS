@@ -24,14 +24,13 @@ class EnemyBulletView: BaseBulletView {
     
     override init() {
         super.init()
-        
         Init()
     }
     func Init(){
         // エネミー弾の生成
         for _ in 0..<ZIKIMAXBULLET {
             isBulletTrigger.append(false)
-            bulletDurationForEnemy.append(50)
+            bulletDurationForEnemy.append(bulletDuration)
             bulletStartTimeForEnemy.append(0)
             body.append(SKSpriteNode(imageNamed: "pink.png"))
         }
@@ -110,10 +109,10 @@ class EnemyBulletView: BaseBulletView {
             for i in 0..<ZIKIMAXBULLET {
                 if isBulletTrigger[i] {
                     if tripleBulletNo != 0 {
-                        body[i].position.x += CGFloat(directionX[i] * 0.2)
+                        body[i].position.x += CGFloat(directionX[i] * BULLET_SPEED)
                         body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
                     }
-                    body[i].position.y -= CGFloat(directionY[i] * 0.2)
+                    body[i].position.y -= CGFloat(directionY[i] * BULLET_SPEED)
                     body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
                     
                     if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||

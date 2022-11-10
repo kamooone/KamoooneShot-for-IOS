@@ -10,6 +10,7 @@ import SpriteKit
 
 class BaseBulletView {
     let ZIKIMAXBULLET: Int = 21
+    let BULLET_SPEED: Float = 1.0
     var isBulletTrigger: [Bool] = []
     var body: [SKSpriteNode] = []
     var bulletDuration: Int = 10
