@@ -8,14 +8,8 @@
 import Foundation
 import SpriteKit
 
-class EnemyBulletView: BaseBulletView {
-    let VECTOR_Y: Float = 50.0
-    let RIGHTVECTOR_X: Float = 10.0
-    let LEFTVECTOR_X: Float = 10.0
-    var tripleBulletNo: Int = 0
-    var directionX: [Float] = []
-    var directionY: [Float] = []
-    
+class EnemyBulletView: BaseBulletView {    
+    var tripleBulletNo: Int = 1
     
     override init() {
         super.init()
