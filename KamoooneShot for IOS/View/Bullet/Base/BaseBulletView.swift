@@ -15,6 +15,11 @@ class BaseBulletView {
     var body: [SKSpriteNode] = []
     var bulletDuration: Int = 10
     var bulletStartTime: Int = 0
+    var nowBulletType: Int = 0
+    enum bulletType: Int {
+        case normalBullet = 0
+        case tripleBullet = 1
+    }
         
     init(){}
 }
