@@ -3,7 +3,7 @@
 //  KamoooneShot for IOS
 //
 //  Created by Kazusa Kondo on 2022/10/23.
-//マージテスト11/9
+//
 
 import Foundation
 import SpriteKit
@@ -13,7 +13,6 @@ class EnemyBulletView: BaseBulletView {
     let RIGHTVECTOR_X: Float = 10.0
     let LEFTVECTOR_X: Float = 10.0
     var tripleBulletNo: Int = 0
-    // ToDo directionは右左関係なく同じ配列にする。直進の弾にもdirectionを設定する。(要素番号を揃えるため)
     var directionX: [Float] = []
     var directionY: [Float] = []
     enum threeShots: Int {
@@ -60,7 +59,7 @@ class EnemyBulletView: BaseBulletView {
 //                            body[i].position.y -= 2
 //                            body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
 //
-//                            if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! {
+//                            if Processing.shared.OutScreenJudge(_body: body[i]) {
 //                                isBulletTrigger[i] = false
 //                                body[i].removeFromParent()
 //                            }
@@ -87,9 +86,15 @@ class EnemyBulletView: BaseBulletView {
 
                     switch tripleBulletNo {
                     case threeShots.straight.rawValue:
-                        // 直進弾のベクトル
+                        // ターゲット方向のベクトルを求める
+                        let vecX = RIGHTVECTOR_X
+                        let vecY = VECTOR_Y
+
+                        // 三平方の定理を使って長さを求める
+                        let length:Float = sqrt(vecX + vecY)
+                        
                         directionX.append(0)
-                        directionY.append(0)
+                        directionY.append(vecY / length)
                         tripleBulletNo += 1
                         break
 
@@ -102,7 +107,7 @@ class EnemyBulletView: BaseBulletView {
                         let length:Float = sqrt(vecX + vecY)
 
                         // ベクトルを求めた長さで割り、正規化にする
-                        directionX.append(vecX / length)
+                        directionX.append((vecX / length) * -1)
                         directionY.append(vecY / length)
                         tripleBulletNo += 1
                         break
@@ -132,15 +137,17 @@ class EnemyBulletView: BaseBulletView {
                 if isBulletTrigger[i] {
                     switch tripleBulletNo {
                     case threeShots.straight.rawValue:
-                        body[i].position.y -= 2
+                        //body[i].position.x += CGFloat(directionX[i] * 0.2)
+                        //body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
+                        body[i].position.y -= CGFloat(directionY[i] * 0.2)
                         body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
-
+                        
                         if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
-                            body[i].position.x <= (GameManager.shared.scene?.frame.minX)! ||
-                            body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
+                            body[i].position.x <= (GameManager.shared.scene?.frame.minX)! || body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
                             isBulletTrigger[i] = false
                             body[i].removeFromParent()
                         }
+                        
                         tripleBulletNo += 1
                         break
 
@@ -149,28 +156,28 @@ class EnemyBulletView: BaseBulletView {
                         body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
                         body[i].position.y -= CGFloat(directionY[i] * 0.2)
                         body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
-
+                        
                         if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
-                            body[i].position.x <= (GameManager.shared.scene?.frame.minX)! ||
-                            body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
+                            body[i].position.x <= (GameManager.shared.scene?.frame.minX)! || body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
                             isBulletTrigger[i] = false
                             body[i].removeFromParent()
                         }
+                        
                         tripleBulletNo += 1
                         break
 
                     case threeShots.diagonalLeftFront.rawValue:
-                        body[i].position.x -= CGFloat(directionX[i] * 0.2)
+                        body[i].position.x += CGFloat(directionX[i] * 0.2)
                         body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
                         body[i].position.y -= CGFloat(directionY[i] * 0.2)
                         body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
-
+                        
                         if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
-                            body[i].position.x <= (GameManager.shared.scene?.frame.minX)! ||
-                            body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
+                            body[i].position.x <= (GameManager.shared.scene?.frame.minX)! || body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
                             isBulletTrigger[i] = false
                             body[i].removeFromParent()
                         }
+                        
                         tripleBulletNo = 0
                         break
                     default:
