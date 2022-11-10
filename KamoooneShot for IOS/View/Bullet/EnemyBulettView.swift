@@ -40,37 +40,37 @@ class EnemyBulletView: BaseBulletView {
     func Update(_x: CGFloat, _y: CGFloat){
         
         // 通常弾
-//                if 0 == 0 {
-//                    // 弾発射前処理
-//                    for i in 0..<ZIKIMAXBULLET {
-//                        if !isBulletTrigger[i] && bulletStartTimeForEnemy > bulletDurationForEnemy {
-//                            isBulletTrigger[i] = true
-//                            body[i].size = CGSize(width: 10, height: 10)
-//                            body[i].position = CGPoint(x: _x, y: _y)
-//                            GameManager.shared.scene?.addChild(body[i])
-//                            bulletStartTimeForEnemy = 0
-//                        }
-//                    }
-//
-//                    // 弾移動処理
-//                    for i in 0..<ZIKIMAXBULLET {
-//                        if isBulletTrigger[i] {
-//                            // 弾発射処理
-//                            body[i].position.y -= 2
-//                            body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
-//
-//                            if Processing.shared.OutScreenJudge(_body: body[i]) {
-//                                isBulletTrigger[i] = false
-//                                body[i].removeFromParent()
-//                            }
-//                            break
-//                        }
-//                        // 弾発射インタバル
-//                        else if bulletStartTimeForEnemy <= bulletDurationForEnemy{
-//                            bulletStartTimeForEnemy += 1
-//                        }
-//                    }
-//                }
+        //                if 0 == 0 {
+        //                    // 弾発射前処理
+        //                    for i in 0..<ZIKIMAXBULLET {
+        //                        if !isBulletTrigger[i] && bulletStartTimeForEnemy > bulletDurationForEnemy {
+        //                            isBulletTrigger[i] = true
+        //                            body[i].size = CGSize(width: 10, height: 10)
+        //                            body[i].position = CGPoint(x: _x, y: _y)
+        //                            GameManager.shared.scene?.addChild(body[i])
+        //                            bulletStartTimeForEnemy = 0
+        //                        }
+        //                    }
+        //
+        //                    // 弾移動処理
+        //                    for i in 0..<ZIKIMAXBULLET {
+        //                        if isBulletTrigger[i] {
+        //                            // 弾発射処理
+        //                            body[i].position.y -= 2
+        //                            body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
+        //
+        //                            if Processing.shared.OutScreenJudge(_body: body[i]) {
+        //                                isBulletTrigger[i] = false
+        //                                body[i].removeFromParent()
+        //                            }
+        //                            break
+        //                        }
+        //                        // 弾発射インタバル
+        //                        else if bulletStartTimeForEnemy <= bulletDurationForEnemy{
+        //                            bulletStartTimeForEnemy += 1
+        //                        }
+        //                    }
+        //                }
         
         
         // 三点弾 ToDo enumを使う
@@ -83,106 +83,47 @@ class EnemyBulletView: BaseBulletView {
                     body[i].position = CGPoint(x: _x, y: _y)
                     GameManager.shared.scene?.addChild(body[i])
                     bulletStartTimeForEnemy[i] = 0
-
-                    switch tripleBulletNo {
-                    case threeShots.straight.rawValue:
-                        // ターゲット方向のベクトルを求める
-                        let vecX = RIGHTVECTOR_X
-                        let vecY = VECTOR_Y
-
-                        // 三平方の定理を使って長さを求める
-                        let length:Float = sqrt(vecX + vecY)
-                        
-                        directionX.append(0)
-                        directionY.append(vecY / length)
-                        tripleBulletNo += 1
-                        break
-
-                    case threeShots.diagonalRightFront.rawValue:
-                        // ターゲット方向のベクトルを求める
-                        let vecX = RIGHTVECTOR_X
-                        let vecY = VECTOR_Y
-
-                        // 三平方の定理を使って長さを求める
-                        let length:Float = sqrt(vecX + vecY)
-
-                        // ベクトルを求めた長さで割り、正規化にする
-                        directionX.append((vecX / length) * -1)
-                        directionY.append(vecY / length)
-                        tripleBulletNo += 1
-                        break
-
-                    case threeShots.diagonalLeftFront.rawValue:
-                        // ターゲット方向のベクトルを求める
-                        let vecX = LEFTVECTOR_X
-                        let vecY = VECTOR_Y
-
-                        // 三平方の定理を使って長さを求める
-                        let length:Float = sqrt(vecX + vecY)
-
-                        // ベクトルを求めた長さで割り、正規化にする
+                    
+                    // ターゲット方向のベクトルを求める
+                    let vecX = RIGHTVECTOR_X
+                    let vecY = VECTOR_Y
+                    
+                    // 三平方の定理を使って長さを求める
+                    let length:Float = sqrt(vecX + vecY)
+                    
+                    // ベクトルを求めた長さで割り、正規化にする
+                    if tripleBulletNo != 1 {
                         directionX.append(vecX / length)
-                        directionY.append(vecY / length)
+                    } else {
+                        directionX.append((vecX / length) * -1)
+                    }
+                    directionY.append(vecY / length)
+                    tripleBulletNo += 1
+                    
+                    if tripleBulletNo == 3 {
                         tripleBulletNo = 0
-                        break
-
-                    default:
-                        break
                     }
                 }
             }
-
+            
             // 弾移動処理
             for i in 0..<ZIKIMAXBULLET {
                 if isBulletTrigger[i] {
-                    switch tripleBulletNo {
-                    case threeShots.straight.rawValue:
-                        //body[i].position.x += CGFloat(directionX[i] * 0.2)
-                        //body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
-                        body[i].position.y -= CGFloat(directionY[i] * 0.2)
-                        body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
-                        
-                        if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
-                            body[i].position.x <= (GameManager.shared.scene?.frame.minX)! || body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
-                            isBulletTrigger[i] = false
-                            body[i].removeFromParent()
-                        }
-                        
-                        tripleBulletNo += 1
-                        break
-
-                    case threeShots.diagonalRightFront.rawValue:
+                    if tripleBulletNo != 0 {
                         body[i].position.x += CGFloat(directionX[i] * 0.2)
                         body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
-                        body[i].position.y -= CGFloat(directionY[i] * 0.2)
-                        body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
-                        
-                        if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
-                            body[i].position.x <= (GameManager.shared.scene?.frame.minX)! || body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
-                            isBulletTrigger[i] = false
-                            body[i].removeFromParent()
-                        }
-                        
-                        tripleBulletNo += 1
-                        break
-
-                    case threeShots.diagonalLeftFront.rawValue:
-                        body[i].position.x += CGFloat(directionX[i] * 0.2)
-                        body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
-                        body[i].position.y -= CGFloat(directionY[i] * 0.2)
-                        body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
-                        
-                        if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
-                            body[i].position.x <= (GameManager.shared.scene?.frame.minX)! || body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
-                            isBulletTrigger[i] = false
-                            body[i].removeFromParent()
-                        }
-                        
+                    }
+                    body[i].position.y -= CGFloat(directionY[i] * 0.2)
+                    body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
+                    
+                    if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
+                        body[i].position.x <= (GameManager.shared.scene?.frame.minX)! || body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
+                        isBulletTrigger[i] = false
+                        body[i].removeFromParent()
+                    }
+                    tripleBulletNo += 1
+                    if tripleBulletNo == 3 {
                         tripleBulletNo = 0
-                        break
-                    default:
-                        break
-
                     }
                 }
                 // 弾発射インタバル
