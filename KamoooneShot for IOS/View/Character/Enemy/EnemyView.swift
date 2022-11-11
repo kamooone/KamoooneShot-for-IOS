@@ -9,8 +9,8 @@ import Foundation
 import SpriteKit
 
 class EnemyView: BaseCharacterView {
-    public static let ENEMYMAX: Int = 20
-
+    public static let ENEMYMAX: Int = 50
+    
     let bullet = EnemyBulletView()
     var rotateAction :SKAction?
     
@@ -27,8 +27,6 @@ class EnemyView: BaseCharacterView {
         body?.zRotation = DegreeToRadian(Degree: 180)
         // sceneに登録
         GameManager.shared.scene?.addChild(body!)
-        // 弾初期化
-        bullet.Init()
     }
     
     func Update(){

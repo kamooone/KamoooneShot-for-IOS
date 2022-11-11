@@ -13,23 +13,20 @@ class BulletView: BaseBulletView {
     
     override init(){
         super.init()
-        
         // このクラスのインスタンスは一つのみにする
         if !BulletView.isSingleton {
-            Init()
+            // 自機弾の生成
+            for _ in 0..<ZIKIMAXBULLET {
+                isBulletTrigger.append(false)
+                body.append(SKSpriteNode(imageNamed: "orange.png"))
+            }
             BulletView.isSingleton = true
         } else {
             // エラー処理
             print("エラー処理")
         }
     }
-    func Init(){
-        // 自機弾の生成
-        for _ in 0..<ZIKIMAXBULLET {
-            isBulletTrigger.append(false)
-            body.append(SKSpriteNode(imageNamed: "orange.png"))
-        }
-    }
+    
     func Update(x: CGFloat, y: CGFloat){
         // 弾発射前処理
         for i in 0..<ZIKIMAXBULLET {

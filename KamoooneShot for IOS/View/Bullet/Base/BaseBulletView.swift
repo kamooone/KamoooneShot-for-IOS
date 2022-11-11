@@ -9,11 +9,12 @@ import Foundation
 import SpriteKit
 
 class BaseBulletView {
-    let ZIKIMAXBULLET: Int = 21
+    let ZIKIMAXBULLET: Int = 90
     let BULLET_SPEED: Float = 1.0
     var isBulletTrigger: [Bool] = []
+    var bulletDirection: [String] = []
     var body: [SKSpriteNode] = []
-    var bulletDuration: Int = 10
+    var bulletDuration: Int = 15
     var bulletStartTime: Int = 0
     let VECTOR_Y: Float = 50.0
     let RIGHTVECTOR_X: Float = 10.0

@@ -16,20 +16,15 @@ class PlayerView: BaseCharacterView {
         super.init()
         // このクラスのインスタンスを一つしか生成できないようにする
         if !PlayerView.isSingleton {
-            Init()
+            // 自機の生成
+            body = SKSpriteNode(imageNamed: "ziki.png")
+            body!.position = CGPoint(x: (GameManager.shared.scene?.frame.midX)!, y: (GameManager.shared.scene?.frame.minY)!+150)
+            GameManager.shared.scene?.addChild(body!)
             PlayerView.isSingleton = true
         } else {
             // エラー処理に飛ばす
             print("インスタンス重複エラー")
         }
-    }
-    
-    func Init(){
-        // 自機の生成
-        body = SKSpriteNode(imageNamed: "ziki.png")
-        body!.position = CGPoint(x: (GameManager.shared.scene?.frame.midX)!, y: (GameManager.shared.scene?.frame.minY)!+150)
-        GameManager.shared.scene?.addChild(body!)
-        bullet.Init()
     }
     
     func Move(){
