@@ -39,12 +39,12 @@ class EnemyBulletView: BaseBulletView {
     func NormalBullet(__x: CGFloat, __y: CGFloat) {
         // 弾発射前処理
         for i in 0..<ZIKIMAXBULLET {
-            if !isBulletTrigger[i] && bulletStartTime > bulletDuration {
+            if !isBulletTrigger[i] && bulletStartTime == 0 {
                 isBulletTrigger[i] = true
                 body[i].size = CGSize(width: 10, height: 10)
                 body[i].position = CGPoint(x: __x, y: __y)
                 GameManager.shared.scene?.addChild(body[i])
-                bulletStartTime = 0
+                bulletStartTime = bulletDuration
             }
         }
         // 弾移動処理
@@ -61,10 +61,10 @@ class EnemyBulletView: BaseBulletView {
                     body[i].removeFromParent()
                 }
             }
-            // 弾発射インタバル
-            else if bulletStartTime <= bulletDuration {
-                bulletStartTime += 1
-            }
+        }
+        // 弾発射インタバル
+        if bulletStartTime != 0 {
+            bulletStartTime -= 1
         }
     }
     

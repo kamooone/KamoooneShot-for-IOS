@@ -30,13 +30,12 @@ class BulletView: BaseBulletView {
     func Update(x: CGFloat, y: CGFloat){
         // 弾発射前処理
         for i in 0..<ZIKIMAXBULLET {
-            if !isBulletTrigger[i] && bulletStartTime > bulletDuration {
+            if !isBulletTrigger[i] && bulletStartTime == 0 {
                 isBulletTrigger[i] = true
-                // ToDo 画面ごとのサイズ
                 body[i].size = CGSize(width: 10, height: 10)
                 body[i].position = CGPoint(x: x, y: y)
                 GameManager.shared.scene?.addChild(body[i])
-                bulletStartTime = 0
+                bulletStartTime = bulletDuration
                 break
             }
         }
@@ -55,8 +54,8 @@ class BulletView: BaseBulletView {
             }
         }
         // 弾発射インタバル
-        if bulletStartTime <= 10{
-            bulletStartTime+=1
+        if bulletStartTime != 0{
+            bulletStartTime -= 1
         }
     }
 }

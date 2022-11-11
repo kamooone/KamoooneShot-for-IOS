@@ -21,7 +21,7 @@ class BaseBulletView {
     let LEFTVECTOR_X: Float = 10.0
     var directionX: [Float] = []
     var directionY: [Float] = []
-    var nowBulletType: Int = 1
+    var nowBulletType: Int = 0
     enum bulletType: Int {
         case normalBullet = 0
         case tripleBullet = 1
