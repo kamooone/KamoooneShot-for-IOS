@@ -86,11 +86,11 @@ class GameScene: SKScene {
             // 回転処理
             //_enemy[i].run(rotateAction)
             
-            player.Update()
+            //player.Update()
             
             // エネミーの数分回す
             for i in 0..<EnemyView.ENEMYMAX {
-                enemys[i].Update()
+                enemys[i].Update(_playerPositionX: player.body?.position.x ?? 0, _playerPositionY: player.body?.position.y ?? 0)
             }
             
             colision.CollisionJudge(player: player, enemys: enemys)

@@ -23,26 +23,29 @@ class EnemyBulletView: BaseBulletView {
         }
     }
     
-    func Update(_x: CGFloat, _y: CGFloat){
+    func Update(_enemyBulletX: CGFloat, _enemyBulletY: CGFloat, __playerBulletX: CGFloat, __playerBulletY: CGFloat){
         switch nowBulletType {
         case bulletType.normalBullet.rawValue:
-            NormalBullet(__x: _x, __y: _y)
+            NormalBullet(__enemyBulletX: _enemyBulletX, __enemyBulletY: _enemyBulletY)
             break
         case bulletType.tripleBullet.rawValue:
-            TripleBullet(__x: _x, __y: _y)
+            TripleBullet(__enemyBulletX: _enemyBulletX, __enemyBulletY: _enemyBulletY)
+            break
+        case bulletType.homingBullet.rawValue:
+            homingBullet(__enemyBulletX: _enemyBulletX, __enemyBulletY: _enemyBulletY, ___playerBulletX: __playerBulletX, ___playerBulletY: __playerBulletY)
             break
         default:
             break
         }
     }
     
-    func NormalBullet(__x: CGFloat, __y: CGFloat) {
+    func NormalBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat) {
         // 弾発射前処理
         for i in 0..<ZIKIMAXBULLET {
             if !isBulletTrigger[i] && bulletStartTime == 0 {
                 isBulletTrigger[i] = true
                 body[i].size = CGSize(width: 10, height: 10)
-                body[i].position = CGPoint(x: __x, y: __y)
+                body[i].position = CGPoint(x: __enemyBulletX, y: __enemyBulletY)
                 GameManager.shared.scene?.addChild(body[i])
                 bulletStartTime = bulletDuration
             }
@@ -68,7 +71,7 @@ class EnemyBulletView: BaseBulletView {
         }
     }
     
-    func TripleBullet(__x: CGFloat, __y: CGFloat) {
+    func TripleBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat) {
         enum tripleBulletType: Int {
             case straight = 1
             case diagonallyRight = 2
@@ -79,7 +82,7 @@ class EnemyBulletView: BaseBulletView {
             if !isBulletTrigger[i] && bulletStartTime == 0 {
                 isBulletTrigger[i] = true
                 body[i].size = CGSize(width: 10, height: 10)
-                body[i].position = CGPoint(x: __x, y: __y)
+                body[i].position = CGPoint(x: __enemyBulletX, y: __enemyBulletY)
                 GameManager.shared.scene?.addChild(body[i])
                 
                 let vecX = RIGHTVECTOR_X
@@ -115,9 +118,49 @@ class EnemyBulletView: BaseBulletView {
                 if bulletDirection[i] != "Straight" {
                     body[i].position.x += CGFloat(directionX[i] * BULLET_SPEED)
                     body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
-                } else {
-                    print("bulletDirection[i]",bulletDirection[i])
-                    print("")
+                }
+                body[i].position.y -= CGFloat(directionY[i] * BULLET_SPEED)
+                body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
+                
+                
+                // 画面エリア外判定
+                if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
+                    body[i].position.x <= (GameManager.shared.scene?.frame.minX)! || body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
+                    isBulletTrigger[i] = false
+                    body[i].removeFromParent()
+                }
+            }
+        }
+        
+        // 弾発射インタバル
+        if bulletStartTime != 0 {
+            bulletStartTime -= 1
+        }
+    }
+    
+    func homingBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerBulletX: CGFloat, ___playerBulletY: CGFloat) {
+        // 弾発射前処理
+        for i in 0..<ZIKIMAXBULLET {
+            if !isBulletTrigger[i] && bulletStartTime == 0 {
+                isBulletTrigger[i] = true
+                body[i].size = CGSize(width: 10, height: 10)
+                body[i].position = CGPoint(x: __enemyBulletX, y: __enemyBulletY)
+                GameManager.shared.scene?.addChild(body[i])
+                
+                let vecX = RIGHTVECTOR_X
+                let vecY = VECTOR_Y
+                let length:Float = sqrt(vecX + vecY)
+                
+                tripleBulletNo += 1
+                directionY[i] = (vecY / length)
+            }
+        }
+        // 弾移動処理
+        for i in 0..<ZIKIMAXBULLET {
+            if isBulletTrigger[i] {
+                if bulletDirection[i] != "Straight" {
+                    body[i].position.x += CGFloat(directionX[i] * BULLET_SPEED)
+                    body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
                 }
                 body[i].position.y -= CGFloat(directionY[i] * BULLET_SPEED)
                 body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))

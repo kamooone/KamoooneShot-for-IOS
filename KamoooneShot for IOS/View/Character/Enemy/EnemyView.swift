@@ -9,7 +9,7 @@ import Foundation
 import SpriteKit
 
 class EnemyView: BaseCharacterView {
-    public static let ENEMYMAX: Int = 50
+    public static let ENEMYMAX: Int = 10
     
     let bullet = EnemyBulletView()
     var rotateAction :SKAction?
@@ -29,9 +29,9 @@ class EnemyView: BaseCharacterView {
         GameManager.shared.scene?.addChild(body!)
     }
     
-    func Update(){
+    func Update(_playerPositionX : CGFloat, _playerPositionY : CGFloat){
         body!.position.y -= 1
-        bullet.Update(_x: body!.position.x, _y: body!.position.y)
+        bullet.Update(_enemyBulletX: body!.position.x, _enemyBulletY: body!.position.y, __playerBulletX: _playerPositionX, __playerBulletY: _playerPositionY)
     }
     
     func DegreeToRadian(Degree : Double!)-> CGFloat{
