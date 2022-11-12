@@ -58,6 +58,8 @@ class Collision {
 
                             enemys[k].explotion.StartExplosion(x: enemys[k].body?.position.x ?? 0,y: enemys[k].body?.position.y ?? 0, cnt: k)
                             player.bullet.body[i].removeFromParent()
+                            player.bullet.body[i].position.x = -1000
+                            player.bullet.body[i].position.y = -1000
                             enemys[k].body?.removeFromParent()
                             enemys[k].body?.position.x = -1000
                             enemys[k].body?.position.y = -1000
@@ -87,10 +89,13 @@ class Collision {
                                 SoundManager.shared.PlaySE()
                                 
                                 //GameScene.GetExplosionObject().StartExplosion(x: enemyPos[k].position.x,y: enemyPos[k].position.y, cnt: k)
-                                enemys[k].bullet.body[cnt].removeFromParent()
                                 player.bullet.body[i].removeFromParent()
+                                player.bullet.body[i].position.x = -1000
+                                player.bullet.body[i].position.y = -1000
+                                enemys[k].bullet.body[cnt].removeFromParent()
+                                enemys[k].body?.position.x = -1000
+                                enemys[k].body?.position.y = -1000
                                 enemys[k].bullet.isBulletTrigger[cnt] = false
-                                
                             }
                         }
                     }
