@@ -29,9 +29,9 @@ class EnemyView: BaseCharacterView {
         GameManager.shared.scene?.addChild(body!)
     }
     
-    func Update(_playerPositionX : CGFloat, _playerPositionY : CGFloat){
+    func Update(_playerX : CGFloat, _playerY : CGFloat){
         body!.position.y -= 1
-        bullet.Update(_enemyBulletX: body!.position.x, _enemyBulletY: body!.position.y, __playerBulletX: _playerPositionX, __playerBulletY: _playerPositionY)
+        bullet.Update(_enemyBulletX: body!.position.x, _enemyBulletY: body!.position.y, __playerX: _playerX, __playerY: _playerY)
     }
     
     func DegreeToRadian(Degree : Double!)-> CGFloat{

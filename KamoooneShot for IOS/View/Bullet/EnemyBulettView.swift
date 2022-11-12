@@ -23,7 +23,7 @@ class EnemyBulletView: BaseBulletView {
         }
     }
     
-    func Update(_enemyBulletX: CGFloat, _enemyBulletY: CGFloat, __playerBulletX: CGFloat, __playerBulletY: CGFloat){
+    func Update(_enemyBulletX: CGFloat, _enemyBulletY: CGFloat, __playerX: CGFloat, __playerY: CGFloat){
         switch nowBulletType {
         case bulletType.normalBullet.rawValue:
             NormalBullet(__enemyBulletX: _enemyBulletX, __enemyBulletY: _enemyBulletY)
@@ -32,7 +32,7 @@ class EnemyBulletView: BaseBulletView {
             TripleBullet(__enemyBulletX: _enemyBulletX, __enemyBulletY: _enemyBulletY)
             break
         case bulletType.homingBullet.rawValue:
-            homingBullet(__enemyBulletX: _enemyBulletX, __enemyBulletY: _enemyBulletY, ___playerBulletX: __playerBulletX, ___playerBulletY: __playerBulletY)
+            homingBullet(__enemyBulletX: _enemyBulletX, __enemyBulletY: _enemyBulletY, ___playerX: __playerX, ___playerY: __playerY)
             break
         default:
             break
@@ -87,7 +87,7 @@ class EnemyBulletView: BaseBulletView {
                 
                 let vecX = RIGHTVECTOR_X
                 let vecY = VECTOR_Y
-                let length:Float = sqrt(vecX + vecY)
+                let length:CGFloat = sqrt(vecX + vecY)
                 
                 tripleBulletNo += 1
                 directionY[i] = (vecY / length)
@@ -116,10 +116,10 @@ class EnemyBulletView: BaseBulletView {
         for i in 0..<ZIKIMAXBULLET {
             if isBulletTrigger[i] {
                 if bulletDirection[i] != "Straight" {
-                    body[i].position.x += CGFloat(directionX[i] * BULLET_SPEED)
+                    body[i].position.x += directionX[i] * BULLET_SPEED
                     body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
                 }
-                body[i].position.y -= CGFloat(directionY[i] * BULLET_SPEED)
+                body[i].position.y -= directionY[i] * BULLET_SPEED
                 body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
                 
                 
@@ -138,7 +138,7 @@ class EnemyBulletView: BaseBulletView {
         }
     }
     
-    func homingBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerBulletX: CGFloat, ___playerBulletY: CGFloat) {
+    func homingBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerX: CGFloat, ___playerY: CGFloat) {
         // 弾発射前処理
         for i in 0..<ZIKIMAXBULLET {
             if !isBulletTrigger[i] && bulletStartTime == 0 {
@@ -146,25 +146,19 @@ class EnemyBulletView: BaseBulletView {
                 body[i].size = CGSize(width: 10, height: 10)
                 body[i].position = CGPoint(x: __enemyBulletX, y: __enemyBulletY)
                 GameManager.shared.scene?.addChild(body[i])
-                
-                let vecX = RIGHTVECTOR_X
-                let vecY = VECTOR_Y
-                let length:Float = sqrt(vecX + vecY)
-                
-                tripleBulletNo += 1
-                directionY[i] = (vecY / length)
+                bulletStartTime = bulletDuration
             }
         }
         // 弾移動処理
         for i in 0..<ZIKIMAXBULLET {
             if isBulletTrigger[i] {
-                if bulletDirection[i] != "Straight" {
-                    body[i].position.x += CGFloat(directionX[i] * BULLET_SPEED)
-                    body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
-                }
-                body[i].position.y -= CGFloat(directionY[i] * BULLET_SPEED)
+                // 三平方の定理を使って長さを求める
+                let length = sqrt((___playerX - body[i].position.x) * (___playerX - body[i].position.x) + (___playerY - body[i].position.y) * (___playerY - body[i].position.y))
+                                
+                body[i].position.x += (___playerX - body[i].position.x) / length * BULLET_SPEED
+                body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
+                body[i].position.y += (___playerY - body[i].position.y) / length * BULLET_SPEED
                 body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
-                
                 
                 // 画面エリア外判定
                 if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||

@@ -90,7 +90,7 @@ class GameScene: SKScene {
             
             // エネミーの数分回す
             for i in 0..<EnemyView.ENEMYMAX {
-                enemys[i].Update(_playerPositionX: player.body?.position.x ?? 0, _playerPositionY: player.body?.position.y ?? 0)
+                enemys[i].Update(_playerX: player.body?.position.x ?? 0, _playerY: player.body?.position.y ?? 0)
             }
             
             colision.CollisionJudge(player: player, enemys: enemys)
