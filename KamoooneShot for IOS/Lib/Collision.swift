@@ -56,7 +56,7 @@ class Collision {
 
                             SoundManager.shared.PlaySE()
 
-                            enemys[k].explotion.StartExplosion(x: enemys[k].body?.position.x ?? 0,y: enemys[k].body?.position.y ?? 0, cnt: k)
+                            enemys[k].explotion.StartExplosion(x: (enemys[k].body?.position.x)!,y: (enemys[k].body?.position.y)!, cnt: k)
                             player.bullet.body[i].removeFromParent()
                             player.bullet.body[i].position.x = -1000
                             player.bullet.body[i].position.y = -1000
@@ -65,6 +65,7 @@ class Collision {
                             enemys[k].body?.position.y = -1000
                         }
                     }
+                    enemys[k].explotion.Update()
                 }
                 
                 // 自機の弾とエネミーの弾との当たり判定
@@ -93,8 +94,8 @@ class Collision {
                                 player.bullet.body[i].position.x = -1000
                                 player.bullet.body[i].position.y = -1000
                                 enemys[k].bullet.body[cnt].removeFromParent()
-                                enemys[k].body?.position.x = -1000
-                                enemys[k].body?.position.y = -1000
+                                enemys[k].bullet.body[cnt].position.x = -1000
+                                enemys[k].bullet.body[cnt].position.y = -1000
                                 enemys[k].bullet.isBulletTrigger[cnt] = false
                             }
                         }
@@ -106,7 +107,7 @@ class Collision {
         
         // 自機と敵の弾との当たり判定
         for k in 0..<EnemyView.ENEMYMAX {
-            for cnt in 0..<player.bullet.ZIKIMAXBULLET {
+            for cnt in 0..<enemys[k].bullet.ZIKIMAXBULLET {
                 if enemys[k].bullet.isBulletTrigger[cnt] {
                     
                     //  ベクトル
@@ -117,7 +118,7 @@ class Collision {
                     let distance = sqrtf(Float((posX * posX) + (posY * posY)))
                     
                     // 対象となる二つのオブジェクトの半径の和を求める
-                    let doubleWidth = Float((player.body?.size.width ?? 0 / 3) + (enemys[k].bullet.body[0].size.width / 3))
+                    let doubleWidth = Float(((player.body?.size.width)! / 3) + (enemys[k].bullet.body[0].size.width / 3))
                     
                     // 中心座標の2点間の距離より半径の和の方が大きければ接触
                     if distance <= doubleWidth && !GameManager.shared.isSeHit {

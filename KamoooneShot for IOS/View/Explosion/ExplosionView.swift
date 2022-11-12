@@ -14,10 +14,6 @@ class ExplosionView {
     var isExplosion: [Bool] = []
 
     init() {
-        Init()
-    }
-    
-    func Init(){
         // テクスチャアトラスのフォルダ名を指定
         let atlas = SKTextureAtlas(named: "explosion")
         // 爆発のテクスチャのスプライト数分
@@ -46,6 +42,8 @@ class ExplosionView {
         for i in 0...EnemyView.ENEMYMAX{
             // 表示する必要がなくなったスプライトを削除する処理
             if !(sprite[i].hasActions() && isExplosion[i] ) {
+                sprite[i].position.x = -100000
+                sprite[i].position.y = -100000
                 sprite[i].removeFromParent()
             }
         }
