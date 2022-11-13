@@ -13,9 +13,7 @@ import AVFoundation
 class GameScene: SKScene {
     var backGround: BackGroundView!
     var gameUI: GameUIView!
-    var player: PlayerView!
-    var colision: Collision!
-    var enemys: [EnemyView] = []
+    var stick: StickView!
 
     
     // 画面描画する際の初期化時に呼ばれる
@@ -28,21 +26,15 @@ class GameScene: SKScene {
         if gameUI == nil {
             gameUI = GameUIView()
         }
-        if player == nil {
-            player = PlayerView()
-        }
-        if colision == nil {
-            colision = Collision()
-        }
-        // エネミーの数分インスタンスを生成する
-        for _ in 0..<EnemyView.ENEMYMAX {
-            enemys.append(EnemyView())
+        if stick == nil {
+            stick = StickView()
         }
     }
     
     //タッチ時に呼ばれる
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
+        GameManager.shared.isTouch = true
         
         // 初回タップを行うとゲームスタート
         if !GameManager.shared.isGameStart {
@@ -55,8 +47,7 @@ class GameScene: SKScene {
         // タップした位置の座標を取得
         let touch = touches.first!;
         GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
-        // 移動
-        player.Move()
+        stick.Move()
         
         for touch in touches {
             _ = touch.location(in: self)
@@ -69,31 +60,25 @@ class GameScene: SKScene {
         // タップした位置に自機を移動
         let touch = touches.first!;
         GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
-        player.Move()
+        
+        stick.Move()
     }
     
     // タッチを離した時に呼ばれる
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        GameManager.shared.isTouch = false
         // タップした位置に自機を移動
         let touch = touches.first!;
         GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
-        player.Move()
+    
+        // 離したらスティックを元の位置に戻す
+        stick.Reset()
     }
     
     //ノードのアクションの処理後に呼ばれる
     override func didEvaluateActions() {
         if GameManager.shared.isGameStart {
-            // 回転処理
-            //_enemy[i].run(rotateAction)
-            
-            //player.Update()
-            
-            // エネミーの数分回す
-            for i in 0..<EnemyView.ENEMYMAX {
-                enemys[i].Update(_playerX: player.body?.position.x ?? 0, _playerY: player.body?.position.y ?? 0)
-            }
-            
-            colision.CollisionJudge(player: player, enemys: enemys)
+            stick.Update()
         }
     }
  }

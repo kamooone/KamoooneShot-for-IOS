@@ -125,7 +125,7 @@ class Collision {
                         //GameManager.isSeHit = true
                         //GameScene.GetExplosionObject().isExplosion[k] = true
                         
-                        SoundManager.shared.PlaySE()
+                        //SoundManager.shared.PlaySE()
                         
                         //GameScene.GetExplosionObject().StartExplosion(x: enemyPos[k].position.x,y: enemyPos[k].position.y, cnt: k)
                         enemys[k].bullet.body[cnt].removeFromParent()

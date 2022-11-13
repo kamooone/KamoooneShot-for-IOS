@@ -18,6 +18,9 @@ class GameManager {
     // タッチ座標を取得するために使用する
     var scene: SKScene?
     
+    // タッチ中かどうかを示す
+    var isTouch: Bool = false
+    
     let backGroundSize: CGSize = CGSize(width: 360, height: 640)
     var isSeHit: Bool = false
 
