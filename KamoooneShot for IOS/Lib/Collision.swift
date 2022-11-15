@@ -36,9 +36,9 @@ class Collision {
                     if isEnemyLive[k] {
                         //  中心座標
                         let playerX = player.bullet.body[i].position.x + (player.bullet.body[i].size.width / 2)
-                        let playerY = player.bullet.body[i].position.y - (player.bullet.body[i].size.height / 2)
+                        let playerY = player.bullet.body[i].position.y + (player.bullet.body[i].size.height / 2)
                         let enemyX = (enemys[k].body?.position.x)! + ((enemys[k].body?.size.width)! / 2)
-                        let enemyY = (enemys[k].body?.position.y)! - ((enemys[k].body?.size.height)! / 2)
+                        let enemyY = (enemys[k].body?.position.y)! + ((enemys[k].body?.size.height)! / 2)
                         
                         // 三平方定理を使用して距離取得
                         let workX = ((playerX - enemyX) * (playerX - enemyX))
@@ -74,9 +74,9 @@ class Collision {
                         if enemys[k].bullet.isBulletTrigger[cnt] {
                             //  中心座標
                             let playerX = player.bullet.body[i].position.x + (player.bullet.body[i].size.width / 2)
-                            let playerY = player.bullet.body[i].position.y - (player.bullet.body[i].size.height / 2)
+                            let playerY = player.bullet.body[i].position.y + (player.bullet.body[i].size.height / 2)
                             let enemyX = enemys[k].bullet.body[cnt].position.x + (enemys[k].bullet.body[cnt].size.width / 2)
-                            let enemyY = enemys[k].bullet.body[cnt].position.y - (enemys[k].bullet.body[cnt].size.height / 2)
+                            let enemyY = enemys[k].bullet.body[cnt].position.y + (enemys[k].bullet.body[cnt].size.height / 2)
                             
                             // 三平方定理を使用して距離取得
                             let workX = ((playerX - enemyX) * (playerX - enemyX))
@@ -115,9 +115,9 @@ class Collision {
                 if enemys[k].bullet.isBulletTrigger[cnt] {
                     //  中心座標
                     let playerX = player.body!.position.x + (player.body!.size.width / 2)
-                    let playerY = player.body!.position.y - (player.body!.size.height / 2)
+                    let playerY = player.body!.position.y + (player.body!.size.height / 2)
                     let enemyX = enemys[k].bullet.body[cnt].position.x + (enemys[k].bullet.body[cnt].size.width / 2)
-                    let enemyY = enemys[k].bullet.body[cnt].position.y - (enemys[k].bullet.body[cnt].size.height / 2)
+                    let enemyY = enemys[k].bullet.body[cnt].position.y + (enemys[k].bullet.body[cnt].size.height / 2)
                     
                     // 三平方定理を使用して距離取得
                     let workX = ((playerX - enemyX) * (playerX - enemyX))
@@ -135,9 +135,9 @@ class Collision {
                         //SoundManager.shared.PlaySE()
                         
                         //GameScene.GetExplosionObject().StartExplosion(x: enemyPos[k].position.x,y: enemyPos[k].position.y, cnt: k)
-                        enemys[k].bullet.body[cnt].removeFromParent()
+                        //enemys[k].bullet.body[cnt].removeFromParent()
                         //ziki.removeFromParent()
-                        enemys[k].bullet.isBulletTrigger[cnt] = false
+                        //enemys[k].bullet.isBulletTrigger[cnt] = false
                     }
                 }
             }
