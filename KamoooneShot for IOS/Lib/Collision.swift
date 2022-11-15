@@ -135,9 +135,9 @@ class Collision {
                         //SoundManager.shared.PlaySE()
                         
                         //GameScene.GetExplosionObject().StartExplosion(x: enemyPos[k].position.x,y: enemyPos[k].position.y, cnt: k)
-                        //enemys[k].bullet.body[cnt].removeFromParent()
+                        enemys[k].bullet.body[cnt].removeFromParent()
                         //ziki.removeFromParent()
-                        //enemys[k].bullet.isBulletTrigger[cnt] = false
+                        enemys[k].bullet.isBulletTrigger[cnt] = false
                     }
                 }
             }

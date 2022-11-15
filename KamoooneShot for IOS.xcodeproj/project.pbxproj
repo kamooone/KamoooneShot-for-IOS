@@ -26,6 +26,8 @@
 		E2481C9727A650F800583CDD /* ExplosionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2481C9627A650F800583CDD /* ExplosionView.swift */; };
 		E2481C9C27A6A36100583CDD /* bgm1.wav in Resources */ = {isa = PBXBuildFile; fileRef = E2481C9B27A6A36100583CDD /* bgm1.wav */; };
 		E2481C9E27A6A36B00583CDD /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = E2481C9D27A6A36B00583CDD /* hit.wav */; };
+		E262CFE62920C78A004E2987 /* stick.png in Resources */ = {isa = PBXBuildFile; fileRef = E262CFE52920C78A004E2987 /* stick.png */; };
+		E262CFE82920C7F8004E2987 /* StickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E262CFE72920C7F8004E2987 /* StickView.swift */; };
 		E2A09148290444F5002D7201 /* EnemyBulettView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A09147290444F5002D7201 /* EnemyBulettView.swift */; };
 		E2BF4C562793D19400BB72E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF4C552793D19400BB72E5 /* AppDelegate.swift */; };
 		E2BF4C582793D19400BB72E5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2BF4C572793D19400BB72E5 /* GameScene.sks */; };
@@ -58,6 +60,8 @@
 		E2481C9627A650F800583CDD /* ExplosionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplosionView.swift; sourceTree = "<group>"; };
 		E2481C9B27A6A36100583CDD /* bgm1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bgm1.wav; sourceTree = "<group>"; };
 		E2481C9D27A6A36B00583CDD /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
+		E262CFE52920C78A004E2987 /* stick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stick.png; sourceTree = "<group>"; };
+		E262CFE72920C7F8004E2987 /* StickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickView.swift; sourceTree = "<group>"; };
 		E2A09147290444F5002D7201 /* EnemyBulettView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyBulettView.swift; sourceTree = "<group>"; };
 		E2BF4C522793D19400BB72E5 /* KamoooneShot for IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KamoooneShot for IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2BF4C552793D19400BB72E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 		E22F253D279D8A8F006F49B7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E262CFE92920D335004E2987 /* Controller */,
 				E2461D6E290CD4C500D2FBDA /* UI */,
 				E2461D6D290CD4BC00D2FBDA /* BackGround */,
 				E2461D6C290CD49300D2FBDA /* Explosion */,
@@ -152,6 +157,7 @@
 		E23A62D428FC205600DE818C /* BackGround */ = {
 			isa = PBXGroup;
 			children = (
+				E262CFE52920C78A004E2987 /* stick.png */,
 				E23A630028FC20DA00DE818C /* bg.png */,
 			);
 			path = BackGround;
@@ -248,6 +254,14 @@
 				E2481C9D27A6A36B00583CDD /* hit.wav */,
 			);
 			path = SE;
+			sourceTree = "<group>";
+		};
+		E262CFE92920D335004E2987 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E262CFE72920C7F8004E2987 /* StickView.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		E2A0914929055666002D7201 /* Character */ = {
@@ -374,6 +388,7 @@
 				E23A62FA28FC20C400DE818C /* pink.png in Resources */,
 				E23A62FB28FC20C400DE818C /* orange.png in Resources */,
 				E2BF4C632793D19400BB72E5 /* Assets.xcassets in Resources */,
+				E262CFE62920C78A004E2987 /* stick.png in Resources */,
 				E2481C9C27A6A36100583CDD /* bgm1.wav in Resources */,
 				E23A630128FC20DA00DE818C /* bg.png in Resources */,
 				E2BF4C662793D19400BB72E5 /* LaunchScreen.storyboard in Resources */,
@@ -403,6 +418,7 @@
 				E2BF4C562793D19400BB72E5 /* AppDelegate.swift in Sources */,
 				E22F2533279D804F006F49B7 /* GameUIView.swift in Sources */,
 				E22466E7279C4E0F00DED8D3 /* PlayerView.swift in Sources */,
+				E262CFE82920C7F8004E2987 /* StickView.swift in Sources */,
 				E22F2531279D4E0E006F49B7 /* EnemyView.swift in Sources */,
 				E22466E5279C3E1600DED8D3 /* Collision.swift in Sources */,
 				E22466E3279C32DC00DED8D3 /* Processing.swift in Sources */,
@@ -554,9 +570,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = M62AGH5W92;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -584,9 +600,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = M62AGH5W92;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
