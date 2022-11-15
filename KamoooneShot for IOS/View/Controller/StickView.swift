@@ -41,11 +41,14 @@ class StickView {
         var vecX = GameManager.shared.touchPos!.x - INIT_POS_X
         var vecY = GameManager.shared.touchPos!.y - INIT_POS_Y
         
-        let length: CGFloat = sqrt(vecX + vecY)
+        let workX = (GameManager.shared.touchPos!.x - INIT_POS_X) * (GameManager.shared.touchPos!.x - INIT_POS_X)
+        let workY = (GameManager.shared.touchPos!.y - INIT_POS_Y) * (GameManager.shared.touchPos!.y - INIT_POS_Y)
+        let length: CGFloat = sqrt(workX + workY)
+        print("length",length)
         let directionX = (vecX / length)
         let directionY = (vecY / length * -1)
         
-        // ToDo 移動範囲を制限させる スティックの加減をつける
+        // ToDo 移動範囲を制限させる(原点からの距離を求めて一定の距離までの移動にする) スティックの加減をつける(原点からの距離によって移動スピードを変える)
         body?.run(SKAction.moveTo(x: GameManager.shared.touchPos!.x, duration: 0))
         body?.run(SKAction.moveTo(y: GameManager.shared.touchPos!.y, duration: 0))
         player.Move(_positionX : (body?.position.x)!, _positionY : (body?.position.y)!)
