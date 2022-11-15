@@ -16,13 +16,10 @@ class Collision {
     init(){
         // このクラスのインスタンスは一つのみにする
         if !Collision.isSingleton {
-            Init()
+            for _ in 0..<EnemyView.ENEMYMAX {
+                isEnemyLive.append(true)
+            }
             Collision.isSingleton = true
-        }
-    }
-    func Init() {
-        for _ in 0..<EnemyView.ENEMYMAX {
-            isEnemyLive.append(true)
         }
     }
     
@@ -34,19 +31,22 @@ class Collision {
     func CollisionJudge(player: PlayerView, enemys: [EnemyView]) {
         for i in 0..<player.bullet.ZIKIMAXBULLET {
             if player.bullet.isBulletTrigger[i] {
-                
                 // 自機の弾とエネミーとの当たり判定
                 for k in 0..<EnemyView.ENEMYMAX {
                     if isEnemyLive[k] {
-                        //  ベクトル
-                        let posX = player.bullet.body[i].position.x - (enemys[k].body?.position.x ?? 0)
-                        let posY = player.bullet.body[i].position.y - (enemys[k].body?.position.y ?? 0)
+                        //  中心座標
+                        let playerX = player.bullet.body[i].position.x + (player.bullet.body[i].size.width / 2)
+                        let playerY = player.bullet.body[i].position.y - (player.bullet.body[i].size.height / 2)
+                        let enemyX = (enemys[k].body?.position.x)! + ((enemys[k].body?.size.width)! / 2)
+                        let enemyY = (enemys[k].body?.position.y)! - ((enemys[k].body?.size.height)! / 2)
                         
                         // 三平方定理を使用して距離取得
-                        let distance = sqrtf(Float((posX * posX) + (posY * posY)))
+                        let workX = ((playerX - enemyX) * (playerX - enemyX))
+                        let workY = ((playerY - enemyY) * (playerY - enemyY))
+                        let distance = sqrt(workX + workY)
                         
                         // 対象となる二つのオブジェクトの半径の和を求める
-                        let doubleWidth = Float((player.bullet.body[i].size.width / 3) + (enemys[0].body?.size.width ?? 0 / 3))
+                        let doubleWidth = (player.bullet.body[i].size.width / 2) + (enemys[0].body?.size.width ?? 0 / 2)
                         
                         // 中心座標の2点間の距離より半径の和の方が大きければ接触
                         if distance <= doubleWidth && !GameManager.shared.isSeHit {
@@ -72,15 +72,19 @@ class Collision {
                 for k in 0..<EnemyView.ENEMYMAX {
                     for cnt in 0..<player.bullet.ZIKIMAXBULLET {
                         if enemys[k].bullet.isBulletTrigger[cnt] {
-                            //  ベクトル
-                            let posX = player.bullet.body[i].position.x - (enemys[k].bullet.body[cnt].position.x )
-                            let posY = player.bullet.body[i].position.y - (enemys[k].bullet.body[cnt].position.y )
+                            //  中心座標
+                            let playerX = player.bullet.body[i].position.x + (player.bullet.body[i].size.width / 2)
+                            let playerY = player.bullet.body[i].position.y - (player.bullet.body[i].size.height / 2)
+                            let enemyX = enemys[k].bullet.body[cnt].position.x + (enemys[k].bullet.body[cnt].size.width / 2)
+                            let enemyY = enemys[k].bullet.body[cnt].position.y - (enemys[k].bullet.body[cnt].size.height / 2)
                             
                             // 三平方定理を使用して距離取得
-                            let distance = sqrtf(Float((posX * posX) + (posY * posY)))
-                            
+                            let workX = ((playerX - enemyX) * (playerX - enemyX))
+                            let workY = ((playerY - enemyY) * (playerY - enemyY))
+                            let distance = sqrt(workX + workY)
+                                                        
                             // 対象となる二つのオブジェクトの半径の和を求める
-                            let doubleWidth = Float((player.bullet.body[i].size.width / 3) + (enemys[k].bullet.body[0].size.width / 3))
+                            let doubleWidth = (player.bullet.body[i].size.width / 2) + (enemys[k].bullet.body[cnt].size.width / 2)
                             
                             // 中心座標の2点間の距離より半径の和の方が大きければ接触
                             if distance <= doubleWidth && !GameManager.shared.isSeHit {
@@ -109,16 +113,19 @@ class Collision {
         for k in 0..<EnemyView.ENEMYMAX {
             for cnt in 0..<enemys[k].bullet.ZIKIMAXBULLET {
                 if enemys[k].bullet.isBulletTrigger[cnt] {
-                    
-                    //  ベクトル
-                    let posX = player.body?.position.x ?? 0 - enemys[k].bullet.body[cnt].position.x
-                    let posY = player.body?.position.y ?? 0 - enemys[k].bullet.body[cnt].position.y
+                    //  中心座標
+                    let playerX = player.body!.position.x + (player.body!.size.width / 2)
+                    let playerY = player.body!.position.y - (player.body!.size.height / 2)
+                    let enemyX = enemys[k].bullet.body[cnt].position.x + (enemys[k].bullet.body[cnt].size.width / 2)
+                    let enemyY = enemys[k].bullet.body[cnt].position.y - (enemys[k].bullet.body[cnt].size.height / 2)
                     
                     // 三平方定理を使用して距離取得
-                    let distance = sqrtf(Float((posX * posX) + (posY * posY)))
-                    
+                    let workX = ((playerX - enemyX) * (playerX - enemyX))
+                    let workY = ((playerY - enemyY) * (playerY - enemyY))
+                    let distance = sqrt(workX + workY)
+                                        
                     // 対象となる二つのオブジェクトの半径の和を求める
-                    let doubleWidth = Float(((player.body?.size.width)! / 3) + (enemys[k].bullet.body[0].size.width / 3))
+                    let doubleWidth = ((player.body?.size.width)! / 2) + (enemys[k].bullet.body[cnt].size.width / 2)
                     
                     // 中心座標の2点間の距離より半径の和の方が大きければ接触
                     if distance <= doubleWidth && !GameManager.shared.isSeHit {
