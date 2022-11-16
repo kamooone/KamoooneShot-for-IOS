@@ -37,48 +37,28 @@ class StickView {
     }
     
     func Move(){
-        // ToDo タッチしたところにスティック移動ではなく、ベクトルでスティックを移動させる。
-        //  中心座標
-        let initCenterX = INIT_POS_X
-        let initCenterY = INIT_POS_Y
+        //  スティックの中心座標
+        let initCenterX = body?.position.x
+        let initCenterY = body?.position.y
         
-        let workX = (GameManager.shared.touchPos!.x - initCenterX) * (GameManager.shared.touchPos!.x - initCenterX)
-        let workY = (GameManager.shared.touchPos!.y - initCenterY) * (GameManager.shared.touchPos!.y - initCenterY)
+        // 移動ベクトル
+        let vecX = GameManager.shared.touchPos!.x - initCenterX!
+        let vecY = GameManager.shared.touchPos!.y - initCenterY!
+        
+        // スティックの中心座標とタッチした場所の中心座標の距離
+        let workX = (GameManager.shared.touchPos!.x - initCenterX!) * (GameManager.shared.touchPos!.x - initCenterX!)
+        let workY = (GameManager.shared.touchPos!.y - initCenterY!) * (GameManager.shared.touchPos!.y - initCenterY!)
         let length: CGFloat = sqrt(workX + workY)
+
+        let directionX = vecX / length
+        let directionY = vecY / length
         
-        // ToDo 移動範囲を制限させる(原点からの距離を求めて一定の距離までの移動にする) スティックの加減をつける(原点からの距離によって移動スピードを変える)
-        let x = abs(initCenterX) + 40
-        let y = abs(initCenterY) + 40
+        body!.position.x += directionX * 1.01
+        body!.run(SKAction.moveTo(x: body!.position.x, duration: 0))
+        body!.position.y += directionY * 1.01
+        body!.run(SKAction.moveTo(y: body!.position.y, duration: 0))
         
-        if abs((body?.position.x)!) < x {
-            body?.run(SKAction.moveTo(x: GameManager.shared.touchPos!.x, duration: 0))
-        } else {
-            //body?.run(SKAction.moveTo(x: x - 0.002, duration: 0))
-        }
-        if abs((body?.position.y)!) < y {
-            body?.run(SKAction.moveTo(y: GameManager.shared.touchPos!.y, duration: 0))
-        } else {
-            //body?.run(SKAction.moveTo(y: y - 0.002, duration: 0))
-        }
-        // ToDo 円形の移動制限幅を超えたら処理を行う
-        //中心点から自身までの方向ベクトルを作る
-        //作った方向ベクトルを正規化する
-        //方向ベクトル分半径に移動させる
-        print("INIT_POS_X",INIT_POS_X)
-        print("INIT_POS_Y",INIT_POS_Y)
-        print("initCenterX",initCenterX)
-        print("initCenterY",initCenterY)
-        print("x",x)
-        print("y",y)
-        print("body?.position.x",body?.position.x)
-        print("body?.position.y",body?.position.x)
-        print("length",length)
-        
-        
-        player.Move(_positionX : (body?.position.x)!, _positionY : (body?.position.y)!)
-        
-        body?.position.x = GameManager.shared.touchPos!.x
-        body?.position.y = GameManager.shared.touchPos!.y
+        //player.Move(_positionX : (body?.position.x)!, _positionY : (body?.position.y)!)
     }
     
     func Update(){
@@ -99,7 +79,7 @@ class StickView {
     }
     
     func Reset(){
-        body!.position = CGPoint(x: (GameManager.shared.scene?.frame.midX)! + 0, y: (GameManager.shared.scene?.frame.midY)! + 75)
+        body!.position = CGPoint(x: INIT_POS_X, y: INIT_POS_Y)
         body?.run(SKAction.moveTo(x: (body?.position.x)!, duration: 0.2))
         body?.run(SKAction.moveTo(y: (body?.position.y)!, duration: 0.2))
         
