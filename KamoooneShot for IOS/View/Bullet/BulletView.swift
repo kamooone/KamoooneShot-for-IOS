@@ -54,8 +54,8 @@ class BulletView: BaseBulletView {
             }
         }
         // 弾発射インタバル
-        if bulletStartTime != 0{
-            bulletStartTime -= 1
+        if bulletStartTime != 0 {
+            bulletStartTime -= 5
         }
     }
 }

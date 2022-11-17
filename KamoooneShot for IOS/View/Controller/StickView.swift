@@ -82,7 +82,7 @@ class StickView {
         if GameManager.shared.isTouch {
             //player.Move(_directionX: (body?.position.x)!, _directionY: (body?.position.y)!)
         }
-        //player.Update()
+        player.Update()
         
         // エネミーの数分回す
         for i in 0..<EnemyView.ENEMYMAX {

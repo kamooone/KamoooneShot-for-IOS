@@ -28,11 +28,28 @@ class PlayerView: BaseCharacterView {
     }
     
     func Move(_positionX: CGFloat, _positionY: CGFloat){
+        
         let length = sqrt((GameManager.shared.touchPos!.x - _positionX) * (GameManager.shared.touchPos!.x - _positionX) + (GameManager.shared.touchPos!.y - _positionY) * (GameManager.shared.touchPos!.y - _positionY))
-        body?.position.x += (GameManager.shared.touchPos!.x - _positionX) / length * 41.7
-        body?.run(SKAction.moveTo(x: (body?.position.x)!, duration: 0.2))
-        body?.position.y += (GameManager.shared.touchPos!.y - _positionY) / length * 41.7
-        body?.run(SKAction.moveTo(y: (body?.position.y)!, duration: 0.2))
+        
+        body?.position.x += (GameManager.shared.touchPos!.x - _positionX) / length * 3.0
+        body?.position.y += (GameManager.shared.touchPos!.y - _positionY) / length * 3.0
+        
+        // 画面外に出たら戻す
+        if (GameManager.shared.scene?.frame.maxX)! - 25 < (body?.position.x)! {
+            body?.position.x -= (GameManager.shared.touchPos!.x - _positionX) / length * 3.0
+        }
+        if (GameManager.shared.scene?.frame.minX)! + 25 > (body?.position.x)! {
+            body?.position.x -= (GameManager.shared.touchPos!.x - _positionX) / length * 3.0
+        }
+        if (GameManager.shared.scene?.frame.maxY)! - 100 < (body?.position.y)! {
+            body?.position.y -= (GameManager.shared.touchPos!.y - _positionY) / length * 3.0
+        }
+        if (GameManager.shared.scene?.frame.minY)! + 100 > (body?.position.y)! {
+            body?.position.y -= (GameManager.shared.touchPos!.y - _positionY) / length * 3.0
+        }
+        
+        body?.run(SKAction.moveTo(x: (body?.position.x)!, duration: 0))
+        body?.run(SKAction.moveTo(y: (body?.position.y)!, duration: 0))
     }
     
     func Update(){
