@@ -38,27 +38,32 @@ class StickView {
     
     func Move(){
         //  スティックの中心座標
-        let initCenterX = body?.position.x
-        let initCenterY = body?.position.y
+        let initCenterX: Double = (Double((body?.position.x)!))
+        let initCenterY: Double = (Double((body?.position.y)!))
         
         // 移動ベクトル
-        let vecX = GameManager.shared.touchPos!.x - initCenterX!
-        let vecY = GameManager.shared.touchPos!.y - initCenterY!
+        let vecX: Double = GameManager.shared.touchPos!.x - initCenterX
+        let vecY: Double = GameManager.shared.touchPos!.y - initCenterY
         
-        // スティックの中心座標とタッチした場所の中心座標の距離
-        let workX = (GameManager.shared.touchPos!.x - initCenterX!) * (GameManager.shared.touchPos!.x - initCenterX!)
-        let workY = (GameManager.shared.touchPos!.y - initCenterY!) * (GameManager.shared.touchPos!.y - initCenterY!)
-        let length: CGFloat = sqrt(workX + workY)
-
-        let directionX = vecX / length
-        let directionY = vecY / length
-        
-        body!.position.x += directionX * 1.01
-        body!.run(SKAction.moveTo(x: body!.position.x, duration: 0))
-        body!.position.y += directionY * 1.01
-        body!.run(SKAction.moveTo(y: body!.position.y, duration: 0))
-        
-        //player.Move(_positionX : (body?.position.x)!, _positionY : (body?.position.y)!)
+        // スティックの中心座標とタッチした場所の中心座標の距離(引く数をinitCenterから固定の数にしたら意図通りの動作になった)
+        let workX: Double = (GameManager.shared.touchPos!.x - 10) * (GameManager.shared.touchPos!.x - 10)
+        let workY: Double = (GameManager.shared.touchPos!.y - 10) * (GameManager.shared.touchPos!.y - 10)
+        let length: Double = sqrt(workX + workY)
+                
+        if length > 0 {
+            let directionX: Double = vecX / length
+            let directionY: Double = vecY / length
+            
+            //if GameManager.shared.touchPos!.x != initCenterX {
+                body!.position.x += directionX * 100.0
+                body!.run(SKAction.moveTo(x: body!.position.x, duration: 0))
+            //}
+            //if GameManager.shared.touchPos!.y != initCenterY {
+                body!.position.y += directionY * 100.0
+                body!.run(SKAction.moveTo(y: body!.position.y, duration: 0))
+            //}
+            player.Move(_positionX : (body?.position.x)!, _positionY : (body?.position.y)!)
+        }
     }
     
     func Update(){

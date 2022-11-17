@@ -3,7 +3,7 @@
 //  KamoooneShot for IOS
 //
 //  Created by Kazusa Kondo on 2022/01/16.
-// リベーステスト
+
 import Foundation
 import SpriteKit // SpriteKitは画面左下が0,0になる。UiKitは左上が0,0
 import AVFoundation
@@ -47,7 +47,7 @@ class GameScene: SKScene {
         // タップした位置の座標を取得
         let touch = touches.first!;
         GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
-        stick.Move()
+        //stick.Move()
         
         for touch in touches {
             _ = touch.location(in: self)
@@ -61,7 +61,7 @@ class GameScene: SKScene {
         let touch = touches.first!;
         GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
         
-        stick.Move()
+        //stick.Move()
     }
     
     // タッチを離した時に呼ばれる
@@ -79,6 +79,9 @@ class GameScene: SKScene {
     override func didEvaluateActions() {
         if GameManager.shared.isGameStart {
             stick.Update()
+        }
+        if GameManager.shared.isTouch {
+            stick.Move()
         }
     }
  }
