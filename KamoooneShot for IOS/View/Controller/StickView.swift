@@ -13,8 +13,8 @@ class StickView {
     var player: PlayerView!
     var enemys: [EnemyView] = []
     var colision: Collision!
-    let INIT_POS_X: CGFloat = (GameManager.shared.scene?.frame.midX)!
-    let INIT_POS_Y: CGFloat = (GameManager.shared.scene?.frame.midY)! + 75
+    let INIT_POS_X: CGFloat = (GameManager.shared.scene?.frame.minX)! + 50
+    let INIT_POS_Y: CGFloat = (GameManager.shared.scene?.frame.minY)! + 125
     
     init() {
         // ジョイスティックの生成
@@ -45,25 +45,34 @@ class StickView {
         let vecX: Double = GameManager.shared.touchPos!.x - initCenterX
         let vecY: Double = GameManager.shared.touchPos!.y - initCenterY
         
-        // スティックの中心座標とタッチした場所の中心座標の距離(引く数をinitCenterから固定の数にしたら意図通りの動作になった)
-        let workX: Double = (GameManager.shared.touchPos!.x - 10) * (GameManager.shared.touchPos!.x - 10)
-        let workY: Double = (GameManager.shared.touchPos!.y - 10) * (GameManager.shared.touchPos!.y - 10)
-        let length: Double = sqrt(workX + workY)
-                
-        if length > 0 {
-            let directionX: Double = vecX / length
-            let directionY: Double = vecY / length
-            
-            //if GameManager.shared.touchPos!.x != initCenterX {
-                body!.position.x += directionX * 100.0
-                body!.run(SKAction.moveTo(x: body!.position.x, duration: 0))
-            //}
-            //if GameManager.shared.touchPos!.y != initCenterY {
-                body!.position.y += directionY * 100.0
-                body!.run(SKAction.moveTo(y: body!.position.y, duration: 0))
-            //}
-            player.Move(_positionX : (body?.position.x)!, _positionY : (body?.position.y)!)
+        // ToDo 求めるのはタッチした場所までの距離ではなく、スティック初期位置からスティック移動した位置までの距離
+        let workTouchX: Double = (GameManager.shared.touchPos!.x - 20) * (GameManager.shared.touchPos!.x - 20)
+        let workTouchY: Double = (GameManager.shared.touchPos!.y - 20) * (GameManager.shared.touchPos!.y - 20)
+        let touchLength: Double = sqrt(workTouchX + workTouchY)
+        
+        // スティック移動ベクトル
+        let directionX: Double = vecX / touchLength
+        let directionY: Double = vecY / touchLength
+
+        // スティック移動処理
+        body!.position.x += directionX * 20.0
+        body!.position.y += directionY * 20.0
+        
+        // スティック初期位置からスティック移動した位置までの距離を求める
+        let workBodyX: Double = ((body?.position.x)! - INIT_POS_X) * ((body?.position.x)! - INIT_POS_X)
+        let workBodyY: Double = ((body?.position.y)! - INIT_POS_Y) * ((body?.position.y)! - INIT_POS_Y)
+        let bodyLength: Double = sqrt(workBodyX + workBodyY)
+        
+        // スティック移動距離が一定の距離を超えたら戻す
+        if bodyLength > 20 {
+            body!.position.x -= directionX * 20.0
+            body!.position.y -= directionY * 20.0
         }
+        
+        body!.run(SKAction.moveTo(x: body!.position.x, duration: 0))
+        body!.run(SKAction.moveTo(y: body!.position.y, duration: 0))
+        
+        player.Move(_positionX : (body?.position.x)!, _positionY : (body?.position.y)!)
     }
     
     func Update(){
