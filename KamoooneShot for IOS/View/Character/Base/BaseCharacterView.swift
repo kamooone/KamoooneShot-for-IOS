@@ -10,6 +10,8 @@ import SpriteKit
 
 class BaseCharacterView {
     var body: SKSpriteNode?
+    var speed: Double = 0
+    var velocity: Double = 0.15
     let explotion = ExplosionView()
     
     init(){}

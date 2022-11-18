@@ -13,8 +13,8 @@ class StickView {
     var player: PlayerView!
     var enemys: [EnemyView] = []
     var colision: Collision!
-    let INIT_POS_X: CGFloat = (GameManager.shared.scene?.frame.minX)! + 50
-    let INIT_POS_Y: CGFloat = (GameManager.shared.scene?.frame.minY)! + 125
+    let INIT_POS_X: Double = (GameManager.shared.scene?.frame.minX)! + 50
+    let INIT_POS_Y: Double = (GameManager.shared.scene?.frame.minY)! + 125
     
     init() {
         // ジョイスティックの生成
@@ -61,10 +61,12 @@ class StickView {
         // スティック初期位置からスティック移動した位置までの距離を求める
         let workBodyX: Double = ((body?.position.x)! - INIT_POS_X) * ((body?.position.x)! - INIT_POS_X)
         let workBodyY: Double = ((body?.position.y)! - INIT_POS_Y) * ((body?.position.y)! - INIT_POS_Y)
-        let bodyLength: Double = sqrt(workBodyX + workBodyY)
+        var stickLength: Double = sqrt(Double(workBodyX + workBodyY))
+        stickLength = round(stickLength * 100) / 100
         
         // スティック移動距離が一定の距離を超えたら戻す
-        if bodyLength > 20 {
+        if stickLength > 20 {
+            stickLength = 20
             body!.position.x -= directionX * 20.0
             body!.position.y -= directionY * 20.0
         }
@@ -72,7 +74,7 @@ class StickView {
         body!.run(SKAction.moveTo(x: body!.position.x, duration: 0))
         body!.run(SKAction.moveTo(y: body!.position.y, duration: 0))
         
-        player.Move(_positionX : (body?.position.x)!, _positionY : (body?.position.y)!)
+        player.Move(_positionX: (body?.position.x)!, _positionY: (body?.position.y)!, _stickLength: stickLength)
     }
     
     func Update(){
@@ -96,7 +98,5 @@ class StickView {
         body!.position = CGPoint(x: INIT_POS_X, y: INIT_POS_Y)
         body?.run(SKAction.moveTo(x: (body?.position.x)!, duration: 0.2))
         body?.run(SKAction.moveTo(y: (body?.position.y)!, duration: 0.2))
-        
-        //player.Reset()
     }
 }

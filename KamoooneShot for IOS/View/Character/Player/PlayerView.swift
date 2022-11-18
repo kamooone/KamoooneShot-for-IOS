@@ -27,25 +27,27 @@ class PlayerView: BaseCharacterView {
         }
     }
     
-    func Move(_positionX: CGFloat, _positionY: CGFloat){
+    func Move(_positionX: CGFloat, _positionY: CGFloat, _stickLength: CGFloat){
+        let workX = (GameManager.shared.touchPos!.x - _positionX) * (GameManager.shared.touchPos!.x - _positionX)
+        let workY = (GameManager.shared.touchPos!.y - _positionY) * (GameManager.shared.touchPos!.y - _positionY)
+        let length = sqrt(workX + workY)
         
-        let length = sqrt((GameManager.shared.touchPos!.x - _positionX) * (GameManager.shared.touchPos!.x - _positionX) + (GameManager.shared.touchPos!.y - _positionY) * (GameManager.shared.touchPos!.y - _positionY))
-        
-        body?.position.x += (GameManager.shared.touchPos!.x - _positionX) / length * 3.0
-        body?.position.y += (GameManager.shared.touchPos!.y - _positionY) / length * 3.0
+        speed = velocity * _stickLength
+        body?.position.x += (GameManager.shared.touchPos!.x - _positionX) / length * speed
+        body?.position.y += (GameManager.shared.touchPos!.y - _positionY) / length * speed
         
         // 画面外に出たら戻す
         if (GameManager.shared.scene?.frame.maxX)! - 25 < (body?.position.x)! {
-            body?.position.x -= (GameManager.shared.touchPos!.x - _positionX) / length * 3.0
+            body?.position.x -= (GameManager.shared.touchPos!.x - _positionX) / length * speed
         }
         if (GameManager.shared.scene?.frame.minX)! + 25 > (body?.position.x)! {
-            body?.position.x -= (GameManager.shared.touchPos!.x - _positionX) / length * 3.0
+            body?.position.x -= (GameManager.shared.touchPos!.x - _positionX) / length * speed
         }
         if (GameManager.shared.scene?.frame.maxY)! - 100 < (body?.position.y)! {
-            body?.position.y -= (GameManager.shared.touchPos!.y - _positionY) / length * 3.0
+            body?.position.y -= (GameManager.shared.touchPos!.y - _positionY) / length * speed
         }
         if (GameManager.shared.scene?.frame.minY)! + 100 > (body?.position.y)! {
-            body?.position.y -= (GameManager.shared.touchPos!.y - _positionY) / length * 3.0
+            body?.position.y -= (GameManager.shared.touchPos!.y - _positionY) / length * speed
         }
         
         body?.run(SKAction.moveTo(x: (body?.position.x)!, duration: 0))
@@ -59,8 +61,8 @@ class PlayerView: BaseCharacterView {
     func Reset() {
         body?.position.x = (GameManager.shared.scene?.frame.midX)!
         body?.position.y = (GameManager.shared.scene?.frame.minY)! + 250
-        body?.run(SKAction.moveTo(x: (GameManager.shared.scene?.frame.midX)!, duration: 0.2))
-        body?.run(SKAction.moveTo(y: (GameManager.shared.scene?.frame.minY)! + 250, duration: 0.2))
+        body?.run(SKAction.moveTo(x: (GameManager.shared.scene?.frame.midX)!, duration: 0))
+        body?.run(SKAction.moveTo(y: (GameManager.shared.scene?.frame.minY)! + 250, duration: 0))
     }
 }
 
