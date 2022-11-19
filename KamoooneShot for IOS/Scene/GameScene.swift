@@ -52,7 +52,6 @@ class GameScene: SKScene {
         if touch.location(in: GameManager.shared.scene!).x < 130 && touch.location(in: GameManager.shared.scene!).y < 220 {
             GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
         }
-        //stick.Move()
         
         for touch: AnyObject in touches {
             let location = touch.location(in: self)
@@ -79,16 +78,16 @@ class GameScene: SKScene {
         if touch.location(in: GameManager.shared.scene!).x < 130 && touch.location(in: GameManager.shared.scene!).y < 220 {
             GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
         }
-        
-        //stick.Move()
     }
     
     // タッチを離した時に呼ばれる
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        GameManager.shared.isTouch = false
+        GameManager.shared.isLeftButtonTouch = false
+        GameManager.shared.isRightButtonTouch = false
         // タップした位置に自機を移動
         let touch = touches.first!;
         if touch.location(in: GameManager.shared.scene!).x < 130 && touch.location(in: GameManager.shared.scene!).y < 220 {
+            GameManager.shared.isTouch = false
             GameManager.shared.touchPos.x = 0
             GameManager.shared.touchPos.y = 0
             stick.Reset()
