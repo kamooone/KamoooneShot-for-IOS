@@ -49,7 +49,9 @@ class GameScene: SKScene {
         
         // タップした位置の座標を取得
         let touch = touches.first!;
-        GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
+        if touch.location(in: GameManager.shared.scene!).x < 130 && touch.location(in: GameManager.shared.scene!).y < 220 {
+            GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
+        }
         //stick.Move()
         
         for touch: AnyObject in touches {
@@ -57,9 +59,14 @@ class GameScene: SKScene {
             let node = self.atPoint(location)
            
             if (node.name == "LeftButton") {
-                print("LeftButtonがタッチされた")
+                GameManager.shared.isLeftButtonTouch = true
+                GameManager.shared.isRightButtonTouch = false
             } else if (node.name == "RightButton") {
-                print("RightButtonがタッチされた")
+                GameManager.shared.isLeftButtonTouch = false
+                GameManager.shared.isRightButtonTouch = true
+            } else {
+                GameManager.shared.isLeftButtonTouch = false
+                GameManager.shared.isRightButtonTouch = false
             }
         }
     }
@@ -69,7 +76,9 @@ class GameScene: SKScene {
         super.touchesMoved(touches, with: event)
         // タップした位置に自機を移動
         let touch = touches.first!;
-        GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
+        if touch.location(in: GameManager.shared.scene!).x < 130 && touch.location(in: GameManager.shared.scene!).y < 220 {
+            GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
+        }
         
         //stick.Move()
     }
@@ -79,10 +88,11 @@ class GameScene: SKScene {
         GameManager.shared.isTouch = false
         // タップした位置に自機を移動
         let touch = touches.first!;
-        GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
-    
-        // 離したらスティックを元の位置に戻す
-        stick.Reset()
+        if touch.location(in: GameManager.shared.scene!).x < 130 && touch.location(in: GameManager.shared.scene!).y < 220 {
+            GameManager.shared.touchPos.x = 0
+            GameManager.shared.touchPos.y = 0
+            stick.Reset()
+        }
     }
     
     //ノードのアクションの処理後に呼ばれる

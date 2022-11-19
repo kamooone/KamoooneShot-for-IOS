@@ -42,21 +42,25 @@ class StickView {
         let initCenterY: Double = (Double((body?.position.y)!))
         
         // 移動ベクトル
-        let vecX: Double = GameManager.shared.touchPos!.x - initCenterX
-        let vecY: Double = GameManager.shared.touchPos!.y - initCenterY
+        let vecX: Double = GameManager.shared.touchPos.x - initCenterX
+        let vecY: Double = GameManager.shared.touchPos.y - initCenterY
         
         // ToDo 求めるのはタッチした場所までの距離ではなく、スティック初期位置からスティック移動した位置までの距離
-        let workTouchX: Double = (GameManager.shared.touchPos!.x - 20) * (GameManager.shared.touchPos!.x - 20)
-        let workTouchY: Double = (GameManager.shared.touchPos!.y - 20) * (GameManager.shared.touchPos!.y - 20)
+        let workTouchX: Double = (GameManager.shared.touchPos.x - 20) * (GameManager.shared.touchPos.x - 20)
+        let workTouchY: Double = (GameManager.shared.touchPos.y - 20) * (GameManager.shared.touchPos.y - 20)
         let touchLength: Double = sqrt(workTouchX + workTouchY)
         
         // スティック移動ベクトル
         let directionX: Double = vecX / touchLength
         let directionY: Double = vecY / touchLength
+//        print("directionX",directionX)
+//        print("directionY",directionY)
 
         // スティック移動処理
         body!.position.x += directionX * 20.0
         body!.position.y += directionY * 20.0
+//        print("body!.position.x",body!.position.x)
+//        print("body!.position.y",body!.position.y)
         
         // スティック初期位置からスティック移動した位置までの距離を求める
         let workBodyX: Double = ((body?.position.x)! - INIT_POS_X) * ((body?.position.x)! - INIT_POS_X)

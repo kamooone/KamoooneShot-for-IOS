@@ -12,13 +12,9 @@ class EnemyView: BaseCharacterView {
     public static let ENEMYMAX: Int = 10
     
     let bullet = EnemyBulletView()
-    var rotateAction :SKAction?
     
     override init(){
         super.init()
-        // 指定した回転値まで回転させるアクションを作る.
-        //rotateAction = SKAction.rotate( toAngle: DegreeToRadian(Degree: 180.0) , duration: 1)
-        
         // 画像設定
         body = SKSpriteNode(imageNamed: "enemy.png")
         // ポジション設定

@@ -13,13 +13,16 @@ class GameManager {
     static let shared = GameManager()
     
     var isGameStart: Bool = false
-    var touchPos: CGPoint?
+    var touchPos: CGPoint = CGPoint(x: 0, y: 0)
     
     // タッチ座標を取得するために使用する
     var scene: SKScene?
     
     // タッチ中かどうかを示す
     var isTouch: Bool = false
+    
+    var isRightButtonTouch: Bool = false
+    var isLeftButtonTouch: Bool = false
     
     let backGroundSize: CGSize = CGSize(width: 360, height: 640)
     var isSeHit: Bool = false

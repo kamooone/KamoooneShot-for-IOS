@@ -28,34 +28,49 @@ class PlayerView: BaseCharacterView {
     }
     
     func Move(_positionX: CGFloat, _positionY: CGFloat, _stickLength: CGFloat){
-        let workX = (GameManager.shared.touchPos!.x - _positionX) * (GameManager.shared.touchPos!.x - _positionX)
-        let workY = (GameManager.shared.touchPos!.y - _positionY) * (GameManager.shared.touchPos!.y - _positionY)
-        let length = sqrt(workX + workY)
+        // ボタンを二つ追加して左右の回転ボタンにする。
+        if GameManager.shared.isRightButtonTouch {
+            rotate -= 2
+        } else if GameManager.shared.isLeftButtonTouch {
+            rotate += 2
+        }
+        body?.zRotation = DegreeToRadian(Degree: rotate)
         
-        speed = velocity * _stickLength
-        body?.position.x += (GameManager.shared.touchPos!.x - _positionX) / length * speed
-        body?.position.y += (GameManager.shared.touchPos!.y - _positionY) / length * speed
-        
-        // 画面外に出たら戻す
-        if (GameManager.shared.scene?.frame.maxX)! - 25 < (body?.position.x)! {
-            body?.position.x -= (GameManager.shared.touchPos!.x - _positionX) / length * speed
+        if GameManager.shared.touchPos.x != 0 && GameManager.shared.touchPos.y != 0 {
+            let workX = (GameManager.shared.touchPos.x - _positionX) * (GameManager.shared.touchPos.x - _positionX)
+            let workY = (GameManager.shared.touchPos.y - _positionY) * (GameManager.shared.touchPos.y - _positionY)
+            let length = sqrt(workX + workY)
+            
+            speed = velocity * _stickLength
+            body?.position.x += (GameManager.shared.touchPos.x - _positionX) / length * speed
+            body?.position.y += (GameManager.shared.touchPos.y - _positionY) / length * speed
+            
+            // 画面外に出たら戻す
+            if (GameManager.shared.scene?.frame.maxX)! - 25 < (body?.position.x)! {
+                body?.position.x -= (GameManager.shared.touchPos.x - _positionX) / length * speed
+            }
+            if (GameManager.shared.scene?.frame.minX)! + 25 > (body?.position.x)! {
+                body?.position.x -= (GameManager.shared.touchPos.x - _positionX) / length * speed
+            }
+            if (GameManager.shared.scene?.frame.maxY)! - 100 < (body?.position.y)! {
+                body?.position.y -= (GameManager.shared.touchPos.y - _positionY) / length * speed
+            }
+            if (GameManager.shared.scene?.frame.minY)! + 100 > (body?.position.y)! {
+                body?.position.y -= (GameManager.shared.touchPos.y - _positionY) / length * speed
+            }
+            
+            body?.run(SKAction.moveTo(x: (body?.position.x)!, duration: 0))
+            body?.run(SKAction.moveTo(y: (body?.position.y)!, duration: 0))
         }
-        if (GameManager.shared.scene?.frame.minX)! + 25 > (body?.position.x)! {
-            body?.position.x -= (GameManager.shared.touchPos!.x - _positionX) / length * speed
-        }
-        if (GameManager.shared.scene?.frame.maxY)! - 100 < (body?.position.y)! {
-            body?.position.y -= (GameManager.shared.touchPos!.y - _positionY) / length * speed
-        }
-        if (GameManager.shared.scene?.frame.minY)! + 100 > (body?.position.y)! {
-            body?.position.y -= (GameManager.shared.touchPos!.y - _positionY) / length * speed
-        }
-        
-        body?.run(SKAction.moveTo(x: (body?.position.x)!, duration: 0))
-        body?.run(SKAction.moveTo(y: (body?.position.y)!, duration: 0))
     }
     
     func Update(){
         bullet.Update(x: body!.position.x, y: body!.position.y)
+    }
+    
+    // ToDo ライブラリにする
+    func DegreeToRadian(Degree : Double!)-> CGFloat{
+        return CGFloat(Degree) / CGFloat(180.0 * M_1_PI)
     }
     
     func Reset() {

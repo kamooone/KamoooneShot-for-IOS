@@ -27,5 +27,6 @@ class ViewController: UIViewController {
         GameManager.shared.scene = TitleScene(size: GameManager.shared.backGroundSize)
         GameManager.shared.scene?.scaleMode = SKSceneScaleMode.aspectFill
         skView.presentScene(GameManager.shared.scene)
+        //skView.isMultipleTouchEnabled = false
     }
 }
