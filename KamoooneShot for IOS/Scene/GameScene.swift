@@ -14,11 +14,11 @@ class GameScene: SKScene {
     var backGround: BackGroundView!
     var gameUI: GameUIView!
     var stick: StickView!
+    var dirrectionButton: [DirectionButtonView] = []
 
     
     // 画面描画する際の初期化時に呼ばれる
     override func didMove(to view: SKView) {
-
         // インスタンスを生成
         if backGround == nil {
             backGround = BackGroundView()
@@ -29,6 +29,9 @@ class GameScene: SKScene {
         if stick == nil {
             stick = StickView()
         }
+        dirrectionButton.append(DirectionButtonView(_x: (GameManager.shared.scene?.frame.maxX)! - 50, _y: (GameManager.shared.scene?.frame.minY)! + 125, _rotate: 0, _name: "RightButton"))
+        
+        dirrectionButton.append(DirectionButtonView(_x: (GameManager.shared.scene?.frame.maxX)! - 100, _y: (GameManager.shared.scene?.frame.minY)! + 125, _rotate: 180, _name: "LeftButton"))
     }
     
     //タッチ時に呼ばれる
@@ -49,8 +52,15 @@ class GameScene: SKScene {
         GameManager.shared.touchPos = touch.location(in: GameManager.shared.scene!)
         //stick.Move()
         
-        for touch in touches {
-            _ = touch.location(in: self)
+        for touch: AnyObject in touches {
+            let location = touch.location(in: self)
+            let node = self.atPoint(location)
+           
+            if (node.name == "LeftButton") {
+                print("LeftButtonがタッチされた")
+            } else if (node.name == "RightButton") {
+                print("RightButtonがタッチされた")
+            }
         }
     }
     
