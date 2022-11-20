@@ -34,6 +34,8 @@ class PlayerView: BaseCharacterView {
         } else if GameManager.shared.isLeftButtonTouch {
             rotate += 2
         }
+        // ToDo rotateをベクトルに変換する
+        print("rotate",rotate)
         body?.zRotation = DegreeToRadian(Degree: rotate)
         
         if GameManager.shared.touchPos.x != 0 && GameManager.shared.touchPos.y != 0 {
@@ -65,7 +67,7 @@ class PlayerView: BaseCharacterView {
     }
     
     func Update(){
-        bullet.Update(x: body!.position.x, y: body!.position.y)
+        bullet.Update(_x: body!.position.x, _y: body!.position.y, _rotate: rotate)
     }
     
     // ToDo ライブラリにする

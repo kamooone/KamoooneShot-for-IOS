@@ -29,16 +29,17 @@ class BulletView: BaseBulletView {
         }
     }
     
-    func Update(x: CGFloat, y: CGFloat){
+    func Update(_x: CGFloat, _y: CGFloat, _rotate: Double){
         // 弾発射前処理
         for i in 0..<ZIKIMAXBULLET {
             if !isBulletTrigger[i] && bulletStartTime == 0 {
                 isBulletTrigger[i] = true
                 body[i].size = CGSize(width: 10, height: 10)
-                body[i].position = CGPoint(x: x, y: y)
+                body[i].position = CGPoint(x: _x, y: _y)
                 GameManager.shared.scene?.addChild(body[i])
                 bulletStartTime = bulletDuration
   
+                // ToDo rotateをベクトルに変換する
                 let vecX: CGFloat = 0
                 let vecY: CGFloat = 10
                 let length:CGFloat = sqrt(vecX + vecY)
