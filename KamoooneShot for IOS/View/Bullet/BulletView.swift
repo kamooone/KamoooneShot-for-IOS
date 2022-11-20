@@ -19,6 +19,8 @@ class BulletView: BaseBulletView {
             for _ in 0..<ZIKIMAXBULLET {
                 isBulletTrigger.append(false)
                 body.append(SKSpriteNode(imageNamed: "orange.png"))
+                directionX.append(0.0)
+                directionY.append(0.0)
             }
             BulletView.isSingleton = true
         } else {
@@ -36,6 +38,12 @@ class BulletView: BaseBulletView {
                 body[i].position = CGPoint(x: x, y: y)
                 GameManager.shared.scene?.addChild(body[i])
                 bulletStartTime = bulletDuration
+  
+                let vecX: CGFloat = 0
+                let vecY: CGFloat = 10
+                let length:CGFloat = sqrt(vecX + vecY)
+                directionX[i] = (vecX / length)
+                directionY[i] = (vecY / length)
                 break
             }
         }
@@ -43,11 +51,14 @@ class BulletView: BaseBulletView {
         // 弾移動処理
         for i in 0..<ZIKIMAXBULLET {
             if isBulletTrigger[i] {
-                // 弾発射処理
-                body[i].position.y += 3
+                body[i].position.x += directionX[i] * BULLET_SPEED
+                body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
+                body[i].position.y += directionY[i] * BULLET_SPEED
                 body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
                 
-                if body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! {
+                // 画面エリア外判定
+                if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
+                    body[i].position.x <= (GameManager.shared.scene?.frame.minX)! || body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
                     isBulletTrigger[i] = false
                     body[i].removeFromParent()
                 }
