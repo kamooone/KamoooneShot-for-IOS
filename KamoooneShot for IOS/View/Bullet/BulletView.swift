@@ -40,11 +40,34 @@ class BulletView: BaseBulletView {
                 bulletStartTime = bulletDuration
   
                 // ToDo rotateをベクトルに変換する
-                let vecX: CGFloat = 0
-                let vecY: CGFloat = 10
+                print(_rotate / 2.25)
+                let work = abs(Int(_rotate / 2.25))
+                var vecX: CGFloat = 0 + (CGFloat(work) * 0.25)
+                var vecY: CGFloat = 10 - (CGFloat(work) * 0.25)
+                if _rotate > 90 {
+                    let w = (CGFloat(work) * 0.25) - 10
+                    vecX = 10 - w
+                    vecY = (CGFloat(work) * 0.25) - 10
+                }
+                if _rotate < -90 {
+                    let w = (CGFloat(work) * 0.25) - 10
+                    vecX = 10 - w
+                    vecY = (CGFloat(work) * 0.25) - 10
+                }
+                
                 let length:CGFloat = sqrt(vecX + vecY)
                 directionX[i] = (vecX / length)
                 directionY[i] = (vecY / length)
+
+                if _rotate > 0 {
+                    directionX[i] = (-vecX / length)
+                }
+                if _rotate > 90 {
+                    directionY[i] = (-vecY / length)
+                }
+                if _rotate < -90 {
+                    directionY[i] = (-vecY / length)
+                }
                 break
             }
         }

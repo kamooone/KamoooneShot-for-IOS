@@ -30,9 +30,9 @@ class PlayerView: BaseCharacterView {
     func Move(_positionX: CGFloat, _positionY: CGFloat, _stickLength: CGFloat){
         // ボタンを二つ追加して左右の回転ボタンにする。
         if GameManager.shared.isRightButtonTouch {
-            rotate -= 2
+            rotate -= 2.25
         } else if GameManager.shared.isLeftButtonTouch {
-            rotate += 2
+            rotate += 2.25
         }
         // ToDo rotateをベクトルに変換する
         print("rotate",rotate)
