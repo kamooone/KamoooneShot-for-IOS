@@ -29,7 +29,7 @@ class BulletView: BaseBulletView {
         }
     }
     
-    func Update(_x: CGFloat, _y: CGFloat, _rotate: Double){
+    func Update(_x: CGFloat, _y: CGFloat, _rotate: Double) {
         // 弾発射前処理
         for i in 0..<ZIKIMAXBULLET {
             if !isBulletTrigger[i] && bulletStartTime == 0 {
@@ -38,18 +38,12 @@ class BulletView: BaseBulletView {
                 body[i].position = CGPoint(x: _x, y: _y)
                 GameManager.shared.scene?.addChild(body[i])
                 bulletStartTime = bulletDuration
-  
-                // ToDo rotateをベクトルに変換する
-                print(_rotate / 2.25)
+
+                // 時期の向きに合わせて弾のベクトルを決定する
                 let work = abs(Int(_rotate / 2.25))
                 var vecX: CGFloat = 0 + (CGFloat(work) * 0.25)
                 var vecY: CGFloat = 10 - (CGFloat(work) * 0.25)
-                if _rotate > 90 {
-                    let w = (CGFloat(work) * 0.25) - 10
-                    vecX = 10 - w
-                    vecY = (CGFloat(work) * 0.25) - 10
-                }
-                if _rotate < -90 {
+                if _rotate < -90 || _rotate > 90 {
                     let w = (CGFloat(work) * 0.25) - 10
                     vecX = 10 - w
                     vecY = (CGFloat(work) * 0.25) - 10
@@ -62,10 +56,7 @@ class BulletView: BaseBulletView {
                 if _rotate > 0 {
                     directionX[i] = (-vecX / length)
                 }
-                if _rotate > 90 {
-                    directionY[i] = (-vecY / length)
-                }
-                if _rotate < -90 {
+                if _rotate < -90 || _rotate > 90 {
                     directionY[i] = (-vecY / length)
                 }
                 break
