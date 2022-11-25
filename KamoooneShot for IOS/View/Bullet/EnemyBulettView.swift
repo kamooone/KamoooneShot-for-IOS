@@ -26,7 +26,7 @@ class EnemyBulletView: BaseBulletView {
     func Update(_enemyBulletX: CGFloat, _enemyBulletY: CGFloat, __playerX: CGFloat, __playerY: CGFloat){
         switch nowBulletType {
         case bulletType.normalBullet.rawValue:
-            NormalBullet(__enemyBulletX: _enemyBulletX, __enemyBulletY: _enemyBulletY)
+            NormalBullet(__enemyBulletX: _enemyBulletX, __enemyBulletY: _enemyBulletY, ___playerX: __playerX, ___playerY: __playerY)
             break
         case bulletType.tripleBullet.rawValue:
             TripleBullet(__enemyBulletX: _enemyBulletX, __enemyBulletY: _enemyBulletY)
@@ -39,8 +39,9 @@ class EnemyBulletView: BaseBulletView {
         }
     }
     
-    func NormalBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat) {
-        // 弾発射前処理
+    func NormalBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerX: CGFloat, ___playerY: CGFloat) {
+        // ToDo 弾のベクトルをプレイヤー目掛け手にする。(弾を発射したらベクトルは変更しない、※ホーミングバレットのベクトル固定Ver)
+        
         for i in 0..<ZIKIMAXBULLET {
             if !isBulletTrigger[i] && bulletStartTime == 0 {
                 isBulletTrigger[i] = true
@@ -53,8 +54,12 @@ class EnemyBulletView: BaseBulletView {
         // 弾移動処理
         for i in 0..<ZIKIMAXBULLET {
             if isBulletTrigger[i] {
-                // 弾発射処理
-                body[i].position.y -= 2
+                // 三平方の定理を使って長さを求める
+                let length = sqrt((___playerX - body[i].position.x) * (___playerX - body[i].position.x) + (___playerY - body[i].position.y) * (___playerY - body[i].position.y))
+                                
+                body[i].position.x += (___playerX - body[i].position.x) / length * BULLET_SPEED
+                body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
+                body[i].position.y += (___playerY - body[i].position.y) / length * BULLET_SPEED
                 body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
                 
                 // 画面エリア外判定
@@ -65,6 +70,7 @@ class EnemyBulletView: BaseBulletView {
                 }
             }
         }
+        
         // 弾発射インタバル
         if bulletStartTime != 0 {
             bulletStartTime -= 1
