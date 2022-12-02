@@ -22,6 +22,7 @@ class StickView {
         body!.position = CGPoint(x: INIT_POS_X, y: INIT_POS_Y)
         GameManager.shared.scene?.addChild(body!)
         
+        // プレイヤーのインスタンスを生成
         if player == nil {
             player = PlayerView()
         }
@@ -31,6 +32,7 @@ class StickView {
             enemys.append(EnemyView())
         }
         
+        // 当たり判定処理クラスのインスタンスを生成
         if colision == nil {
             colision = Collision()
         }
@@ -45,7 +47,7 @@ class StickView {
         let vecX: Double = GameManager.shared.touchPos.x - initCenterX
         let vecY: Double = GameManager.shared.touchPos.y - initCenterY
         
-        // ToDo 求めるのはタッチした場所までの距離ではなく、スティック初期位置からスティック移動した位置までの距離
+        // 求めるのはタッチした場所までの距離ではなく、スティック初期位置からスティック移動した位置までの距離
         let workTouchX: Double = (GameManager.shared.touchPos.x - 20) * (GameManager.shared.touchPos.x - 20)
         let workTouchY: Double = (GameManager.shared.touchPos.y - 20) * (GameManager.shared.touchPos.y - 20)
         let touchLength: Double = sqrt(workTouchX + workTouchY)
@@ -53,14 +55,10 @@ class StickView {
         // スティック移動ベクトル
         let directionX: Double = vecX / touchLength
         let directionY: Double = vecY / touchLength
-//        print("directionX",directionX)
-//        print("directionY",directionY)
 
         // スティック移動処理
         body!.position.x += directionX * 20.0
         body!.position.y += directionY * 20.0
-//        print("body!.position.x",body!.position.x)
-//        print("body!.position.y",body!.position.y)
         
         // スティック初期位置からスティック移動した位置までの距離を求める
         let workBodyX: Double = ((body?.position.x)! - INIT_POS_X) * ((body?.position.x)! - INIT_POS_X)
@@ -68,7 +66,7 @@ class StickView {
         var stickLength: Double = sqrt(Double(workBodyX + workBodyY))
         stickLength = round(stickLength * 100) / 100
         
-        // スティック移動距離が一定の距離を超えたら戻す
+        // スティック移動距離が一定の距離を超えないようにする
         if stickLength > 20 {
             stickLength = 20
             body!.position.x -= directionX * 20.0
@@ -82,15 +80,8 @@ class StickView {
     }
     
     func Update(){
-        // 回転処理
-        //_enemy[i].run(rotateAction)
-        
-        if GameManager.shared.isTouch {
-            //player.Move(_directionX: (body?.position.x)!, _directionY: (body?.position.y)!)
-        }
         player.Update()
         
-        // エネミーの数分回す
         for i in 0..<EnemyView.ENEMYMAX {
             enemys[i].Update(_playerX: player.body?.position.x ?? 0, _playerY: player.body?.position.y ?? 0)
         }

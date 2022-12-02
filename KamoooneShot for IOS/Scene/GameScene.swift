@@ -16,7 +16,6 @@ class GameScene: SKScene {
     var stick: StickView!
     var dirrectionButton: [DirectionButtonView] = []
 
-    
     // 画面描画する際の初期化時に呼ばれる
     override func didMove(to view: SKView) {
         // インスタンスを生成
@@ -104,6 +103,3 @@ class GameScene: SKScene {
         }
     }
  }
-
-
-
