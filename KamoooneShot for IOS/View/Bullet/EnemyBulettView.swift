@@ -20,10 +20,13 @@ class EnemyBulletView: BaseBulletView {
             bulletDirection.append("")
             directionX.append(0.0)
             directionY.append(0.0)
+            normalVecX.append(0.0)
+            normalVecY.append(0.0)
         }
     }
     
-    func Update(_enemyBulletX: CGFloat, _enemyBulletY: CGFloat, __playerX: CGFloat, __playerY: CGFloat){
+    func Update(_enemyBulletX: CGFloat, _enemyBulletY: CGFloat, __playerX: CGFloat, __playerY: CGFloat, _radian: Double) {
+        print("_radian",_radian)
         switch nowBulletType {
         case bulletType.normalBullet.rawValue:
             NormalBullet(__enemyBulletX: _enemyBulletX, __enemyBulletY: _enemyBulletY, ___playerX: __playerX, ___playerY: __playerY)
@@ -40,7 +43,7 @@ class EnemyBulletView: BaseBulletView {
     }
     
     func NormalBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerX: CGFloat, ___playerY: CGFloat) {
-        // ToDo 弾のベクトルをプレイヤー目掛け手にする。(弾を発射したらベクトルは変更しない、※ホーミングバレットのベクトル固定Ver)
+        // 弾のベクトルをプレイヤー目掛け手にする。(弾を発射したらベクトルは変更しない、※ホーミングバレットのベクトル固定Ver)
         
         for i in 0..<ZIKIMAXBULLET {
             if !isBulletTrigger[i] && bulletStartTime == 0 {
@@ -49,17 +52,20 @@ class EnemyBulletView: BaseBulletView {
                 body[i].position = CGPoint(x: __enemyBulletX, y: __enemyBulletY)
                 GameManager.shared.scene?.addChild(body[i])
                 bulletStartTime = bulletDuration
+                
+                // 弾発射ベクトルを求める(発射後は固定)
+                let length = sqrt((___playerX - body[i].position.x) * (___playerX - body[i].position.x) + (___playerY - body[i].position.y) * (___playerY - body[i].position.y))
+                normalVecX[i] = (___playerX - body[i].position.x) / length
+                normalVecY[i] = (___playerY - body[i].position.y) / length
             }
         }
         // 弾移動処理
         for i in 0..<ZIKIMAXBULLET {
             if isBulletTrigger[i] {
-                // 三平方の定理を使って長さを求める
-                let length = sqrt((___playerX - body[i].position.x) * (___playerX - body[i].position.x) + (___playerY - body[i].position.y) * (___playerY - body[i].position.y))
                                 
-                body[i].position.x += (___playerX - body[i].position.x) / length * BULLET_SPEED
+                body[i].position.x += normalVecX[i] * BULLET_SPEED
                 body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
-                body[i].position.y += (___playerY - body[i].position.y) / length * BULLET_SPEED
+                body[i].position.y += normalVecY[i] * BULLET_SPEED
                 body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
                 
                 // 画面エリア外判定

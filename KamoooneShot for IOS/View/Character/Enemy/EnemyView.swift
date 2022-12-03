@@ -18,8 +18,7 @@ class EnemyView: BaseCharacterView {
         // 画像設定
         body = SKSpriteNode(imageNamed: "enemy.png")
         // ポジション設定
-//        body?.position = CGPoint(x: CGFloat.random(in: (GameManager.shared.scene?.frame.minX)! + 25..<(GameManager.shared.scene?.frame.maxX)! - 25), y: CGFloat.random(in: (GameManager.shared.scene?.frame.maxY)! + 150..<(GameManager.shared.scene?.frame.maxY)! + 600))
-        body?.position = CGPoint(x: CGFloat.random(in: (GameManager.shared.scene?.frame.minX)! + 25..<(GameManager.shared.scene?.frame.maxX)! - 25), y: 500)
+        body?.position = CGPoint(x: CGFloat.random(in: (GameManager.shared.scene?.frame.minX)! + 25..<(GameManager.shared.scene?.frame.maxX)! - 25), y: CGFloat.random(in: (GameManager.shared.scene?.frame.maxY)! + 150..<(GameManager.shared.scene?.frame.maxY)! + 600))
         // 敵機の向き
         rotate = 180
         body?.zRotation = DegreeToRadian(Degree: rotate)
@@ -36,13 +35,14 @@ class EnemyView: BaseCharacterView {
         let eX = (body?.position.x)!
         let eY = (body?.position.y)!
         let r = atan2(Double(pY - eY), Double(pX - eX))
-        let radian = r + 2 * Double.pi
-        let kakudo = floor(radian * 360 / (2 * Double.pi))
-        body?.zRotation = DegreeToRadian(Degree: kakudo - 90)
+        let r1 = r + 2 * Double.pi
+        let radian = floor(r1 * 360 / (2 * Double.pi))
+        body?.zRotation = DegreeToRadian(Degree: radian - 90)
+        print("radian",radian)
         
         // ToDo 向きが決定してから弾を打つようにする。(向きが決定してかつ弾を打っている時は向きを変えない)
-        //body!.position.y -= 1
-        //bullet.Update(_enemyBulletX: body!.position.x, _enemyBulletY: body!.position.y, __playerX: _playerX, __playerY: _playerY)
+        body!.position.y -= 0.5
+        bullet.Update(_enemyBulletX: body!.position.x, _enemyBulletY: body!.position.y, __playerX: _playerX, __playerY: _playerY, _radian: radian)
     }
     
     func DegreeToRadian(Degree : Double!)-> CGFloat{

@@ -10,7 +10,7 @@ import SpriteKit
 
 class BaseBulletView {
     let ZIKIMAXBULLET: Int = 90
-    let BULLET_SPEED: CGFloat = 1.7
+    let BULLET_SPEED: CGFloat = 3.7
     var isBulletTrigger: [Bool] = []
     var bulletDirection: [String] = []
     var body: [SKSpriteNode] = []
@@ -21,7 +21,9 @@ class BaseBulletView {
     let LEFTVECTOR_X: CGFloat = 10.0
     var directionX: [CGFloat] = []
     var directionY: [CGFloat] = []
-    var nowBulletType: Int = 1
+    var normalVecX: [Double] = []
+    var normalVecY: [Double] = []
+    var nowBulletType: Int = 0
     enum bulletType: Int {
         case normalBullet = 0
         case tripleBullet = 1
