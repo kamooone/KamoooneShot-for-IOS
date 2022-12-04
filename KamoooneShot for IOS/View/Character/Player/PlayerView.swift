@@ -79,7 +79,7 @@ class PlayerView: BaseCharacterView {
     }
     
     func Update(){
-        bullet.Update(_x: body!.position.x, _y: body!.position.y, _rotate: rotate)
+        //bullet.Update(_x: body!.position.x, _y: body!.position.y, _rotate: rotate)
     }
     
     // ToDo ライブラリにする

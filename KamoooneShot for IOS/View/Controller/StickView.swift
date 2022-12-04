@@ -13,7 +13,7 @@ class StickView {
     var player: PlayerView!
     var enemys: [EnemyView] = []
     var colision: Collision!
-    let INIT_POS_X: Double = (GameManager.shared.scene?.frame.minX)! + 50
+    let INIT_POS_X: Double = (GameManager.shared.scene?.frame.minX)! + 75
     let INIT_POS_Y: Double = (GameManager.shared.scene?.frame.minY)! + 125
     
     init() {

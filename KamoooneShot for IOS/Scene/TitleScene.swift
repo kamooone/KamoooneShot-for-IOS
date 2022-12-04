@@ -24,30 +24,30 @@ class TitleScene: SKScene{
         // テキストのノードを作成する。
         let label = SKLabelNode(fontNamed: "American Typewriter Bold")
         label.text = "KamoooneShot"
-        label.position = CGPoint(x: self.frame.midX, y: self.frame.maxY - 100);
+        label.position = CGPoint(x: self.frame.midX, y: self.frame.maxY - 150);
         self.addChild(label)
         
         // ランキングボタンを表示
         let rankingButtonLabel = SKLabelNode(fontNamed: "American Typewriter Bold")
         rankingButtonLabel.text = "RANKING"
-        rankingButtonLabel.position = CGPoint(x: self.frame.midX, y: 190);
+        rankingButtonLabel.position = CGPoint(x: self.frame.midX, y: 240);
         rankingButtonLabel.fontSize = 30
         self.addChild(rankingButtonLabel)
         var circle = UIBezierPath(roundedRect: CGRect(x: 100, y: 400, width: 180, height: 40), cornerRadius: 10)
         let rankingButton = SKShapeNode(path: circle.cgPath, centered: true)
-        rankingButton.position = CGPoint(x:self.frame.midX, y:200)
+        rankingButton.position = CGPoint(x:self.frame.midX, y:250)
         rankingButton.name = "RANKING"
         addChild(rankingButton)
          
         // ゲームスタートボタンを表示
         let startButtonLabel = SKLabelNode(fontNamed: "American Typewriter Bold")
         startButtonLabel.text = "START"
-        startButtonLabel.position = CGPoint(x: self.frame.midX, y: 90);
+        startButtonLabel.position = CGPoint(x: self.frame.midX, y: 140);
         startButtonLabel.fontSize = 30
         self.addChild(startButtonLabel)
         circle = UIBezierPath(roundedRect: CGRect(x: 100, y: 400, width: 180, height: 40), cornerRadius: 10)
         let startButton = SKShapeNode(path: circle.cgPath, centered: true)
-        startButton.position = CGPoint(x:self.frame.midX, y:100)
+        startButton.position = CGPoint(x:self.frame.midX, y:150)
         startButton.name = "START"
         addChild(startButton)
     }

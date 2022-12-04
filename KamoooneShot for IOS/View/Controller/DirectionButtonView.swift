@@ -15,6 +15,7 @@ class DirectionButtonView {
         button.position = CGPoint(x: _x, y: _y)
         button.zPosition = 1
         button.name = _name
+        button.zRotation = DegreeToRadian(Degree: _rotate)
         GameManager.shared.scene?.addChild(button)
     }
     
