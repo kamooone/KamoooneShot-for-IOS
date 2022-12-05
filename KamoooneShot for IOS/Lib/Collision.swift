@@ -58,11 +58,11 @@ class Collision {
 
                             enemys[k].explotion.StartExplosion(x: (enemys[k].body?.position.x)!,y: (enemys[k].body?.position.y)!, cnt: k)
                             player.bullet.body[i].removeFromParent()
-                            player.bullet.body[i].position.x = -1000
-                            player.bullet.body[i].position.y = -1000
+                            player.bullet.body[i].position.x = GameManager.shared.OUT_OF_SCREEN_AREA
+                            player.bullet.body[i].position.y = GameManager.shared.OUT_OF_SCREEN_AREA
                             enemys[k].body?.removeFromParent()
-                            enemys[k].body?.position.x = -1000
-                            enemys[k].body?.position.y = -1000
+                            enemys[k].body?.position.x = GameManager.shared.OUT_OF_SCREEN_AREA
+                            enemys[k].body?.position.y = GameManager.shared.OUT_OF_SCREEN_AREA
                         }
                     }
                     enemys[k].explotion.Update()
@@ -95,11 +95,11 @@ class Collision {
                                 
                                 //GameScene.GetExplosionObject().StartExplosion(x: enemyPos[k].position.x,y: enemyPos[k].position.y, cnt: k)
                                 player.bullet.body[i].removeFromParent()
-                                player.bullet.body[i].position.x = -1000
-                                player.bullet.body[i].position.y = -1000
+                                player.bullet.body[i].position.x = GameManager.shared.OUT_OF_SCREEN_AREA
+                                player.bullet.body[i].position.y = GameManager.shared.OUT_OF_SCREEN_AREA
                                 enemys[k].bullet.body[cnt].removeFromParent()
-                                enemys[k].bullet.body[cnt].position.x = -1000
-                                enemys[k].bullet.body[cnt].position.y = -1000
+                                enemys[k].bullet.body[cnt].position.x = GameManager.shared.OUT_OF_SCREEN_AREA
+                                enemys[k].bullet.body[cnt].position.y = GameManager.shared.OUT_OF_SCREEN_AREA
                                 enemys[k].bullet.isBulletTrigger[cnt] = false
                             }
                         }

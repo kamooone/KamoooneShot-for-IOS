@@ -13,13 +13,15 @@ class StickView {
     var player: PlayerView!
     var enemys: [EnemyView] = []
     var colision: Collision!
-    let INIT_POS_X: Double = (GameManager.shared.scene?.frame.minX)! + 75
-    let INIT_POS_Y: Double = (GameManager.shared.scene?.frame.minY)! + 125
+    let STICK_INIT_POS_X: Double = (GameManager.shared.scene?.frame.minX)! + 75
+    let STICK_INIT_POS_Y: Double = (GameManager.shared.scene?.frame.minY)! + 125
+    let STICK_SPEED: CGFloat = 20.0
+    let STICK_MOVE_RANGE: Double = 20
     
     init() {
         // ジョイスティックの生成
         body = SKSpriteNode(imageNamed: "stick.png")
-        body!.position = CGPoint(x: INIT_POS_X, y: INIT_POS_Y)
+        body!.position = CGPoint(x: STICK_INIT_POS_X, y: STICK_INIT_POS_Y)
         GameManager.shared.scene?.addChild(body!)
         
         // プレイヤーのインスタンスを生成
@@ -48,8 +50,8 @@ class StickView {
         let vecY: Double = GameManager.shared.touchPos.y - initCenterY
         
         // 求めるのはタッチした場所までの距離ではなく、スティック初期位置からスティック移動した位置までの距離
-        let workTouchX: Double = (GameManager.shared.touchPos.x - 20) * (GameManager.shared.touchPos.x - 20)
-        let workTouchY: Double = (GameManager.shared.touchPos.y - 20) * (GameManager.shared.touchPos.y - 20)
+        let workTouchX: Double = (GameManager.shared.touchPos.x - STICK_SPEED) * (GameManager.shared.touchPos.x - STICK_SPEED)
+        let workTouchY: Double = (GameManager.shared.touchPos.y - STICK_SPEED) * (GameManager.shared.touchPos.y - STICK_SPEED)
         let touchLength: Double = sqrt(workTouchX + workTouchY)
         
         // スティック移動ベクトル
@@ -57,20 +59,20 @@ class StickView {
         let directionY: Double = vecY / touchLength
 
         // スティック移動処理
-        body!.position.x += directionX * 20.0
-        body!.position.y += directionY * 20.0
+        body!.position.x += directionX * STICK_SPEED
+        body!.position.y += directionY * STICK_SPEED
         
         // スティック初期位置からスティック移動した位置までの距離を求める
-        let workBodyX: Double = ((body?.position.x)! - INIT_POS_X) * ((body?.position.x)! - INIT_POS_X)
-        let workBodyY: Double = ((body?.position.y)! - INIT_POS_Y) * ((body?.position.y)! - INIT_POS_Y)
+        let workBodyX: Double = ((body?.position.x)! - STICK_INIT_POS_X) * ((body?.position.x)! - STICK_INIT_POS_X)
+        let workBodyY: Double = ((body?.position.y)! - STICK_INIT_POS_Y) * ((body?.position.y)! - STICK_INIT_POS_Y)
         var stickLength: Double = sqrt(Double(workBodyX + workBodyY))
-        stickLength = round(stickLength * 100) / 100
+        stickLength = round(stickLength * 100) / 100 // 小数点第二位以下を切り捨てる
         
         // スティック移動距離が一定の距離を超えないようにする
-        if stickLength > 20 {
-            stickLength = 20
-            body!.position.x -= directionX * 20.0
-            body!.position.y -= directionY * 20.0
+        if stickLength > STICK_MOVE_RANGE {
+            stickLength = STICK_MOVE_RANGE
+            body!.position.x -= directionX * STICK_SPEED
+            body!.position.y -= directionY * STICK_SPEED
         }
         
         body!.run(SKAction.moveTo(x: body!.position.x, duration: 0))
@@ -90,8 +92,8 @@ class StickView {
     }
     
     func Reset(){
-        body!.position = CGPoint(x: INIT_POS_X, y: INIT_POS_Y)
-        body?.run(SKAction.moveTo(x: (body?.position.x)!, duration: 0.2))
-        body?.run(SKAction.moveTo(y: (body?.position.y)!, duration: 0.2))
+        body!.position = CGPoint(x: STICK_INIT_POS_X, y: STICK_INIT_POS_Y)
+        body?.run(SKAction.moveTo(x: (body?.position.x)!, duration: 0))
+        body?.run(SKAction.moveTo(y: (body?.position.y)!, duration: 0))
     }
 }

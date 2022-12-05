@@ -12,6 +12,7 @@ class GameManager {
     // 他のクラスで使用できるようにstaticなインスタンスを生成しておく
     static let shared = GameManager()
     
+    var OUT_OF_SCREEN_AREA: CGFloat = -1000
     var isGameStart: Bool = false
     var touchPos: CGPoint = CGPoint(x: 0, y: 0)
     

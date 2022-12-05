@@ -146,66 +146,6 @@ class EnemyBulletView: BaseBulletView {
         if bulletStartTime != 0 {
             bulletStartTime -= 1
         }
-        
-        // 弾発射前処理
-//        for i in 0..<ZIKIMAXBULLET {
-//            if !isBulletTrigger[i] && bulletStartTime == 0 {
-//                isBulletTrigger[i] = true
-//                body[i].size = CGSize(width: 10, height: 10)
-//                body[i].position = CGPoint(x: __enemyBulletX, y: __enemyBulletY)
-//                GameManager.shared.scene?.addChild(body[i])
-//
-//                let vecX = RIGHTVECTOR_X
-//                let vecY = VECTOR_Y
-//                let length:CGFloat = sqrt(vecX + vecY)
-//
-//                tripleBulletNo += 1
-//                directionY[i] = (vecY / length)
-//                switch tripleBulletNo {
-//                case tripleBulletType.straight.rawValue:
-//                    bulletDirection[i] = "Straight"
-//                    break
-//
-//                case tripleBulletType.diagonallyRight.rawValue:
-//                    directionX[i] = (vecX / length) * -1
-//                    bulletDirection[i] = "DiagonallyRight"
-//                    break
-//
-//                case tripleBulletType.diagonallyLeft.rawValue:
-//                    directionX[i] = (vecX / length)
-//                    bulletDirection[i] = "DiagonallyLeft"
-//                    tripleBulletNo = 0
-//                    bulletStartTime = bulletDuration
-//                    break
-//                default:
-//                    break
-//                }
-//            }
-//        }
-//        // 弾移動処理
-//        for i in 0..<ZIKIMAXBULLET {
-//            if isBulletTrigger[i] {
-//                if bulletDirection[i] != "Straight" {
-//                    body[i].position.x += directionX[i] * BULLET_SPEED
-//                    body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
-//                }
-//                body[i].position.y -= directionY[i] * BULLET_SPEED
-//                body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
-//
-//
-//                // 画面エリア外判定
-//                if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
-//                    body[i].position.x <= (GameManager.shared.scene?.frame.minX)! || body[i].position.x >= (GameManager.shared.scene?.frame.maxX)! {
-//                    isBulletTrigger[i] = false
-//                    body[i].removeFromParent()
-//                }
-//            }
-//        }
-//
-//        // 弾発射インタバル
-//        if bulletStartTime != 0 {
-//            bulletStartTime -= 1
-//        }
     }
     
     func homingBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerX: CGFloat, ___playerY: CGFloat) {
