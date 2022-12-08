@@ -10,6 +10,7 @@ import SpriteKit
 
 class BulletView: BaseBulletView {
     private static var isSingleton: Bool = false
+    let rotateSpeed: Double = 2.25
     
     override init(){
         super.init()
@@ -40,7 +41,7 @@ class BulletView: BaseBulletView {
                 bulletStartTime = bulletDuration
 
                 // 時期の向きに合わせて弾のベクトルを決定する
-                let work = abs(Int(_rotate / 2.25))
+                let work = abs(Int(_rotate / rotateSpeed))
                 var vecX: CGFloat = 0 + (CGFloat(work) * 0.25)
                 var vecY: CGFloat = 10 - (CGFloat(work) * 0.25)
                 if _rotate < -90 || _rotate > 90 {

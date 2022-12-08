@@ -10,9 +10,10 @@ import SpriteKit
 
 class PlayerView: BaseCharacterView {
     private static var isSingleton: Bool = false
+    let rotateSpeed: Double = 2.25
     let bullet = BulletView()
     
-    override init(){
+    override init() {
         super.init()
         // このクラスのインスタンスを一つしか生成できないようにする
         if !PlayerView.isSingleton {
@@ -27,25 +28,25 @@ class PlayerView: BaseCharacterView {
         }
     }
     
-    func Move(_positionX: CGFloat, _positionY: CGFloat, _stickLength: CGFloat){
+    func Move(_positionX: CGFloat, _positionY: CGFloat, _stickLength: CGFloat) {
         // ボタンを二つ追加して左右の回転ボタンにする。
         if GameManager.shared.isRightButtonTouch {
             if rotate > -180 {
-                rotate -= 2.25
+                rotate -= rotateSpeed
             } else if rotate == -180 {
                 rotate = 180
-                rotate -= 2.25
+                rotate -= rotateSpeed
             } else {
-                rotate -= 2.25
+                rotate -= rotateSpeed
             }
         } else if GameManager.shared.isLeftButtonTouch {
             if rotate < 180 {
-                rotate += 2.25
+                rotate += rotateSpeed
             } else if rotate == 180 {
                 rotate = -180
-                rotate += 2.25
+                rotate += rotateSpeed
             } else {
-                rotate += 2.25
+                rotate += rotateSpeed
             }
         }
         body?.zRotation = DegreeToRadian(Degree: rotate)
@@ -78,12 +79,12 @@ class PlayerView: BaseCharacterView {
         }
     }
     
-    func Update(){
+    func Update() {
         bullet.Update(_x: body!.position.x, _y: body!.position.y, _rotate: rotate)
     }
     
     // ToDo ライブラリにする
-    func DegreeToRadian(Degree : Double!)-> CGFloat{
+    func DegreeToRadian(Degree : Double!)-> CGFloat {
         return CGFloat(Degree) / CGFloat(180.0 * M_1_PI)
     }
     
