@@ -9,6 +9,7 @@ import Foundation
 import SpriteKit
 
 class StickView {
+    var bodyBG: SKSpriteNode?
     var body: SKSpriteNode?
     var player: PlayerView!
     var enemys: [EnemyView] = []
@@ -20,6 +21,9 @@ class StickView {
     
     init() {
         // ジョイスティックの生成
+        bodyBG = SKSpriteNode(imageNamed: "stickBG.png")
+        bodyBG!.position = CGPoint(x: STICK_INIT_POS_X, y: STICK_INIT_POS_Y)
+        GameManager.shared.scene?.addChild(bodyBG!)
         body = SKSpriteNode(imageNamed: "stick.png")
         body!.position = CGPoint(x: STICK_INIT_POS_X, y: STICK_INIT_POS_Y)
         GameManager.shared.scene?.addChild(body!)

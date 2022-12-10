@@ -30,7 +30,7 @@ class GameScene: SKScene {
         }
         dirrectionButton.append(DirectionButtonView(_x: (GameManager.shared.scene?.frame.maxX)! - 60, _y: (GameManager.shared.scene?.frame.minY)! + 125, _rotate: 0, _name: "RightButton"))
         
-        dirrectionButton.append(DirectionButtonView(_x: (GameManager.shared.scene?.frame.maxX)! - 100, _y: (GameManager.shared.scene?.frame.minY)! + 125, _rotate: 180, _name: "LeftButton"))
+        dirrectionButton.append(DirectionButtonView(_x: (GameManager.shared.scene?.frame.maxX)! - 120, _y: (GameManager.shared.scene?.frame.minY)! + 125, _rotate: 180, _name: "LeftButton"))
     }
     
     //タッチ時に呼ばれる

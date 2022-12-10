@@ -30,6 +30,7 @@
 		E2481C9E27A6A36B00583CDD /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = E2481C9D27A6A36B00583CDD /* hit.wav */; };
 		E262CFE62920C78A004E2987 /* stick.png in Resources */ = {isa = PBXBuildFile; fileRef = E262CFE52920C78A004E2987 /* stick.png */; };
 		E262CFE82920C7F8004E2987 /* StickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E262CFE72920C7F8004E2987 /* StickView.swift */; };
+		E28A858A2944A1B6008889B7 /* stickBG.png in Resources */ = {isa = PBXBuildFile; fileRef = E28A85892944A1B6008889B7 /* stickBG.png */; };
 		E2A09148290444F5002D7201 /* EnemyBulettView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A09147290444F5002D7201 /* EnemyBulettView.swift */; };
 		E2BF4C562793D19400BB72E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF4C552793D19400BB72E5 /* AppDelegate.swift */; };
 		E2BF4C582793D19400BB72E5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2BF4C572793D19400BB72E5 /* GameScene.sks */; };
@@ -66,6 +67,7 @@
 		E2481C9D27A6A36B00583CDD /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
 		E262CFE52920C78A004E2987 /* stick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stick.png; sourceTree = "<group>"; };
 		E262CFE72920C7F8004E2987 /* StickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickView.swift; sourceTree = "<group>"; };
+		E28A85892944A1B6008889B7 /* stickBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stickBG.png; sourceTree = "<group>"; };
 		E2A09147290444F5002D7201 /* EnemyBulettView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyBulettView.swift; sourceTree = "<group>"; };
 		E2BF4C522793D19400BB72E5 /* KamoooneShot for IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KamoooneShot for IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2BF4C552793D19400BB72E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		E23A62D428FC205600DE818C /* BackGround */ = {
 			isa = PBXGroup;
 			children = (
+				E28A85892944A1B6008889B7 /* stickBG.png */,
 				E2049DD32929066200DBDC38 /* directionButton.png */,
 				E262CFE52920C78A004E2987 /* stick.png */,
 				E23A630028FC20DA00DE818C /* bg.png */,
@@ -388,6 +391,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E28A858A2944A1B6008889B7 /* stickBG.png in Resources */,
 				E2BF4C612793D19400BB72E5 /* Main.storyboard in Resources */,
 				E23A62FF28FC20D100DE818C /* ziki.png in Resources */,
 				E2BF4C582793D19400BB72E5 /* GameScene.sks in Resources */,
