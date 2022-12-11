@@ -149,7 +149,6 @@ class EnemyBulletView: BaseBulletView {
     }
     
     func homingBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerX: CGFloat, ___playerY: CGFloat) {
-        // 弾発射前処理
         for i in 0..<ZIKIMAXBULLET {
             if !isBulletTrigger[i] && bulletStartTime == 0 {
                 isBulletTrigger[i] = true
@@ -157,17 +156,26 @@ class EnemyBulletView: BaseBulletView {
                 body[i].position = CGPoint(x: __enemyBulletX, y: __enemyBulletY)
                 GameManager.shared.scene?.addChild(body[i])
                 bulletStartTime = bulletDuration
+                
+                // 弾発射ベクトルを求める(発射後は固定)
+                let length = sqrt((___playerX - body[i].position.x) * (___playerX - body[i].position.x) + (___playerY - body[i].position.y) * (___playerY - body[i].position.y))
+                normalVecX[i] = (___playerX - body[i].position.x) / length
+                normalVecY[i] = (___playerY - body[i].position.y) / length
             }
         }
+        
+        // ToDo 一定の間隔で自機との角度を求めてnormalVecX[i]を更新する。normalVecY[i]は更新する必要なし?
+        for i in 0..<ZIKIMAXBULLET {
+            
+        }
+        
         // 弾移動処理
         for i in 0..<ZIKIMAXBULLET {
             if isBulletTrigger[i] {
-                // 三平方の定理を使って長さを求める
-                let length = sqrt((___playerX - body[i].position.x) * (___playerX - body[i].position.x) + (___playerY - body[i].position.y) * (___playerY - body[i].position.y))
                                 
-                body[i].position.x += (___playerX - body[i].position.x) / length * BULLET_SPEED
+                body[i].position.x += normalVecX[i] * BULLET_SPEED
                 body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
-                body[i].position.y += (___playerY - body[i].position.y) / length * BULLET_SPEED
+                body[i].position.y += normalVecY[i] * BULLET_SPEED
                 body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
                 
                 // 画面エリア外判定

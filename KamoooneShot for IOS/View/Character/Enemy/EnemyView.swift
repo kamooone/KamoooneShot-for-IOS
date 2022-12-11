@@ -38,7 +38,6 @@ class EnemyView: BaseCharacterView {
         let r1 = r + 2 * Double.pi
         let radian = floor(r1 * 360 / (2 * Double.pi))
         body?.zRotation = DegreeToRadian(Degree: radian - 90)
-        print("radian",radian)
         
         // ToDo 向きが決定してから弾を打つようにする。(向きが決定してかつ弾を打っている時は向きを変えない)
         body!.position.y -= 0.5

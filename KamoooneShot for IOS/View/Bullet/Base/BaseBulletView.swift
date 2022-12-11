@@ -23,7 +23,7 @@ class BaseBulletView {
     var directionY: [CGFloat] = []
     var normalVecX: [Double] = []
     var normalVecY: [Double] = []
-    var nowBulletType: Int = 0
+    var nowBulletType: Int = 2
     enum bulletType: Int {
         case normalBullet = 0
         case tripleBullet = 1
