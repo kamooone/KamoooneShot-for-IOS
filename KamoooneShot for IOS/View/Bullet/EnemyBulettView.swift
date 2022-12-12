@@ -149,6 +149,7 @@ class EnemyBulletView: BaseBulletView {
     }
     
     func homingBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerX: CGFloat, ___playerY: CGFloat) {
+        // 弾発射前処理
         for i in 0..<ZIKIMAXBULLET {
             if !isBulletTrigger[i] && bulletStartTime == 0 {
                 isBulletTrigger[i] = true
@@ -156,27 +157,43 @@ class EnemyBulletView: BaseBulletView {
                 body[i].position = CGPoint(x: __enemyBulletX, y: __enemyBulletY)
                 GameManager.shared.scene?.addChild(body[i])
                 bulletStartTime = bulletDuration
-                
-                // 弾発射ベクトルを求める(発射後は固定)
-                let length = sqrt((___playerX - body[i].position.x) * (___playerX - body[i].position.x) + (___playerY - body[i].position.y) * (___playerY - body[i].position.y))
-                normalVecX[i] = (___playerX - body[i].position.x) / length
-                normalVecY[i] = (___playerY - body[i].position.y) / length
+                homingEnabled[i] = true
             }
         }
         
-        // ToDo 一定の間隔で自機との角度を求めてnormalVecX[i]を更新する。normalVecY[i]は更新する必要なし?
+        // ToDO ホーミング処理は発射後一定の時間だけ行い、その後はその時のベクトルで直進するようにする。(こうすることで避けれるホーミング弾にする)
+        // もしくは一定の距離になるまでは目標座標を更新して、1メートル以内になったら更新しないような感じ。
         for i in 0..<ZIKIMAXBULLET {
-            
+            if homingEnabled[i] {
+                normalVecX[i] = ___playerX
+                normalVecY[i] = ___playerY
+            }
         }
         
         // 弾移動処理
         for i in 0..<ZIKIMAXBULLET {
             if isBulletTrigger[i] {
-                                
-                body[i].position.x += normalVecX[i] * BULLET_SPEED
-                body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
-                body[i].position.y += normalVecY[i] * BULLET_SPEED
-                body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
+                
+                if homingEnabled[i] {
+                    // 三平方の定理を使って長さを求める
+                    let length = sqrt((normalVecX[i] - body[i].position.x) * (normalVecX[i] - body[i].position.x) + (normalVecY[i] - body[i].position.y) * (normalVecY[i] - body[i].position.y))
+                    
+                    body[i].position.x += (normalVecX[i] - body[i].position.x) / length * BULLET_SPEED
+                    body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
+                    body[i].position.y += (normalVecY[i] - body[i].position.y) / length * BULLET_SPEED
+                    body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
+                    
+                    // ToDo ホーミング弾有効時間を計算する
+                    
+                    
+                }
+                if !homingEnabled[i] {
+                    let length = sqrt((normalVecX[i] - body[i].position.x) * (normalVecX[i] - body[i].position.x) + (normalVecY[i] - body[i].position.y) * (normalVecY[i] - body[i].position.y))
+                    body[i].position.x += (normalVecX[i] - body[i].position.x) / length * BULLET_SPEED
+                    body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
+                    body[i].position.y += (normalVecY[i] - body[i].position.y) / length * BULLET_SPEED
+                    body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
+                }
                 
                 // 画面エリア外判定
                 if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
