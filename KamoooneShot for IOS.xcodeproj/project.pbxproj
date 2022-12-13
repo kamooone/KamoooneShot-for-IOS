@@ -18,8 +18,6 @@
 		E22F2535279D835F006F49B7 /* BackGroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F2534279D835F006F49B7 /* BackGroundView.swift */; };
 		E22F2537279D8516006F49B7 /* BulletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F2536279D8516006F49B7 /* BulletView.swift */; };
 		E23A62BC28FC108E00DE818C /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A62BB28FC108E00DE818C /* SoundManager.swift */; };
-		E23A62FA28FC20C400DE818C /* pink.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A62F828FC20C400DE818C /* pink.png */; };
-		E23A62FB28FC20C400DE818C /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A62F928FC20C400DE818C /* orange.png */; };
 		E23A62FE28FC20D100DE818C /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A62FC28FC20D100DE818C /* enemy.png */; };
 		E23A62FF28FC20D100DE818C /* ziki.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A62FD28FC20D100DE818C /* ziki.png */; };
 		E23A630128FC20DA00DE818C /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E23A630028FC20DA00DE818C /* bg.png */; };
@@ -30,6 +28,7 @@
 		E2481C9E27A6A36B00583CDD /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = E2481C9D27A6A36B00583CDD /* hit.wav */; };
 		E262CFE62920C78A004E2987 /* stick.png in Resources */ = {isa = PBXBuildFile; fileRef = E262CFE52920C78A004E2987 /* stick.png */; };
 		E262CFE82920C7F8004E2987 /* StickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E262CFE72920C7F8004E2987 /* StickView.swift */; };
+		E26F12422948CAA00035695E /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = E26F12412948CAA00035695E /* bullet.png */; };
 		E28A858A2944A1B6008889B7 /* stickBG.png in Resources */ = {isa = PBXBuildFile; fileRef = E28A85892944A1B6008889B7 /* stickBG.png */; };
 		E2A09148290444F5002D7201 /* EnemyBulettView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A09147290444F5002D7201 /* EnemyBulettView.swift */; };
 		E2BF4C562793D19400BB72E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF4C552793D19400BB72E5 /* AppDelegate.swift */; };
@@ -55,8 +54,6 @@
 		E22F2534279D835F006F49B7 /* BackGroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundView.swift; sourceTree = "<group>"; };
 		E22F2536279D8516006F49B7 /* BulletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletView.swift; sourceTree = "<group>"; };
 		E23A62BB28FC108E00DE818C /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
-		E23A62F828FC20C400DE818C /* pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pink.png; sourceTree = "<group>"; };
-		E23A62F928FC20C400DE818C /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
 		E23A62FC28FC20D100DE818C /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
 		E23A62FD28FC20D100DE818C /* ziki.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ziki.png; sourceTree = "<group>"; };
 		E23A630028FC20DA00DE818C /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
@@ -67,6 +64,7 @@
 		E2481C9D27A6A36B00583CDD /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
 		E262CFE52920C78A004E2987 /* stick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stick.png; sourceTree = "<group>"; };
 		E262CFE72920C7F8004E2987 /* StickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickView.swift; sourceTree = "<group>"; };
+		E26F12412948CAA00035695E /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		E28A85892944A1B6008889B7 /* stickBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stickBG.png; sourceTree = "<group>"; };
 		E2A09147290444F5002D7201 /* EnemyBulettView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyBulettView.swift; sourceTree = "<group>"; };
 		E2BF4C522793D19400BB72E5 /* KamoooneShot for IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KamoooneShot for IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,8 +181,7 @@
 		E23A62D628FC207500DE818C /* Bullet */ = {
 			isa = PBXGroup;
 			children = (
-				E23A62F928FC20C400DE818C /* orange.png */,
-				E23A62F828FC20C400DE818C /* pink.png */,
+				E26F12412948CAA00035695E /* bullet.png */,
 			);
 			path = Bullet;
 			sourceTree = "<group>";
@@ -395,8 +392,7 @@
 				E2BF4C612793D19400BB72E5 /* Main.storyboard in Resources */,
 				E23A62FF28FC20D100DE818C /* ziki.png in Resources */,
 				E2BF4C582793D19400BB72E5 /* GameScene.sks in Resources */,
-				E23A62FA28FC20C400DE818C /* pink.png in Resources */,
-				E23A62FB28FC20C400DE818C /* orange.png in Resources */,
+				E26F12422948CAA00035695E /* bullet.png in Resources */,
 				E2049DD42929066200DBDC38 /* directionButton.png in Resources */,
 				E2BF4C632793D19400BB72E5 /* Assets.xcassets in Resources */,
 				E262CFE62920C78A004E2987 /* stick.png in Resources */,

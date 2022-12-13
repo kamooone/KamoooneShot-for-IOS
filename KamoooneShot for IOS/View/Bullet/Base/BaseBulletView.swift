@@ -14,6 +14,7 @@ class BaseBulletView {
     var isBulletTrigger: [Bool] = []
     var bulletDirection: [String] = []
     var body: [SKSpriteNode] = []
+    var rotate: Double = 180
     var bulletDuration: Int = 100
     var bulletStartTime: Int = 0
     let VECTOR_Y: CGFloat = 50.0

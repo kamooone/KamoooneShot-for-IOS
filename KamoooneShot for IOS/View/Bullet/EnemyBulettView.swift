@@ -16,7 +16,7 @@ class EnemyBulletView: BaseBulletView {
         // エネミー弾の生成
         for _ in 0..<ZIKIMAXBULLET {
             isBulletTrigger.append(false)
-            body.append(SKSpriteNode(imageNamed: "pink.png"))
+            body.append(SKSpriteNode(imageNamed: "bullet.png"))
             bulletDirection.append("")
             directionX.append(0.0)
             directionY.append(0.0)

@@ -17,9 +17,12 @@ class BulletView: BaseBulletView {
         // このクラスのインスタンスは一つのみにする
         if !BulletView.isSingleton {
             // 自機弾の生成
-            for _ in 0..<ZIKIMAXBULLET {
+            for i in 0..<ZIKIMAXBULLET {
                 isBulletTrigger.append(false)
-                body.append(SKSpriteNode(imageNamed: "orange.png"))
+                body.append(SKSpriteNode(imageNamed: "bullet.png"))
+                // 敵機の向き
+                rotate = 180
+                body[i].zRotation = DegreeToRadian(Degree: rotate)
                 directionX.append(0.0)
                 directionY.append(0.0)
             }
@@ -84,5 +87,9 @@ class BulletView: BaseBulletView {
         if bulletStartTime != 0 {
             bulletStartTime -= 5
         }
+    }
+    
+    func DegreeToRadian(Degree : Double!)-> CGFloat{
+        return CGFloat(Degree) / CGFloat(180.0 * M_1_PI)
     }
 }
