@@ -23,6 +23,7 @@ class BaseBulletView {
     var directionY: [CGFloat] = []
     var normalVecX: [Double] = []
     var normalVecY: [Double] = []
+    var homingLength: [Double] = []
     var homingEnabled: [Bool] = []
     var nowBulletType: Int = 2
     enum bulletType: Int {
