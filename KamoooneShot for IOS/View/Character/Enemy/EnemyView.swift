@@ -41,7 +41,7 @@ class EnemyView: BaseCharacterView {
         
         // ToDo 向きが決定してから弾を打つようにする。(向きが決定してかつ弾を打っている時は向きを変えない)
         body!.position.y -= 0.5
-        bullet.Update(_enemyBulletX: body!.position.x, _enemyBulletY: body!.position.y, __playerX: _playerX, __playerY: _playerY, _radian: radian)
+        bullet.Update(_enemyBulletX: body!.position.x, _enemyBulletY: body!.position.y, __playerX: _playerX, __playerY: _playerY, _radian: radian - 90)
     }
     
     func DegreeToRadian(Degree : Double!)-> CGFloat{

@@ -38,8 +38,9 @@ class BulletView: BaseBulletView {
         for i in 0..<ZIKIMAXBULLET {
             if !isBulletTrigger[i] && bulletStartTime == 0 {
                 isBulletTrigger[i] = true
-                body[i].size = CGSize(width: 10, height: 10)
+                body[i].size = CGSize(width: 30, height: 30)
                 body[i].position = CGPoint(x: _x, y: _y)
+                body[i].zRotation = DegreeToRadian(Degree: _rotate + 180)
                 GameManager.shared.scene?.addChild(body[i])
                 bulletStartTime = bulletDuration
 
