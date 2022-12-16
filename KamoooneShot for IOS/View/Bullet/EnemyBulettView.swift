@@ -171,16 +171,14 @@ class EnemyBulletView: BaseBulletView {
         // 弾移動処理
         for i in 0..<ZIKIMAXBULLET {
             if isBulletTrigger[i] {
+                body[i].zRotation = DegreeToRadian(Degree: __radian + 180)
                 // ホーミング有効時の処理
                 if homingEnabled[i] {
                     homingLength[i] = sqrt((___playerX - body[i].position.x) * (___playerX - body[i].position.x) + (___playerY - body[i].position.y) * (___playerY - body[i].position.y))
-
                     body[i].position.x += (___playerX - body[i].position.x) / homingLength[i] * BULLET_SPEED
                     body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
                     body[i].position.y += (___playerY - body[i].position.y) / homingLength[i] * BULLET_SPEED
                     body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
-                    
-                    body[i].zRotation = DegreeToRadian(Degree: 180 + __radian)
                     
                     // 一定の距離まで近づくとホーミング処理停止して現在のベクトルで直進する
                     if homingLength[i] < 80 {
