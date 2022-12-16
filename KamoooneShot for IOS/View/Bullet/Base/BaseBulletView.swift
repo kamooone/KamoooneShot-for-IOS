@@ -14,7 +14,7 @@ class BaseBulletView {
     var isBulletTrigger: [Bool] = []
     var bulletDirection: [String] = []
     var body: [SKSpriteNode] = []
-    var rotate: Double = 180
+    var rotate: CGFloat = 180
     var bulletDuration: Int = 100
     var bulletStartTime: Int = 0
     let VECTOR_Y: CGFloat = 50.0
@@ -22,9 +22,9 @@ class BaseBulletView {
     let LEFTVECTOR_X: CGFloat = 10.0
     var directionX: [CGFloat] = []
     var directionY: [CGFloat] = []
-    var normalVecX: [Double] = []
-    var normalVecY: [Double] = []
-    var homingLength: [Double] = []
+    var normalVecX: [CGFloat] = []
+    var normalVecY: [CGFloat] = []
+    var homingLength: [CGFloat] = []
     var homingEnabled: [Bool] = []
     var nowBulletType: Int = 2
     enum bulletType: Int {

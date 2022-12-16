@@ -14,10 +14,10 @@ class StickView {
     var player: PlayerView!
     var enemys: [EnemyView] = []
     var colision: Collision!
-    let STICK_INIT_POS_X: Double = (GameManager.shared.scene?.frame.minX)! + 75
-    let STICK_INIT_POS_Y: Double = (GameManager.shared.scene?.frame.minY)! + 125
+    let STICK_INIT_POS_X: CGFloat = (GameManager.shared.scene?.frame.minX)! + 75
+    let STICK_INIT_POS_Y: CGFloat = (GameManager.shared.scene?.frame.minY)! + 125
     let STICK_SPEED: CGFloat = 20.0
-    let STICK_MOVE_RANGE: Double = 20
+    let STICK_MOVE_RANGE: CGFloat = 20
     
     init() {
         // ジョイスティックの生成
@@ -46,30 +46,30 @@ class StickView {
     
     func Move(){
         //  スティックの中心座標
-        let initCenterX: Double = (Double((body?.position.x)!))
-        let initCenterY: Double = (Double((body?.position.y)!))
+        let initCenterX: CGFloat = (CGFloat((body?.position.x)!))
+        let initCenterY: CGFloat = (CGFloat((body?.position.y)!))
         
         // 移動ベクトル
-        let vecX: Double = GameManager.shared.touchPos.x - initCenterX
-        let vecY: Double = GameManager.shared.touchPos.y - initCenterY
+        let vecX: CGFloat = GameManager.shared.touchPos.x - initCenterX
+        let vecY: CGFloat = GameManager.shared.touchPos.y - initCenterY
         
         // 求めるのはタッチした場所までの距離ではなく、スティック初期位置からスティック移動した位置までの距離
-        let workTouchX: Double = (GameManager.shared.touchPos.x - STICK_SPEED) * (GameManager.shared.touchPos.x - STICK_SPEED)
-        let workTouchY: Double = (GameManager.shared.touchPos.y - STICK_SPEED) * (GameManager.shared.touchPos.y - STICK_SPEED)
-        let touchLength: Double = sqrt(workTouchX + workTouchY)
+        let workTouchX: CGFloat = (GameManager.shared.touchPos.x - STICK_SPEED) * (GameManager.shared.touchPos.x - STICK_SPEED)
+        let workTouchY: CGFloat = (GameManager.shared.touchPos.y - STICK_SPEED) * (GameManager.shared.touchPos.y - STICK_SPEED)
+        let touchLength: CGFloat = sqrt(workTouchX + workTouchY)
         
         // スティック移動ベクトル
-        let directionX: Double = vecX / touchLength
-        let directionY: Double = vecY / touchLength
+        let directionX: CGFloat = vecX / touchLength
+        let directionY: CGFloat = vecY / touchLength
 
         // スティック移動処理
         body!.position.x += directionX * STICK_SPEED
         body!.position.y += directionY * STICK_SPEED
         
         // スティック初期位置からスティック移動した位置までの距離を求める
-        let workBodyX: Double = ((body?.position.x)! - STICK_INIT_POS_X) * ((body?.position.x)! - STICK_INIT_POS_X)
-        let workBodyY: Double = ((body?.position.y)! - STICK_INIT_POS_Y) * ((body?.position.y)! - STICK_INIT_POS_Y)
-        var stickLength: Double = sqrt(Double(workBodyX + workBodyY))
+        let workBodyX: CGFloat = ((body?.position.x)! - STICK_INIT_POS_X) * ((body?.position.x)! - STICK_INIT_POS_X)
+        let workBodyY: CGFloat = ((body?.position.y)! - STICK_INIT_POS_Y) * ((body?.position.y)! - STICK_INIT_POS_Y)
+        var stickLength: CGFloat = sqrt(CGFloat(workBodyX + workBodyY))
         stickLength = round(stickLength * 100) / 100 // 小数点第二位以下を切り捨てる
         
         // スティック移動距離が一定の距離を超えないようにする

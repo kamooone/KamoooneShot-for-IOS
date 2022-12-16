@@ -10,7 +10,7 @@ import SpriteKit
 
 class DirectionButtonView {
     
-    init(_x: Double, _y: Double, _rotate: Double, _name: String) {
+    init(_x: CGFloat, _y: CGFloat, _rotate: CGFloat, _name: String) {
         let button = SKSpriteNode(imageNamed: "directionButton")
         button.position = CGPoint(x: _x, y: _y)
         button.zPosition = 1
@@ -19,7 +19,7 @@ class DirectionButtonView {
         GameManager.shared.scene?.addChild(button)
     }
     
-    func DegreeToRadian(Degree : Double!)-> CGFloat{
+    func DegreeToRadian(Degree : CGFloat!)-> CGFloat{
         return CGFloat(Degree) / CGFloat(180.0 * M_1_PI)
     }
 }

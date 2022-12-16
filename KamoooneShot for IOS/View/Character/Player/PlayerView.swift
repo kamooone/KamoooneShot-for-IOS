@@ -10,7 +10,7 @@ import SpriteKit
 
 class PlayerView: BaseCharacterView {
     private static var isSingleton: Bool = false
-    let rotateSpeed: Double = 2.25
+    let rotateSpeed: CGFloat = 2.25
     let bullet = BulletView()
     
     override init() {
@@ -84,7 +84,7 @@ class PlayerView: BaseCharacterView {
     }
     
     // ToDo ライブラリにする
-    func DegreeToRadian(Degree : Double!)-> CGFloat {
+    func DegreeToRadian(Degree : CGFloat!)-> CGFloat {
         return CGFloat(Degree) / CGFloat(180.0 * M_1_PI)
     }
     

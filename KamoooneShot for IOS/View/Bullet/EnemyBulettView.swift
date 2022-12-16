@@ -27,7 +27,7 @@ class EnemyBulletView: BaseBulletView {
         }
     }
     
-    func Update(_enemyBulletX: CGFloat, _enemyBulletY: CGFloat, __playerX: CGFloat, __playerY: CGFloat, _radian: Double) {
+    func Update(_enemyBulletX: CGFloat, _enemyBulletY: CGFloat, __playerX: CGFloat, __playerY: CGFloat, _radian: CGFloat) {
         print("_radian",_radian)
         switch nowBulletType {
         case bulletType.normalBullet.rawValue:
@@ -44,7 +44,7 @@ class EnemyBulletView: BaseBulletView {
         }
     }
     
-    func NormalBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerX: CGFloat, ___playerY: CGFloat, __radian: Double) {
+    func NormalBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerX: CGFloat, ___playerY: CGFloat, __radian: CGFloat) {
         // 弾のベクトルをプレイヤー目掛け手にする。(弾を発射したらベクトルは変更しない、※ホーミングバレットのベクトル固定Ver)
         
         for i in 0..<ZIKIMAXBULLET {
@@ -87,7 +87,7 @@ class EnemyBulletView: BaseBulletView {
         }
     }
     
-    func TripleBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerX: CGFloat, ___playerY: CGFloat, __radian: Double) {
+    func TripleBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerX: CGFloat, ___playerY: CGFloat, __radian: CGFloat) {
         enum tripleBulletType: Int {
             case straight = 1
             case diagonallyRight = 2
@@ -155,7 +155,7 @@ class EnemyBulletView: BaseBulletView {
         }
     }
     
-    func homingBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerX: CGFloat, ___playerY: CGFloat, __radian: Double) {
+    func homingBullet(__enemyBulletX: CGFloat, __enemyBulletY: CGFloat, ___playerX: CGFloat, ___playerY: CGFloat, __radian: CGFloat) {
         // 弾発射前処理
         for i in 0..<ZIKIMAXBULLET {
             if !isBulletTrigger[i] && bulletStartTime == 0 {
@@ -212,7 +212,7 @@ class EnemyBulletView: BaseBulletView {
         }
     }
     
-    func DegreeToRadian(Degree : Double!)-> CGFloat{
+    func DegreeToRadian(Degree : CGFloat!)-> CGFloat{
         return CGFloat(Degree) / CGFloat(180.0 * M_1_PI)
     }
 }

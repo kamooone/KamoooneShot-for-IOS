@@ -34,9 +34,9 @@ class EnemyView: BaseCharacterView {
         let pY = _playerY
         let eX = (body?.position.x)!
         let eY = (body?.position.y)!
-        let r = atan2(Double(pY - eY), Double(pX - eX))
-        let r1 = r + 2 * Double.pi
-        let radian = floor(r1 * 360 / (2 * Double.pi))
+        let r = atan2(CGFloat(pY - eY), CGFloat(pX - eX))
+        let r1 = r + 2 * CGFloat.pi
+        let radian = floor(r1 * 360 / (2 * CGFloat.pi))
         body?.zRotation = DegreeToRadian(Degree: radian - 90)
         
         // ToDo 向きが決定してから弾を打つようにする。(向きが決定してかつ弾を打っている時は向きを変えない)
@@ -44,7 +44,7 @@ class EnemyView: BaseCharacterView {
         bullet.Update(_enemyBulletX: body!.position.x, _enemyBulletY: body!.position.y, __playerX: _playerX, __playerY: _playerY, _radian: radian - 90)
     }
     
-    func DegreeToRadian(Degree : Double!)-> CGFloat{
+    func DegreeToRadian(Degree : CGFloat!)-> CGFloat{
         return CGFloat(Degree) / CGFloat(180.0 * M_1_PI)
     }
 }
