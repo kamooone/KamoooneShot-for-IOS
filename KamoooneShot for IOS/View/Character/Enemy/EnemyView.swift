@@ -21,7 +21,7 @@ class EnemyView: BaseCharacterView {
         body?.position = CGPoint(x: CGFloat.random(in: (GameManager.shared.scene?.frame.minX)! + 25..<(GameManager.shared.scene?.frame.maxX)! - 25), y: CGFloat.random(in: (GameManager.shared.scene?.frame.maxY)! + 150..<(GameManager.shared.scene?.frame.maxY)! + 600))
         // 敵機の向き
         rotate = 180
-        body?.zRotation = DegreeToRadian(Degree: rotate)
+        body?.zRotation = Processing.shared.DegreeToRadian(Degree: rotate)
         // sceneに登録
         GameManager.shared.scene?.addChild(body!)
     }
@@ -37,15 +37,11 @@ class EnemyView: BaseCharacterView {
         let r = atan2(CGFloat(pY - eY), CGFloat(pX - eX))
         let r1 = r + 2 * CGFloat.pi
         let radian = floor(r1 * 360 / (2 * CGFloat.pi))
-        body?.zRotation = DegreeToRadian(Degree: radian - 90)
+        body?.zRotation = Processing.shared.DegreeToRadian(Degree: radian - 90)
         
         // ToDo 向きが決定してから弾を打つようにする。(向きが決定してかつ弾を打っている時は向きを変えない)
         body!.position.y -= 0.5
         bullet.Update(_enemyBulletX: body!.position.x, _enemyBulletY: body!.position.y, __playerX: _playerX, __playerY: _playerY, _radian: radian - 90)
-    }
-    
-    func DegreeToRadian(Degree : CGFloat!)-> CGFloat{
-        return CGFloat(Degree) / CGFloat(180.0 * M_1_PI)
     }
 }
 

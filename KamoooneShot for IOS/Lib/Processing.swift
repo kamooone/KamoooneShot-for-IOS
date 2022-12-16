@@ -17,12 +17,7 @@ class Processing {
         
     }
     
-//    func OutScreenJudge(_body: SKSpriteNode) -> Bool {
-//        if _body.position.y <= (GameManager.shared.scene?.frame.minY)! || _body.position.y >= (GameManager.shared.scene?.frame.maxY)! ||
-//            _body.position.x <= (GameManager.shared.scene?.frame.minX)! ||
-//            _body.position.x >= (GameManager.shared.scene?.frame.maxX)! {
-//            return true
-//        }
-//        return false
-//    }
+    func DegreeToRadian(Degree : CGFloat!)-> CGFloat{
+        return CGFloat(Degree) / CGFloat(180.0 * M_1_PI)
+    }
 }

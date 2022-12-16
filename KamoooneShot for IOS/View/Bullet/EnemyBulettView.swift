@@ -70,7 +70,7 @@ class EnemyBulletView: BaseBulletView {
                 body[i].position.y += normalVecY[i] * BULLET_SPEED
                 body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
                 
-                body[i].zRotation = DegreeToRadian(Degree: __radian)
+                body[i].zRotation = Processing.shared.DegreeToRadian(Degree: __radian)
                 
                 // 画面エリア外判定
                 if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
@@ -138,7 +138,7 @@ class EnemyBulletView: BaseBulletView {
                 body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
                 
                 // トリプルバレットなので一番目と3番目の弾は別途__radian値の調整必要
-                body[i].zRotation = DegreeToRadian(Degree: __radian)
+                body[i].zRotation = Processing.shared.DegreeToRadian(Degree: __radian)
                 
                 // 画面エリア外判定
                 if body[i].position.y <= (GameManager.shared.scene?.frame.minY)! || body[i].position.y >= (GameManager.shared.scene?.frame.maxY)! ||
@@ -171,7 +171,7 @@ class EnemyBulletView: BaseBulletView {
         // 弾移動処理
         for i in 0..<ZIKIMAXBULLET {
             if isBulletTrigger[i] {
-                body[i].zRotation = DegreeToRadian(Degree: __radian + 180)
+                body[i].zRotation = Processing.shared.DegreeToRadian(Degree: __radian + 180)
                 // ホーミング有効時の処理
                 if homingEnabled[i] {
                     homingLength[i] = sqrt((___playerX - body[i].position.x) * (___playerX - body[i].position.x) + (___playerY - body[i].position.y) * (___playerY - body[i].position.y))
@@ -210,9 +210,5 @@ class EnemyBulletView: BaseBulletView {
         if bulletStartTime != 0 {
             bulletStartTime -= 1
         }
-    }
-    
-    func DegreeToRadian(Degree : CGFloat!)-> CGFloat{
-        return CGFloat(Degree) / CGFloat(180.0 * M_1_PI)
     }
 }

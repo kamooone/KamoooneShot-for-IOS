@@ -22,7 +22,7 @@ class BulletView: BaseBulletView {
                 body.append(SKSpriteNode(imageNamed: "bullet.png"))
                 // 敵機の向き
                 rotate = 180
-                body[i].zRotation = DegreeToRadian(Degree: rotate)
+                body[i].zRotation = Processing.shared.DegreeToRadian(Degree: rotate)
                 directionX.append(0.0)
                 directionY.append(0.0)
             }
@@ -40,7 +40,7 @@ class BulletView: BaseBulletView {
                 isBulletTrigger[i] = true
                 body[i].size = CGSize(width: 30, height: 30)
                 body[i].position = CGPoint(x: _x, y: _y)
-                body[i].zRotation = DegreeToRadian(Degree: _rotate + 180)
+                body[i].zRotation = Processing.shared.DegreeToRadian(Degree: _rotate + 180)
                 GameManager.shared.scene?.addChild(body[i])
                 bulletStartTime = bulletDuration
 
@@ -88,9 +88,5 @@ class BulletView: BaseBulletView {
         if bulletStartTime != 0 {
             bulletStartTime -= 5
         }
-    }
-    
-    func DegreeToRadian(Degree : CGFloat!)-> CGFloat{
-        return CGFloat(Degree) / CGFloat(180.0 * M_1_PI)
     }
 }

@@ -49,7 +49,7 @@ class PlayerView: BaseCharacterView {
                 rotate += rotateSpeed
             }
         }
-        body?.zRotation = DegreeToRadian(Degree: rotate)
+        body?.zRotation = Processing.shared.DegreeToRadian(Degree: rotate)
         
         if GameManager.shared.touchPos.x != 0 && GameManager.shared.touchPos.y != 0 {
             let workX = (GameManager.shared.touchPos.x - _positionX) * (GameManager.shared.touchPos.x - _positionX)
@@ -81,11 +81,6 @@ class PlayerView: BaseCharacterView {
     
     func Update() {
         //bullet.Update(_x: body!.position.x, _y: body!.position.y, _rotate: rotate + rotateSpeed)
-    }
-    
-    // ToDo ライブラリにする
-    func DegreeToRadian(Degree : CGFloat!)-> CGFloat {
-        return CGFloat(Degree) / CGFloat(180.0 * M_1_PI)
     }
     
     func Reset() {
