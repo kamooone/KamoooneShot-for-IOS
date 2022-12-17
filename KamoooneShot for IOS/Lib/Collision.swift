@@ -49,9 +49,8 @@ class Collision {
                         let doubleWidth = (player.bullet.body[i].size.width / 2) + (enemys[0].body?.size.width ?? 0 / 2)
                         
                         // 中心座標の2点間の距離より半径の和の方が大きければ接触
-                        if distance <= doubleWidth && !GameManager.shared.isSeHit {
+                        if distance <= doubleWidth && !enemys[k].explotion.isExplosion[k] {
                             isEnemyLive[k] = false
-                            GameManager.shared.isSeHit = true
                             enemys[k].explotion.isExplosion[k] = true
 
                             SoundManager.shared.PlaySE()
@@ -64,13 +63,15 @@ class Collision {
                             enemys[k].body?.position.x = GameManager.shared.OUT_OF_SCREEN_AREA
                             enemys[k].body?.position.y = GameManager.shared.OUT_OF_SCREEN_AREA
                         }
+                        if enemys[k].explotion.isExplosion[k] {
+                            enemys[k].explotion.Update(_num: k)
+                        }
                     }
-                    enemys[k].explotion.Update()
                 }
                 
                 // 自機の弾とエネミーの弾との当たり判定
                 for k in 0..<EnemyView.ENEMYMAX {
-                    for cnt in 0..<player.bullet.ZIKIMAXBULLET {
+                    for cnt in 0..<enemys[k].bullet.ZIKIMAXBULLET {
                         if enemys[k].bullet.isBulletTrigger[cnt] {
                             //  中心座標
                             let playerX = player.bullet.body[i].position.x + (player.bullet.body[i].size.width / 2)
@@ -87,13 +88,12 @@ class Collision {
                             let doubleWidth = (player.bullet.body[i].size.width / 2) + (enemys[k].bullet.body[cnt].size.width / 2)
                             
                             // 中心座標の2点間の距離より半径の和の方が大きければ接触
-                            if distance <= doubleWidth && !GameManager.shared.isSeHit {
-                                //GameManager.isSeHit = true
-                                //GameScene.GetExplosionObject().isExplosion[k] = true
+                            if distance <= doubleWidth && !player.bullet.explotion.isExplosion[i] {
+                                player.bullet.explotion.isExplosion[i] = true
                                 
                                 SoundManager.shared.PlaySE()
                                 
-                                //GameScene.GetExplosionObject().StartExplosion(x: enemyPos[k].position.x,y: enemyPos[k].position.y, cnt: k)
+                                player.bullet.explotion.StartExplosion(x: (player.bullet.body[i].position.x),y: (player.bullet.body[i].position.y), cnt: i)
                                 player.bullet.body[i].removeFromParent()
                                 player.bullet.body[i].position.x = GameManager.shared.OUT_OF_SCREEN_AREA
                                 player.bullet.body[i].position.y = GameManager.shared.OUT_OF_SCREEN_AREA
@@ -103,10 +103,12 @@ class Collision {
                                 enemys[k].bullet.isBulletTrigger[cnt] = false
                             }
                         }
+                        if player.bullet.explotion.isExplosion[i] {
+                            player.bullet.explotion.Update(_num: i)
+                        }
                     }
                 }
             }
-            GameManager.shared.isSeHit = false
         }
         
         // 自機と敵の弾との当たり判定
@@ -128,7 +130,7 @@ class Collision {
                     let doubleWidth = ((player.body?.size.width)! / 2) + (enemys[k].bullet.body[cnt].size.width / 2)
                     
                     // 中心座標の2点間の距離より半径の和の方が大きければ接触
-                    if distance <= doubleWidth && !GameManager.shared.isSeHit {
+                    if distance <= doubleWidth {
                         //GameManager.isSeHit = true
                         //GameScene.GetExplosionObject().isExplosion[k] = true
                         

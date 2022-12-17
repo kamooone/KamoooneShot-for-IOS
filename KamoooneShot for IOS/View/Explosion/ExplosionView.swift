@@ -13,23 +13,23 @@ class ExplosionView {
     var sprite: [SKSpriteNode] = []
     var isExplosion: [Bool] = []
 
-    init() {
+    init(_MAX: Int) {
         // テクスチャアトラスのフォルダ名を指定
         let atlas = SKTextureAtlas(named: "explosion")
         // 爆発のテクスチャのスプライト数分
         for i in 0...15{
             explosion.append(atlas.textureNamed("explosion" + String(i+1)))
         }
-        for _ in 0...EnemyView.ENEMYMAX{
+        for _ in 0..._MAX {
             isExplosion.append(false)
             sprite.append(SKSpriteNode(texture: explosion[15]))
         }
     }
     
-    func StartExplosion(x:CGFloat, y:CGFloat, cnt:Int){
+    func StartExplosion(x:CGFloat, y:CGFloat, cnt:Int) {
         sprite[cnt].position = CGPoint(x: x, y: y)
         GameManager.shared.scene?.addChild(sprite[cnt])
-        
+
         /** Creates an action that repeats another action a specified number of times
          @param action The action to execute
          @param count The number of times to execute the action
@@ -38,14 +38,13 @@ class ExplosionView {
         sprite[cnt].run(SKAction.repeat(animation, count: 1))
     }
     
-    func Update(){
-        for i in 0...EnemyView.ENEMYMAX{
-            // 表示する必要がなくなったスプライトを削除する処理
-            if !(sprite[i].hasActions() && isExplosion[i] ) {
-                sprite[i].position.x = GameManager.shared.OUT_OF_SCREEN_AREA
-                sprite[i].position.y = GameManager.shared.OUT_OF_SCREEN_AREA
-                sprite[i].removeFromParent()
-            }
+    func Update(_num: Int) {
+        // 表示する必要がなくなったスプライトを削除する処理
+        if !(sprite[_num].hasActions() && isExplosion[_num] ) {
+            sprite[_num].position.x = GameManager.shared.OUT_OF_SCREEN_AREA
+            sprite[_num].position.y = GameManager.shared.OUT_OF_SCREEN_AREA
+            isExplosion[_num] = false
+            sprite[_num].removeFromParent()
         }
     }
 }

@@ -11,6 +11,7 @@ import SpriteKit
 class BulletView: BaseBulletView {
     private static var isSingleton: Bool = false
     let rotateSpeed: CGFloat = 2.25
+    let explotion = ExplosionView(_MAX: 90)
     
     override init(){
         super.init()

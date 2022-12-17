@@ -178,8 +178,7 @@ class EnemyBulletView: BaseBulletView {
                     body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
                     body[i].position.y += (___playerY - body[i].position.y) / homingLength[i] * BULLET_SPEED
                     body[i].run(SKAction.moveTo(y: body[i].position.y, duration: 0))
-                    // ToDo __radian + 180  これをさらにホーミングによって回転した角度を足さないといけない(先にホーミングで回転した角度を求める必要あり)
-                    body[i].zRotation = Processing.shared.DegreeToRadian(Degree: __radian + 180)
+                    body[i].zRotation = Processing.shared.DegreeToRadian(Degree: __radian + 180 + (___playerX - body[i].position.x) / homingLength[i] * BULLET_SPEED)
                     // 一定の距離まで近づくとホーミング処理停止して現在のベクトルで直進する
                     if homingLength[i] < 80 {
                         homingEnabled[i] = false
@@ -190,6 +189,7 @@ class EnemyBulletView: BaseBulletView {
                 }
                 // ホーミング無効時の処理
                 if !homingEnabled[i] {
+                    body[i].zRotation = Processing.shared.DegreeToRadian(Degree: __radian + 180 + (___playerX - body[i].position.x) / homingLength[i] * BULLET_SPEED)
                     body[i].position.x += normalVecX[i]
                     body[i].run(SKAction.moveTo(x: body[i].position.x, duration: 0))
                     body[i].position.y += normalVecY[i]

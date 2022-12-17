@@ -26,7 +26,6 @@ class GameManager {
     var isLeftButtonTouch: Bool = false
     
     let backGroundSize: CGSize = CGSize(width: 360, height: 640)
-    var isSeHit: Bool = false
 
     // インスタンスを一つにするためにinitはptivateにする
     private init() {
