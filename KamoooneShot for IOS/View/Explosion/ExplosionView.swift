@@ -13,16 +13,17 @@ class ExplosionView {
     var sprite: [SKSpriteNode] = []
     var isExplosion: [Bool] = []
 
-    init(_MAX: Int) {
+    init(_MAX: Int, _width: CGFloat, _height: CGFloat) {
         // テクスチャアトラスのフォルダ名を指定
         let atlas = SKTextureAtlas(named: "explosion")
         // 爆発のテクスチャのスプライト数分
         for i in 0...15{
             explosion.append(atlas.textureNamed("explosion" + String(i+1)))
         }
-        for _ in 0..._MAX {
+        for i in 0..._MAX {
             isExplosion.append(false)
             sprite.append(SKSpriteNode(texture: explosion[15]))
+            sprite[i].size = CGSize(width: _width, height: _height)
         }
     }
     
