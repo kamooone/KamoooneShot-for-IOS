@@ -14,7 +14,7 @@ class BaseCharacterView {
     var rotate: CGFloat = 0
     var speed: CGFloat = 0
     var velocity: CGFloat = 0.15
-    let explotion = ExplosionView(_MAX: EnemyView.ENEMYMAX)
+    let explotion = ExplosionView(_MAX: EnemyView.ENEMYMAX,_width: 50,_height: 50)
     
     init(){}
 }

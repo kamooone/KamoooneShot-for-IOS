@@ -93,7 +93,7 @@ class Collision {
                                 
                                 SoundManager.shared.PlaySE()
                                 
-                                player.bullet.explotion.StartExplosion(x: (player.bullet.body[i].position.x),y: (player.bullet.body[i].position.y), cnt: i)
+                                player.bullet.explotion.StartExplosion(x: (player.bullet.body[i].position.x - 20),y: (player.bullet.body[i].position.y - 20), cnt: i)
                                 player.bullet.body[i].removeFromParent()
                                 player.bullet.body[i].position.x = GameManager.shared.OUT_OF_SCREEN_AREA
                                 player.bullet.body[i].position.y = GameManager.shared.OUT_OF_SCREEN_AREA
