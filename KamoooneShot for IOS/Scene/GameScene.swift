@@ -40,7 +40,6 @@ class GameScene: SKScene {
         
         // 初回タップを行うとゲームスタート
         if !GameManager.shared.isGameStart {
-            gameUI.Update()
             // BGM再生
             SoundManager.shared.PlayBGM()
             GameManager.shared.isGameStart = true
@@ -100,6 +99,12 @@ class GameScene: SKScene {
         }
         if GameManager.shared.isTouch {
             stick.Move()
+        }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        if GameManager.shared.isGameStart {
+            gameUI.Update()
         }
     }
  }

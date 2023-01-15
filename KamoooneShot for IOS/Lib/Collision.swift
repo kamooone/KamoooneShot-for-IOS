@@ -53,6 +53,7 @@ class Collision {
                             isEnemyLive[k] = false
                             enemys[k].explotion.isExplosion[k] = true
 
+                            GameManager.shared.addScore += 100
                             SoundManager.shared.PlaySE()
 
                             enemys[k].explotion.StartExplosion(x: (enemys[k].body?.position.x)!,y: (enemys[k].body?.position.y)!, cnt: k)
@@ -91,6 +92,7 @@ class Collision {
                             if distance <= doubleWidth && !player.bullet.explotion.isExplosion[i] {
                                 player.bullet.explotion.isExplosion[i] = true
                                 
+                                GameManager.shared.addScore += 10
                                 SoundManager.shared.PlaySE()
                                 
                                 player.bullet.explotion.StartExplosion(x: (player.bullet.body[i].position.x),y: (player.bullet.body[i].position.y), cnt: i)

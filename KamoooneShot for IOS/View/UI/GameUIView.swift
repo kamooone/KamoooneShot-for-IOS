@@ -30,10 +30,10 @@ class GameUIView {
             
             // テキストのノードを作成する。
             scoreText = SKLabelNode(fontNamed: "American Typewriter Bold")
-            scoreText!.text = "Score"
-            scoreText!.fontSize = 20
+            scoreText!.text = "Score : 0"
+            scoreText!.fontSize = 16
             // 表示位置を画面中央
-            scoreText!.position = CGPoint(x: (GameManager.shared.scene?.frame.minX)! + 50, y: (GameManager.shared.scene?.frame.maxY)! - 120);
+            scoreText!.position = CGPoint(x: (GameManager.shared.scene?.frame.minX)! + 60, y: (GameManager.shared.scene?.frame.maxY)! - 120);
             GameManager.shared.scene?.addChild(scoreText!)
             
             GameUIView.isSingleton = true
@@ -43,6 +43,12 @@ class GameUIView {
     func Update(){
         // タップしてスタートの文字を削除
         tapText!.run(unHideAction)
-        scoreText!.text = "Score"+"100"
+        
+        // ToDo スコアアップ時の処理が入った場合、if文で上がった点数まで加算するまで+1を繰り返す
+        if GameManager.shared.nowScore != GameManager.shared.addScore {
+            GameManager.shared.nowScore += 2
+        }
+        
+        scoreText!.text = "Score : " + String(GameManager.shared.nowScore)
     }
 }
