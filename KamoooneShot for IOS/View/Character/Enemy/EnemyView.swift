@@ -9,8 +9,6 @@ import Foundation
 import SpriteKit
 
 class EnemyView: BaseCharacterView {
-    public static let ENEMYMAX: Int = 10
-    
     let bullet = EnemyBulletView()
     
     override init() {
@@ -28,10 +26,20 @@ class EnemyView: BaseCharacterView {
     
     func Update(_playerX : CGFloat, _playerY : CGFloat){
         // ToDo 自機の方を向く処理(将来的には弾を打つ直前だけ向く処理を入れる。弾を打つ処理も特定のタイミングの時だけ)
+        let radian = DirectionUpdate(__playerX: _playerX, __playerY: _playerY)
+        
+        // ToDo 行動パターン処理を使い分けて敵の種類のバリエーションを実装
+        Formation.shared.Update(_body: body!)
+        
+        // ToDo 向きが決定してから弾を打つようにする。(向きが決定してかつ弾を打っている時は向きを変えない)
+        bullet.Update(_enemyBulletX: body!.position.x, _enemyBulletY: body!.position.y, __playerX: _playerX, __playerY: _playerY, _radian: radian - 90)
+    }
+    
+    func DirectionUpdate(__playerX: CGFloat, __playerY : CGFloat) -> CGFloat {
         // ベクトルと角度を求める。そして何°回転させる必要があるか。
         // atanは「アークタンジェント」のことで、「タンジェントの逆三角関数」であるとのこと。辺の長さから角度を求めるために使われるものらしい。
-        let pX = _playerX
-        let pY = _playerY
+        let pX = __playerX
+        let pY = __playerY
         let eX = (body?.position.x)!
         let eY = (body?.position.y)!
         let r = atan2(CGFloat(pY - eY), CGFloat(pX - eX))
@@ -39,11 +47,7 @@ class EnemyView: BaseCharacterView {
         let radian = floor(r1 * 360 / (2 * CGFloat.pi))
         body?.zRotation = Processing.shared.DegreeToRadian(Degree: radian - 90)
         
-        // ToDo 向きが決定してから弾を打つようにする。(向きが決定してかつ弾を打っている時は向きを変えない)
-        body!.position.y -= 0.5
-        bullet.Update(_enemyBulletX: body!.position.x, _enemyBulletY: body!.position.y, __playerX: _playerX, __playerY: _playerY, _radian: radian - 90)
+        return radian
     }
+    
 }
-
-
-

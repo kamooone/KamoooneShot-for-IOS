@@ -34,7 +34,7 @@ class StickView {
         }
         
         // エネミーの数分インスタンスを生成する
-        for _ in 0..<EnemyView.ENEMYMAX {
+        for _ in 0..<GameManager.shared.ENEMYMAX {
             enemys.append(EnemyView())
         }
         
@@ -88,7 +88,7 @@ class StickView {
     func Update(){
         player.Update()
         
-        for i in 0..<EnemyView.ENEMYMAX {
+        for i in 0..<GameManager.shared.ENEMYMAX {
             enemys[i].Update(_playerX: player.body?.position.x ?? 0, _playerY: player.body?.position.y ?? 0)
         }
         

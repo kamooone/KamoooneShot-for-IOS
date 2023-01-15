@@ -28,6 +28,7 @@ class GameManager {
     var nowScore: Int = 0
     var addScore: Int = 0
     
+    let ENEMYMAX: Int = 10
     let backGroundSize: CGSize = CGSize(width: 360, height: 640)
 
     // インスタンスを一つにするためにinitはptivateにする

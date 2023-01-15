@@ -16,7 +16,7 @@ class Collision {
     init(){
         // このクラスのインスタンスは一つのみにする
         if !Collision.isSingleton {
-            for _ in 0..<EnemyView.ENEMYMAX {
+            for _ in 0..<GameManager.shared.ENEMYMAX {
                 isEnemyLive.append(true)
             }
             Collision.isSingleton = true
@@ -32,7 +32,7 @@ class Collision {
         for i in 0..<player.bullet.ZIKIMAXBULLET {
             if player.bullet.isBulletTrigger[i] {
                 // 自機の弾とエネミーとの当たり判定
-                for k in 0..<EnemyView.ENEMYMAX {
+                for k in 0..<GameManager.shared.ENEMYMAX {
                     if isEnemyLive[k] {
                         //  中心座標
                         let playerX = player.bullet.body[i].position.x + (player.bullet.body[i].size.width / 2)
@@ -71,7 +71,7 @@ class Collision {
                 }
                 
                 // 自機の弾とエネミーの弾との当たり判定
-                for k in 0..<EnemyView.ENEMYMAX {
+                for k in 0..<GameManager.shared.ENEMYMAX {
                     for cnt in 0..<enemys[k].bullet.ZIKIMAXBULLET {
                         if enemys[k].bullet.isBulletTrigger[cnt] {
                             //  中心座標
@@ -114,7 +114,7 @@ class Collision {
         }
         
         // 自機と敵の弾との当たり判定
-        for k in 0..<EnemyView.ENEMYMAX {
+        for k in 0..<GameManager.shared.ENEMYMAX {
             for cnt in 0..<enemys[k].bullet.ZIKIMAXBULLET {
                 if enemys[k].bullet.isBulletTrigger[cnt] {
                     //  中心座標
