@@ -50,6 +50,48 @@ class TitleScene: SKScene{
         startButton.position = CGPoint(x:self.frame.midX, y:150)
         startButton.name = "START"
         addChild(startButton)
+        
+        
+        
+        
+        // WebAPIレスポンステスト
+//        let url: URL = URL(string: "http://kamooone.sakura.ne.jp/GetRanking.php")!
+//        let task: URLSessionTask = URLSession.shared.dataTask(with: url, completionHandler: {(data, response, error) in
+//            do{
+//                let couponData = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! [[String: Any]]
+//                print(couponData) // Jsonの中身を表示
+//                print("=============================")
+//            }
+//            catch {
+//                print(error)
+//            }
+//        })
+//        task.resume()
+        
+        
+        // WebAPIリクエストテスト
+//        let url = URL(string: "http://kamooone.sakura.ne.jp/SetRanking.php")!
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "POST"
+//        let parameters = [["name": "テスト名前1", "score": "765"]]
+//
+//        request.httpBody = try! JSONSerialization.data(withJSONObject: parameters)
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//
+//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard let data = data, error == nil else {
+//                // WebApi処理が失敗した時に呼ばれる。
+//                print(error?.localizedDescription ?? "No data")
+//                return
+//            }
+//
+//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//            if let responseJSON = responseJSON as? [String: Any] {
+//                // WebAPIのレスポンス
+//                print(responseJSON)
+//            }
+//        }
+//        task.resume()
     }
     
     // 画面をタッチされた時に呼ばれる

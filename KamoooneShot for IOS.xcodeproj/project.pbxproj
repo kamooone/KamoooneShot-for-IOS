@@ -68,6 +68,7 @@
 		E26F12412948CAA00035695E /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		E28A85892944A1B6008889B7 /* stickBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stickBG.png; sourceTree = "<group>"; };
 		E2A09147290444F5002D7201 /* EnemyBulettView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyBulettView.swift; sourceTree = "<group>"; };
+		E2AF1772298EAAD0001397EF /* KamoooneShot-for-IOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "KamoooneShot-for-IOS-Info.plist"; sourceTree = SOURCE_ROOT; };
 		E2B783B52973ED0B0082B7B1 /* Formation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formation.swift; sourceTree = "<group>"; };
 		E2BF4C522793D19400BB72E5 /* KamoooneShot for IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KamoooneShot for IOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2BF4C552793D19400BB72E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -326,6 +327,7 @@
 		E2BF4C542793D19400BB72E5 /* KamoooneShot for IOS */ = {
 			isa = PBXGroup;
 			children = (
+				E2AF1772298EAAD0001397EF /* KamoooneShot-for-IOS-Info.plist */,
 				E23A62B728FBDB3600DE818C /* App */,
 				E23A62B628FBDADD00DE818C /* Lib */,
 				E23A62B528FBDA9E00DE818C /* Manager */,
@@ -594,6 +596,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M62AGH5W92;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "KamoooneShot-for-IOS-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -624,6 +628,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M62AGH5W92;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "KamoooneShot-for-IOS-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
