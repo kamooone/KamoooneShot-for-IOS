@@ -42,6 +42,7 @@
 		E2BF4C632793D19400BB72E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2BF4C622793D19400BB72E5 /* Assets.xcassets */; };
 		E2BF4C662793D19400BB72E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BF4C642793D19400BB72E5 /* LaunchScreen.storyboard */; };
 		E2BF4C6D2794403600BB72E5 /* TitleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BF4C6C2794403600BB72E5 /* TitleScene.swift */; };
+		E72B186A299B421700F7A38D /* RealmTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72B1869299B421700F7A38D /* RealmTestModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		E2BF4C622793D19400BB72E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2BF4C652793D19400BB72E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2BF4C6C2794403600BB72E5 /* TitleScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleScene.swift; sourceTree = "<group>"; };
+		E72B1869299B421700F7A38D /* RealmTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTestModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +114,6 @@
 				B1887C2CF739EE5C25BB137B /* Pods-KamoooneShot for IOS.debug.xcconfig */,
 				D852AD4B9ECA8DA840E57498 /* Pods-KamoooneShot for IOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -352,6 +353,7 @@
 		E2BF4C542793D19400BB72E5 /* KamoooneShot for IOS */ = {
 			isa = PBXGroup;
 			children = (
+				E72B1868299B420200F7A38D /* Realm */,
 				E2AF1772298EAAD0001397EF /* KamoooneShot-for-IOS-Info.plist */,
 				E23A62B728FBDB3600DE818C /* App */,
 				E23A62B628FBDADD00DE818C /* Lib */,
@@ -366,6 +368,14 @@
 				E23A62BD28FC1DCD00DE818C /* Resources */,
 			);
 			path = "KamoooneShot for IOS";
+			sourceTree = "<group>";
+		};
+		E72B1868299B420200F7A38D /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				E72B1869299B421700F7A38D /* RealmTestModel.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -498,6 +508,7 @@
 				E2BF4C5C2793D19400BB72E5 /* GameScene.swift in Sources */,
 				E2461D66290CCE7C00D2FBDA /* BaseCharacterView.swift in Sources */,
 				E2461D6B290CD48100D2FBDA /* BaseBulletView.swift in Sources */,
+				E72B186A299B421700F7A38D /* RealmTestModel.swift in Sources */,
 				E2481C9727A650F800583CDD /* ExplosionView.swift in Sources */,
 				E22F252F279D3F83006F49B7 /* GameManager.swift in Sources */,
 				E22F2537279D8516006F49B7 /* BulletView.swift in Sources */,

@@ -8,6 +8,7 @@
 import Foundation
 import SpriteKit
 import UIKit
+import RealmSwift
 
 class TitleScene: SKScene{
     
@@ -92,6 +93,29 @@ class TitleScene: SKScene{
 //            }
 //        }
 //        task.resume()
+        
+        
+        
+        
+        // Realmテスト
+        // 作成したTodoModel型の変数を用意。
+        // Realmから受け取るデータを入れる変数
+        var itemList: Results<RealmTestModel>!
+
+        // Realmをインスタンス化する
+        let realm = try! Realm()
+        
+        // objects()はRealmに保存されている指定されたデータを全て取得する！
+        itemList = realm.objects(RealmTestModel.self)
+        
+        // object().filter()でさらにフィルタリングして指定する
+        //return realm!.objects(RSubject.self).where { s in
+        //    s.id == subjectId
+        //}.first
+        
+        // 他参考URL https://tech.amefure.com/swift-realm-reading
+        
+        print("realm.objectsテスト",itemList)
     }
     
     // 画面をタッチされた時に呼ばれる
