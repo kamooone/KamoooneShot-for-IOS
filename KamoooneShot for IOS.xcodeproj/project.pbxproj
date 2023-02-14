@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C8F4C4DCC78CB79FA5A2935 /* Pods_KamoooneShot_for_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34199AE8A712FD280605497D /* Pods_KamoooneShot_for_IOS.framework */; };
 		E2049DD42929066200DBDC38 /* directionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E2049DD32929066200DBDC38 /* directionButton.png */; };
 		E2049DD6292906B300DBDC38 /* DirectionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2049DD5292906B300DBDC38 /* DirectionButtonView.swift */; };
 		E22466E3279C32DC00DED8D3 /* Processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22466E2279C32DC00DED8D3 /* Processing.swift */; };
@@ -44,6 +45,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		34199AE8A712FD280605497D /* Pods_KamoooneShot_for_IOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KamoooneShot_for_IOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1887C2CF739EE5C25BB137B /* Pods-KamoooneShot for IOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KamoooneShot for IOS.debug.xcconfig"; path = "Target Support Files/Pods-KamoooneShot for IOS/Pods-KamoooneShot for IOS.debug.xcconfig"; sourceTree = "<group>"; };
+		D852AD4B9ECA8DA840E57498 /* Pods-KamoooneShot for IOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KamoooneShot for IOS.release.xcconfig"; path = "Target Support Files/Pods-KamoooneShot for IOS/Pods-KamoooneShot for IOS.release.xcconfig"; sourceTree = "<group>"; };
 		E2049DD32929066200DBDC38 /* directionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = directionButton.png; sourceTree = "<group>"; };
 		E2049DD5292906B300DBDC38 /* DirectionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionButtonView.swift; sourceTree = "<group>"; };
 		E22466E2279C32DC00DED8D3 /* Processing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Processing.swift; sourceTree = "<group>"; };
@@ -87,12 +91,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C8F4C4DCC78CB79FA5A2935 /* Pods_KamoooneShot_for_IOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3440A524A3B34C1F182D209C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34199AE8A712FD280605497D /* Pods_KamoooneShot_for_IOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B59C2860ED89B17F8DB19413 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B1887C2CF739EE5C25BB137B /* Pods-KamoooneShot for IOS.debug.xcconfig */,
+				D852AD4B9ECA8DA840E57498 /* Pods-KamoooneShot for IOS.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		E22F253C279D8A50006F49B7 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,6 +336,8 @@
 			children = (
 				E2BF4C542793D19400BB72E5 /* KamoooneShot for IOS */,
 				E2BF4C532793D19400BB72E5 /* Products */,
+				B59C2860ED89B17F8DB19413 /* Pods */,
+				3440A524A3B34C1F182D209C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -350,9 +375,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E2BF4C692793D19400BB72E5 /* Build configuration list for PBXNativeTarget "KamoooneShot for IOS" */;
 			buildPhases = (
+				ADA9060FDF6D37F285D18CCA /* [CP] Check Pods Manifest.lock */,
 				E2BF4C4E2793D19400BB72E5 /* Sources */,
 				E2BF4C4F2793D19400BB72E5 /* Frameworks */,
 				E2BF4C502793D19400BB72E5 /* Resources */,
+				794A0DBC1D07ADCCBD24E2F9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -419,6 +446,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		794A0DBC1D07ADCCBD24E2F9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KamoooneShot for IOS/Pods-KamoooneShot for IOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KamoooneShot for IOS/Pods-KamoooneShot for IOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KamoooneShot for IOS/Pods-KamoooneShot for IOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ADA9060FDF6D37F285D18CCA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KamoooneShot for IOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E2BF4C4E2793D19400BB72E5 /* Sources */ = {
@@ -588,6 +657,7 @@
 		};
 		E2BF4C6A2793D19400BB72E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1887C2CF739EE5C25BB137B /* Pods-KamoooneShot for IOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -620,6 +690,7 @@
 		};
 		E2BF4C6B2793D19400BB72E5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D852AD4B9ECA8DA840E57498 /* Pods-KamoooneShot for IOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
